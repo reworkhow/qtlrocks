@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Software - Cheng Lab at UC Davis</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <aside class="sidebar">
+      <img src="images/ChengLabLogo.png" alt="Cheng Lab Logo" class="sidebar-logo">
+      <h1>Cheng Lab</h1>
+      <ul class="nav">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="people.html">People</a></li>
+        <li><a href="research.html">Research</a></li>
+        <li><a href="software.html">Software</a></li>
+        <li><a href="teaching.html">Teaching</a></li>
+      </ul>
+    </aside>
+    <main class="main-content">
+      <header>
+        <h2>Software & Tools</h2>
+        <p>Software and computational tools developed by our lab and collaborators</p>
+      </header>
+      
+      <section class="software-list">
+        <div class="software-item">
+          <h3>JWAS.jl</h3>
+          <p>An open-source software tool written in Julia for Bayesian multiple regression methods applied to genomic prediction and genome-wide association studies:</p>
+          <ul>
+            <li>Univariate (single-trait) analysis</li>
+            <li>Multivariate (multi-trait) analysis</li>
+            <li>No limitations on fixed effects (e.g., herd, year, age, sex)</li>
+            <li>Random effects other than markers (e.g., litter, pen)</li>
+            <li>Random effects using pedigree information</li>
+            <li>Additive genetic effects, Maternal effects, Random permanent environmental effects</li>
+            <li>Correlated residuals,Correlated random effects</li>
+            <li>Unknown (or known) variance components</li>
+            <li>Complete genomic data</li>
+            <li>Incomplete genomic data (single-step)</li>
+            <li>Neural Networks (NNMM) and Multi-class Bayesian Analysis</li>
+            <li>Cross-validation and GWAS capabilities</li>
+          </ul>
+          <div class="software-links">
+            <a href="https://github.com/reworkhow/JWAS.jl" target="_blank">GitHub Repository</a>
+          </div>
+        </div>
+
+        <div class="software-item">
+          <h3>XSim.jl</h3>
+          <p>A fast and user-friendly tool to simulate sequence data and complicated pedigree structures:</p>
+          <ul>
+            <li>Efficient CPOS algorithm implementation</li>
+            <li>Simulation using real genome sequence data</li>
+            <li>Support for complex pedigree structures</li>
+            <li>Modern breeding program simulation</li>
+            <li>Multi-trait and multi-generation support</li>
+          </ul>
+          <div class="software-links">
+            <a href="https://github.com/reworkhow/XSim.jl" target="_blank">GitHub Repository</a>
+          </div>
+        </div>
+
+        <div class="software-item">
+          <h3>LPChoose.jl</h3>
+          <p>Optimizing Sequencing Resources in Genotyped Livestock Populations by Linear Programming:</p>
+          <ul>
+            <li>Efficient allocation of sequencing resources in genotyped populations</li>
+            <li>Minimum set cover approach for haplotype representation</li>
+            <li>Budget-constrained selection for maximum haplotype coverage</li>
+            <li>Integration with whole-genome sequence data</li>
+            <li>Support for large-scale livestock breeding programs</li>
+          </ul>
+          <div class="software-links">
+            <a href="https://github.com/reworkhow/LPChoose.jl" target="_blank">GitHub Repository</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="resources">
+        <h3>Additional Resources</h3>
+        <ul>
+          <li><a href="https://groups.io/g/qtlrocks" target="_blank">Discussion Group</a></li>
+        </ul>
+      </section>
+    </main>
+  </div>
+  <footer>
+    <p>&copy; 2024 Cheng Lab, UC Davis</p>
+  </footer>
+</body>
+</html>

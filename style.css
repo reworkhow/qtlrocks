@@ -162,4 +162,183 @@ footer {
   width: 100%;
   height: auto;
   margin: 0 auto 18px auto;
+}
+.software-list {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  margin-bottom: 40px;
+}
+.software-item {
+  background: #f8f8f8;
+  border-radius: 8px;
+  padding: 25px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+}
+.software-item h3 {
+  color: #8b0000;
+  margin-top: 0;
+  margin-bottom: 15px;
+  font-size: 1.4em;
+}
+.software-item p {
+  color: #444;
+  margin-bottom: 15px;
+}
+.software-item ul {
+  margin: 0 0 20px 0;
+  padding-left: 20px;
+}
+.software-item li {
+  margin-bottom: 8px;
+  color: #555;
+}
+.software-links {
+  display: flex;
+  gap: 15px;
+}
+.software-links a {
+  display: inline-block;
+  padding: 8px 16px;
+  background: #8b0000;
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+  font-size: 0.95em;
+  transition: background 0.2s;
+}
+.software-links a:hover {
+  background: #a00000;
+}
+.resources {
+  background: #f8f8f8;
+  border-radius: 8px;
+  padding: 25px;
+  margin-top: 20px;
+}
+.resources h3 {
+  color: #444;
+  margin-top: 0;
+  margin-bottom: 15px;
+}
+.resources ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.resources li {
+  margin-bottom: 10px;
+}
+.resources a {
+  color: #8b0000;
+  text-decoration: none;
+  font-size: 1.05em;
+}
+.resources a:hover {
+  text-decoration: underline;
+}
+
+/* Teaching page styles */
+.courses, .workshops {
+  margin-bottom: 2rem;
+}
+
+.course-item, .workshop-item {
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.course-item h4, .workshop-item h4 {
+  color: #2c3e50;
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+}
+
+.course-item p, .workshop-item p {
+  margin-bottom: 1rem;
+  color: #666;
+}
+
+.course-item ul, .workshop-item ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.course-item ul li, .workshop-item ul li {
+  margin-bottom: 0.5rem;
+  padding-left: 1.5rem;
+  position: relative;
+}
+
+.course-item ul li:before, .workshop-item ul li:before {
+  content: "•";
+  color: #3498db;
+  position: absolute;
+  left: 0;
+}
+
+.resources ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.resources ul li {
+  margin-bottom: 0.75rem;
+}
+
+.resources ul li a {
+  color: #3498db;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.resources ul li a:hover {
+  color: #2980b9;
+  text-decoration: underline;
+}
+
+.course-image {
+  width: 100%;
+  max-width: 600px;
+  height: auto;
+  border-radius: 8px;
+  margin: 0.5rem 0 1rem 0;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  display: block;
+}
+
+.workshop-item .course-image {
+  max-height: 300px;
+  object-fit: cover;
+  object-position: center;
+}
+
+.course-item h5 {
+  color: #2c3e50;
+  margin: 1.5rem 0 0.5rem 0;
+  font-size: 1.1rem;
+}
+
+.course-item h6 {
+  color: #2c3e50;
+  margin: 1rem 0 0.5rem 0;
+  font-size: 1rem;
+}
+
+.course-item strong {
+  color: #2c3e50;
+}
+
+.course-item a {
+  color: #3498db;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.course-item a:hover {
+  color: #2980b9;
+  text-decoration: underline;
 } 

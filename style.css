@@ -362,4 +362,24 @@ footer {
   .project-list {
     grid-template-columns: 1fr;
   }
+}
+
+.research-vision {
+  background: #f8f8fa;
+  border-radius: 10px;
+  padding: 32px 28px 24px 28px;
+  margin-top: 18px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  color: #232323;
+}
+.research-vision h4 {
+  margin-top: 1.8em;
+  margin-bottom: 0.5em;
+  color: #8b0000;
+  font-size: 1.15em;
+}
+.research-vision p {
+  margin-bottom: 1.1em;
+  line-height: 1.7;
+  font-size: 1.05em;
 } 

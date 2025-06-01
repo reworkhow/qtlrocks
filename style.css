@@ -83,29 +83,39 @@ header {
   color: #444;
 }
 .project-list {
-  display: flex;
-  gap: 30px;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 28px;
+  margin-top: 18px;
 }
 .project {
-  background: #f3f3f3;
-  border-radius: 6px;
-  padding: 15px;
-  width: 200px;
+  background: #232323;
+  border-radius: 12px;
+  padding: 18px 14px 14px 14px;
   text-align: center;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+  color: #fff;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.project:hover {
+  transform: translateY(-4px) scale(1.03);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.18);
 }
 .project img {
-  width: 120px;
-  height: 90px;
+  width: 100%;
+  max-width: 320px;
+  height: 160px;
   object-fit: cover;
-  border-radius: 4px;
-  margin-bottom: 10px;
+  border-radius: 8px;
+  margin-bottom: 14px;
+  background: #fff;
 }
 .project h4 {
   margin: 0;
-  color: #8b0000;
-  font-size: 1.1em;
+  color: #fff;
+  font-size: 1.08em;
+  font-weight: 500;
+  margin-top: 8px;
 }
 footer {
   text-align: center;
@@ -341,4 +351,15 @@ footer {
 .course-item a:hover {
   color: #2980b9;
   text-decoration: underline;
+}
+
+@media (max-width: 900px) {
+  .project-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 600px) {
+  .project-list {
+    grid-template-columns: 1fr;
+  }
 } 

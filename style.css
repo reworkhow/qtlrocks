@@ -392,4 +392,70 @@ footer {
 .research-img:hover {
   transform: scale(2.5);
   z-index: 1;
+}
+
+/* Mobile Responsive Styles */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    margin: 0;
+    border-radius: 0;
+  }
+
+  .sidebar {
+    width: 100%;
+    min-height: auto;
+    padding: 20px;
+    text-align: center;
+  }
+
+  .sidebar-logo {
+    max-width: 180px;
+  }
+
+  .main-content {
+    padding: 20px;
+  }
+
+  header {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .lab-photo {
+    margin: 0 0 20px 0;
+  }
+
+  .research-vision {
+    margin-bottom: 30px;
+  }
+
+  .research-vision img {
+    float: none !important;
+    width: 100% !important;
+    margin: 0 0 20px 0 !important;
+  }
+
+  .research-vision p {
+    font-size: 1em;
+    line-height: 1.6;
+  }
+
+  .research-img:hover {
+    transform: scale(1.2);
+  }
+}
+
+@media (max-width: 480px) {
+  .lab-info h2 {
+    font-size: 1.4em;
+  }
+
+  .lab-info p {
+    font-size: 1em;
+  }
+
+  .research-vision h4 {
+    font-size: 1.2em;
+  }
 } 

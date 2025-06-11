@@ -382,4 +382,14 @@ footer {
   margin-bottom: 1.1em;
   line-height: 1.7;
   font-size: 1.05em;
+}
+
+.research-img {
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.research-img:hover {
+  transform: scale(2.5);
+  z-index: 1;
 } 

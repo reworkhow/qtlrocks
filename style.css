@@ -248,6 +248,28 @@ footer {
   text-decoration: underline;
 }
 
+.responsibilities {
+  background: #f8f8fa;
+  border-radius: 8px;
+  padding: 28px 30px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.responsibilities ul {
+  margin: 0;
+  padding-left: 1.3rem;
+}
+
+.responsibilities li {
+  margin-bottom: 1rem;
+  line-height: 1.65;
+  color: #444;
+}
+
+.responsibilities li:last-child {
+  margin-bottom: 0;
+}
+
 /* Teaching page styles */
 .courses, .workshops {
   margin-bottom: 2rem;
@@ -458,4 +480,4 @@ footer {
   .research-vision h4 {
     font-size: 1.2em;
   }
-} 
+}

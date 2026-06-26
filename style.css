@@ -270,6 +270,46 @@ footer {
   margin-bottom: 0;
 }
 
+.newsletter-archive {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.newsletter-item {
+  background: #f8f8fa;
+  border-radius: 8px;
+  padding: 22px 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.newsletter-date {
+  color: #666;
+  font-size: 0.95em;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.newsletter-item h3 {
+  margin: 0 0 10px 0;
+  color: #444;
+}
+
+.newsletter-item h3 a {
+  color: #8b0000;
+  text-decoration: none;
+}
+
+.newsletter-item h3 a:hover {
+  text-decoration: underline;
+}
+
+.newsletter-item p {
+  margin: 0;
+  color: #444;
+  line-height: 1.6;
+}
+
 /* Teaching page styles */
 .courses, .workshops {
   margin-bottom: 2rem;

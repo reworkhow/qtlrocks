@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>qtl.rocks Lab newsletter (6/19/2026)</title>
+  <style type="text/css">
+    :root {
+      --ink: #111827;
+      --muted: #5b6472;
+      --line: #e5e7eb;
+      --blue: #1f6feb;
+      --blue-soft: #eef5ff;
+      --orange: #f97316;
+      --orange-soft: #fff7ed;
+      --green: #0f766e;
+      --green-soft: #ecfdf5;
+      --purple: #7c3aed;
+      --purple-soft: #f5f3ff;
+      --yellow: #ca8a04;
+      --yellow-soft: #fefce8;
+      --rose: #be123c;
+      --rose-soft: #fff1f2;
+      --gray-soft: #f9fafb;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: #f3f4f6;
+      color: var(--ink);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.6;
+    }
+
+    .page {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #ffffff;
+      padding: 34px;
+    }
+
+    .header {
+      border-bottom: 5px solid var(--blue);
+      padding-bottom: 18px;
+      margin-bottom: 28px;
+    }
+
+    .kicker {
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--blue);
+      font-weight: 700;
+      font-size: 13px;
+      margin-bottom: 6px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 34px;
+      line-height: 1.15;
+      color: var(--ink);
+    }
+
+    .subtitle {
+      color: var(--muted);
+      font-size: 16px;
+      margin-top: 10px;
+    }
+
+    .toc {
+      background: var(--gray-soft);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 18px 20px;
+      margin: 24px 0 32px;
+    }
+
+    .toc h2 {
+      margin: 0 0 10px;
+      font-size: 18px;
+    }
+
+    .toc ol {
+      margin: 0;
+      padding-left: 22px;
+    }
+
+    .section {
+      margin: 0 0 34px;
+      padding-bottom: 30px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .section.summary {
+      border-bottom: none;
+    }
+
+    .tag {
+      display: inline-block;
+      border-radius: 999px;
+      padding: 4px 10px;
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .tag.blue {
+      background: var(--blue-soft);
+      color: #075985;
+    }
+
+    .tag.orange {
+      background: var(--orange-soft);
+      color: #9a3412;
+    }
+
+    .tag.green {
+      background: var(--green-soft);
+      color: #065f46;
+    }
+
+    .tag.purple {
+      background: var(--purple-soft);
+      color: #5b21b6;
+    }
+
+    .tag.rose {
+      background: var(--rose-soft);
+      color: #9f1239;
+    }
+
+    h2 {
+      margin: 4px 0 12px;
+      font-size: 25px;
+      line-height: 1.25;
+    }
+
+    h3 {
+      margin: 22px 0 8px;
+      font-size: 18px;
+    }
+
+    p {
+      margin: 10px 0;
+    }
+
+    a {
+      color: var(--blue);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .box {
+      border-radius: 12px;
+      padding: 16px 18px;
+      margin: 16px 0;
+      border-left: 5px solid;
+    }
+
+    .box.blue {
+      background: var(--blue-soft);
+      border-color: var(--blue);
+    }
+
+    .box.orange {
+      background: var(--orange-soft);
+      border-color: var(--orange);
+    }
+
+    .box.green {
+      background: var(--green-soft);
+      border-color: var(--green);
+    }
+
+    .box.purple {
+      background: var(--purple-soft);
+      border-color: var(--purple);
+    }
+
+    .box.yellow {
+      background: var(--yellow-soft);
+      border-color: var(--yellow);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      margin: 18px 0;
+    }
+
+    .card {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 16px;
+      background: #ffffff;
+    }
+
+    .card h3 {
+      margin-top: 0;
+      font-size: 17px;
+    }
+
+    .card p {
+      color: #374151;
+      font-size: 14px;
+      margin-bottom: 0;
+    }
+
+    .explainer-strip {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 10px;
+      margin: 18px 0;
+    }
+
+    .explainer-step {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #ffffff;
+      padding: 12px;
+      text-align: center;
+    }
+
+    .explainer-step strong {
+      display: block;
+      color: var(--blue);
+      font-size: 13px;
+      margin-bottom: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .explainer-step span {
+      color: #374151;
+      font-size: 13px;
+    }
+
+    .link-row {
+      margin-top: 14px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    ul {
+      padding-left: 22px;
+    }
+
+    li {
+      margin-bottom: 7px;
+    }
+
+    .footer {
+      margin-top: 28px;
+      padding-top: 18px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    @media (max-width: 760px) {
+      .page {
+        padding: 22px;
+      }
+
+      h1 {
+        font-size: 28px;
+      }
+
+      .grid,
+      .explainer-strip {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+    <div class="header">
+      <div class="kicker">qtl.rocks Lab Newsletter</div>
+      <h1>qtl.rocks Lab newsletter (6/19/2026)</h1>
+      <div class="subtitle">
+        This week's theme: AI can help us learn faster, but we still need real understanding, real skills, and curiosity about surprising biology.
+      </div>
+    </div>
+
+    <div class="toc">
+      <h2>In this issue</h2>
+      <ol>
+        <li>Transformer Explainer: making LLM internals visible</li>
+        <li>AI-induced never-skilling in medical education</li>
+        <li>Science: pigeon navigation and superparamagnetic macrophages</li>
+      </ol>
+    </div>
+
+    <div class="section">
+      <span class="tag blue">AI Learning</span>
+      <h2>1. Transformer Explainer: making LLM internals visible</h2>
+
+      <p>
+        <a href="https://poloclub.github.io/transformer-explainer/" target="_blank" rel="noopener noreferrer">Transformer Explainer</a>
+        is an interactive tool from the Polo Club team that helps people understand how transformer models work.
+        Instead of treating an LLM as a mysterious black box, the tool lets users inspect the steps that connect input text
+        to next-token prediction.
+      </p>
+
+      <div class="explainer-strip">
+        <div class="explainer-step">
+          <strong>Tokens</strong>
+          <span>text becomes model-readable pieces</span>
+        </div>
+
+        <div class="explainer-step">
+          <strong>Embeddings</strong>
+          <span>tokens become vectors</span>
+        </div>
+
+        <div class="explainer-step">
+          <strong>Attention</strong>
+          <span>tokens look at other tokens</span>
+        </div>
+
+        <div class="explainer-step">
+          <strong>MLP</strong>
+          <span>features are transformed</span>
+        </div>
+
+        <div class="explainer-step">
+          <strong>Output</strong>
+          <span>the model predicts what comes next</span>
+        </div>
+      </div>
+
+      <div class="box blue">
+        <strong>Main signal:</strong>
+        Interactive explanations make abstract AI concepts easier to inspect.
+        This is especially useful for students who use LLMs every day but still
+        need to understand what is happening underneath.
+      </div>
+
+      <h3>Why this matters for the lab</h3>
+      <p>
+        We should not only learn how to prompt AI. We should also understand the
+        model well enough to know what it can and cannot do. Visual tools make it
+        easier to ask better questions about attention, probability, temperature,
+        top-k, top-p, and why the model produces one answer instead of another.
+      </p>
+
+      <div class="box purple">
+        <strong>My takeaway:</strong>
+        The best AI training combines use and understanding. Tools like Transformer
+        Explainer turn the abstract parts of transformers into something concrete,
+        which makes it easier to use AI responsibly and teach it to new students.
+      </div>
+
+      <p class="link-row">
+        Link:
+        <a href="https://poloclub.github.io/transformer-explainer/" target="_blank" rel="noopener noreferrer">Open Transformer Explainer</a>
+      </p>
+    </div>
+
+    <div class="section">
+      <span class="tag orange">Medical Education</span>
+      <h2>2. AI-induced never-skilling in medical education</h2>
+
+      <p>
+        A Nature Medicine perspective argues that medical education now faces a
+        new AI-related risk: not only <em>deskilling</em>, where experienced people
+        lose abilities, but <em>never-skilling</em>, where trainees rely on AI so
+        early that they never fully develop foundational clinical reasoning.
+      </p>
+
+      <div class="box orange">
+        <strong>Main signal:</strong>
+        AI can make learners faster, but speed is not the same as competence.
+        If trainees outsource reasoning too early, they may produce correct-looking
+        answers without developing independent judgment.
+      </div>
+
+      <h3>Why this matters beyond medicine</h3>
+      <p>
+        This is also a research-training problem. In statistics, genomics, coding,
+        and paper writing, students can now ask AI to generate polished answers
+        before they understand the core concepts. That can help productivity, but
+        it can also hide weak foundations.
+      </p>
+
+      <div class="box purple">
+        <strong>My takeaway:</strong>
+        AI should not replace the painful but necessary stage of learning. We need
+        baseline competency first, then AI-assisted learning. The order matters:
+        learn to think, then use AI to think faster and better.
+      </div>
+
+      <p class="link-row">
+        Link:
+        <a href="https://www.nature.com/articles/s41591-026-04438-y" target="_blank" rel="noopener noreferrer">Read the Nature Medicine article</a>
+      </p>
+    </div>
+
+    <div class="section">
+      <span class="tag green">Biology + Navigation</span>
+      <h2>3. Pigeon navigation and superparamagnetic macrophages</h2>
+
+      <p>
+        A Science paper reports that homing pigeon navigation under overcast
+        conditions relies on superparamagnetic macrophages. The surprising part is
+        the proposed link between navigation behavior, iron-rich immune cells,
+        liver biology, and magnetosensation.
+      </p>
+
+      <div class="box green">
+        <strong>Main signal:</strong>
+        Biology can connect systems that look unrelated at first. A navigation
+        phenotype may involve immune cells and liver tissue, not only the obvious
+        sensory organs.
+      </div>
+
+      <h3>Why this is interesting for the lab</h3>
+      <ul>
+        <li><strong>Mechanism can be surprising:</strong> the most important tissue or cell type may not be where we first expect it.</li>
+        <li><strong>Behavior needs systems thinking:</strong> navigation connects environment, physiology, cells, and neural pathways.</li>
+        <li><strong>Broad reading matters:</strong> unusual papers can train us to notice connections across fields.</li>
+      </ul>
+
+      <div class="box purple">
+        <strong>My takeaway:</strong>
+        This is exactly why reading broadly matters. Sometimes the most interesting
+        scientific ideas come from connections that look strange at first: immune
+        cells as sensors, liver as compass, and behavior explained by cell biology.
+        Good research often starts with being surprised.
+      </div>
+
+      <p class="link-row">
+        Link:
+        <a href="https://www.science.org/doi/10.1126/science.ady2486" target="_blank" rel="noopener noreferrer">Read the Science article</a>
+      </p>
+    </div>
+
+    <div class="section summary">
+      <span class="tag purple">Summary</span>
+      <h2>Key takeaways</h2>
+
+      <ul>
+        <li>Transformer Explainer is useful because it makes LLM internals inspectable, not just abstract.</li>
+        <li>AI education needs the right order: build foundational skills first, then use AI to accelerate learning.</li>
+        <li>The pigeon-navigation paper is a reminder that biological mechanisms can be surprising and cross-system.</li>
+      </ul>
+    </div>
+
+    <div class="footer">
+      Prepared for qtl.rocks Lab. Source links are included for follow-up reading.
+    </div>
+  </div>
+</body>
+</html>

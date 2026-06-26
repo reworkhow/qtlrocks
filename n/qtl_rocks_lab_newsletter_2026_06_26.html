@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>qtl.rocks Lab newsletter (6/26/2026)</title>
+  <style type="text/css">
+    :root {
+      --ink: #111827;
+      --muted: #5b6472;
+      --line: #e5e7eb;
+      --blue: #1f6feb;
+      --blue-soft: #eef5ff;
+      --orange: #f97316;
+      --orange-soft: #fff7ed;
+      --green: #0f766e;
+      --green-soft: #ecfdf5;
+      --purple: #7c3aed;
+      --purple-soft: #f5f3ff;
+      --yellow: #ca8a04;
+      --yellow-soft: #fefce8;
+      --rose: #be123c;
+      --rose-soft: #fff1f2;
+      --gray-soft: #f9fafb;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: #f3f4f6;
+      color: var(--ink);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.6;
+    }
+
+    .page {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #ffffff;
+      padding: 34px;
+    }
+
+    .header {
+      border-bottom: 5px solid var(--blue);
+      padding-bottom: 18px;
+      margin-bottom: 28px;
+    }
+
+    .kicker {
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--blue);
+      font-weight: 700;
+      font-size: 13px;
+      margin-bottom: 6px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 34px;
+      line-height: 1.15;
+      color: var(--ink);
+    }
+
+    .subtitle {
+      color: var(--muted);
+      font-size: 16px;
+      margin-top: 10px;
+    }
+
+    .toc {
+      background: var(--gray-soft);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 18px 20px;
+      margin: 24px 0 32px;
+    }
+
+    .toc h2 {
+      margin: 0 0 10px;
+      font-size: 18px;
+    }
+
+    .toc ol {
+      margin: 0;
+      padding-left: 22px;
+    }
+
+    .section {
+      margin: 0 0 34px;
+      padding-bottom: 30px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .section.summary {
+      border-bottom: none;
+    }
+
+    .tag {
+      display: inline-block;
+      border-radius: 999px;
+      padding: 4px 10px;
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .tag.blue {
+      background: var(--blue-soft);
+      color: #075985;
+    }
+
+    .tag.orange {
+      background: var(--orange-soft);
+      color: #9a3412;
+    }
+
+    .tag.green {
+      background: var(--green-soft);
+      color: #065f46;
+    }
+
+    .tag.purple {
+      background: var(--purple-soft);
+      color: #5b21b6;
+    }
+
+    .tag.rose {
+      background: var(--rose-soft);
+      color: #9f1239;
+    }
+
+    h2 {
+      margin: 4px 0 12px;
+      font-size: 25px;
+      line-height: 1.25;
+    }
+
+    h3 {
+      margin: 22px 0 8px;
+      font-size: 18px;
+    }
+
+    p {
+      margin: 10px 0;
+    }
+
+    a {
+      color: var(--blue);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .box {
+      border-radius: 12px;
+      padding: 16px 18px;
+      margin: 16px 0;
+      border-left: 5px solid;
+    }
+
+    .box.blue {
+      background: var(--blue-soft);
+      border-color: var(--blue);
+    }
+
+    .box.orange {
+      background: var(--orange-soft);
+      border-color: var(--orange);
+    }
+
+    .box.green {
+      background: var(--green-soft);
+      border-color: var(--green);
+    }
+
+    .box.purple {
+      background: var(--purple-soft);
+      border-color: var(--purple);
+    }
+
+    .box.yellow {
+      background: var(--yellow-soft);
+      border-color: var(--yellow);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin: 18px 0;
+    }
+
+    .card {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 16px;
+      background: #ffffff;
+    }
+
+    .card h3 {
+      margin-top: 0;
+      font-size: 17px;
+    }
+
+    .card p {
+      color: #374151;
+      font-size: 14px;
+      margin-bottom: 0;
+    }
+
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin: 18px 0;
+    }
+
+    .metric {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: #ffffff;
+      padding: 18px;
+    }
+
+    .metric-label {
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .metric-value {
+      color: var(--ink);
+      font-size: 29px;
+      font-weight: 800;
+      line-height: 1.1;
+      margin-top: 6px;
+    }
+
+    .metric-note {
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 8px;
+    }
+
+    .failure-chart {
+      display: grid;
+      gap: 12px;
+      margin: 18px 0;
+    }
+
+    .failure-item {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: #ffffff;
+      padding: 14px 16px;
+    }
+
+    .failure-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: baseline;
+      margin-bottom: 8px;
+    }
+
+    .failure-name {
+      font-weight: 800;
+      color: var(--ink);
+    }
+
+    .failure-value {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--blue);
+    }
+
+    .failure-item.orange .failure-value {
+      color: var(--orange);
+    }
+
+    .failure-item.purple .failure-value {
+      color: var(--purple);
+    }
+
+    .failure-item.green .failure-value {
+      color: var(--green);
+    }
+
+    .bar {
+      height: 12px;
+      background: #eef2f7;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .bar-fill {
+      height: 100%;
+      border-radius: 999px;
+      background: var(--blue);
+    }
+
+    .failure-item.orange .bar-fill {
+      background: var(--orange);
+    }
+
+    .failure-item.purple .bar-fill {
+      background: var(--purple);
+    }
+
+    .failure-item.green .bar-fill {
+      background: var(--green);
+    }
+
+    .failure-note {
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 8px;
+    }
+
+    .writing-test {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: #ffffff;
+      margin: 18px 0;
+      overflow: hidden;
+    }
+
+    .writing-row {
+      display: grid;
+      grid-template-columns: 150px 1fr;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .writing-row:last-child {
+      border-bottom: none;
+    }
+
+    .writing-label {
+      background: var(--gray-soft);
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 700;
+      padding: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .writing-content {
+      padding: 14px 16px;
+    }
+
+    .bad {
+      color: #991b1b;
+      font-weight: 700;
+    }
+
+    .good {
+      color: #065f46;
+      font-weight: 700;
+    }
+
+    .figure {
+      margin: 18px 0;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--gray-soft);
+    }
+
+    .figure img {
+      display: block;
+      width: 100%;
+      border-radius: 10px;
+      border: 1px solid #d1d5db;
+    }
+
+    .figure.narrow {
+      max-width: 620px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .caption {
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 8px;
+    }
+
+    .prompt-box {
+      border: 1px solid var(--line);
+      border-left: 5px solid var(--purple);
+      border-radius: 14px;
+      background: var(--purple-soft);
+      margin: 18px 0;
+      padding: 18px;
+    }
+
+    .prompt-label {
+      color: #5b21b6;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .prompt-text {
+      color: var(--ink);
+      font-size: 20px;
+      font-weight: 800;
+      line-height: 1.35;
+    }
+
+    .link-row {
+      margin-top: 14px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    ul {
+      padding-left: 22px;
+    }
+
+    li {
+      margin-bottom: 7px;
+    }
+
+    .footer {
+      margin-top: 28px;
+      padding-top: 18px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    @media (max-width: 760px) {
+      .page {
+        padding: 22px;
+      }
+
+      h1 {
+        font-size: 28px;
+      }
+
+      .grid,
+      .metric-grid,
+      .writing-row {
+        grid-template-columns: 1fr;
+      }
+
+      .failure-head {
+        display: block;
+      }
+
+      .metric-value {
+        font-size: 25px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+    <div class="header">
+      <div class="kicker">qtl.rocks Lab Newsletter</div>
+      <h1>qtl.rocks Lab newsletter (6/26/2026)</h1>
+      <div class="subtitle">
+        This week's theme: domain knowledge, logical thinking, and self-directed initiative determine how useful AI can be.
+      </div>
+    </div>
+
+    <div class="toc">
+      <h2>In this issue</h2>
+      <ol>
+        <li>ChatGPT is not another undergraduate intern</li>
+        <li>No empty phrases</li>
+        <li>Agents' Last Exam: why agents still fail</li>
+        <li>A prompt for understanding yourself</li>
+      </ol>
+    </div>
+
+    <div class="section">
+      <span class="tag blue">AI + Research</span>
+      <h2>1. ChatGPT is not another undergraduate intern</h2>
+
+      <p>
+        When using ChatGPT or Codex, the most important thing is not just the tool.
+        The important thing is the person using it: their <strong>domain knowledge</strong>,
+        <strong>logical thinking</strong>, and <strong>self-directed initiative</strong>.
+      </p>
+
+      <div class="box blue">
+        <strong>Important analogy:</strong>
+        Codex does not feel like another undergraduate intern. A better analogy is
+        that we are asking someone with strong computational training, maybe like a
+        computational physicist, to work with us on computational genomics.
+      </div>
+
+      <p>
+        It knows coding, algorithms, debugging, and computation. But it does not
+        automatically know the biological context, the scientific priority, or what
+        result is meaningful for our project.
+      </p>
+
+      <div class="grid">
+        <div class="card">
+          <h3>Domain knowledge</h3>
+          <p>Know the scientific context well enough to decide what matters and what is irrelevant.</p>
+        </div>
+
+        <div class="card">
+          <h3>Logical thinking</h3>
+          <p>Break down the problem, check assumptions, and notice contradictions in the result.</p>
+        </div>
+
+        <div class="card">
+          <h3>Self-directed initiative</h3>
+          <p>
+            This is agency, or <strong>&#20027;&#35266;&#33021;&#21160;&#24615;</strong>: the drive to keep asking,
+            testing, revising, and pushing until the work becomes real.
+          </p>
+        </div>
+      </div>
+
+      <div class="box blue">
+        <strong>Main signal:</strong>
+        AI raises the return on the user's own ability. If we ask vague questions,
+        we get vague answers. If we ask well-defined questions with enough scientific
+        context, AI becomes much more useful.
+      </div>
+
+      <h3>Why this matters for the lab</h3>
+      <p>
+        AI can help us write code, debug workflows, compare methods, and move faster.
+        But the researcher still has to define the problem, provide the biological
+        context, and judge whether the answer makes sense.
+      </p>
+
+      <div class="box purple">
+        <strong>My takeaway:</strong>
+        ChatGPT is useful only when the user brings domain knowledge, logical
+        thinking, and self-directed initiative. The model may know coding and
+        computation, but the researcher must define the problem, provide context,
+        evaluate the result, and keep pushing. AI does not remove the need for
+        agency; it rewards people who already have it.
+      </div>
+    </div>
+
+    <div class="section">
+      <span class="tag rose">Writing + Revision</span>
+      <h2>2. No empty phrases</h2>
+
+      <p>
+        The practical writing point is to avoid empty phrases.
+        These are phrases that sound polished but do not actually say anything.
+        ChatGPT often writes this way, so we need to be careful that our scientific
+        writing does not become vague and AI-like.
+      </p>
+
+      <div class="writing-test">
+        <div class="writing-row">
+          <div class="writing-label">Empty</div>
+          <div class="writing-content">
+            <span class="bad">"metabolomics-proteomics framework"</span>
+          </div>
+        </div>
+
+        <div class="writing-row">
+          <div class="writing-label">Problem</div>
+          <div class="writing-content">
+            What is this concretely? A model, a dataset, a correlation analysis,
+            a causal hypothesis, a pipeline, or a biological mechanism?
+          </div>
+        </div>
+
+        <div class="writing-row">
+          <div class="writing-label">Better</div>
+          <div class="writing-content">
+            <span class="good">Name the exact data, method, comparison, and biological question.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="box rose">
+        <strong>Main signal:</strong>
+        Every sentence should add information. If a sentence only sounds good but
+        does not make the argument more concrete, remove it or rewrite it.
+      </div>
+
+      <h3>A useful test</h3>
+      <ul>
+        <li>Does this sentence add new information?</li>
+        <li>What concrete information is being communicated?</li>
+        <li>Could a reader explain exactly what this means?</li>
+      </ul>
+
+      <div class="box purple">
+        <strong>My takeaway:</strong>
+        Do not write sentences that only sound good. Write sentences that say
+        something. In scientific writing, concrete information is more important
+        than polished phrasing.
+      </div>
+    </div>
+
+    <div class="section">
+      <span class="tag green">AI Agents + Evaluation</span>
+      <h2>3. Agents' Last Exam: why agents still fail</h2>
+
+      <p>
+        <a href="https://arxiv.org/abs/2606.05405" target="_blank" rel="noopener noreferrer">Agents' Last Exam</a>
+        is a benchmark for evaluating AI agents on real professional workflows.
+        These are not short question-answer tasks. They are long-horizon tasks that
+        require real software use, files, GUI interaction, CLI work, planning, and
+        verifiable deliverables.
+      </p>
+
+      <p>
+        The benchmark covers broad professional work: 13 industry clusters, 55
+        subfields, and more than 1,000 tasks. It is designed to measure whether
+        agents can do economically valuable work, not just score well on toy tasks.
+      </p>
+
+      <div class="metric-grid">
+        <div class="metric">
+          <div class="metric-label">Best overall pass rate</div>
+          <div class="metric-value">24.0%</div>
+          <div class="metric-note">Codex with GPT-5.5 on the public benchmark.</div>
+        </div>
+
+        <div class="metric">
+          <div class="metric-label">Not-full-pass rate</div>
+          <div class="metric-value">76.0%</div>
+          <div class="metric-note">The strongest reported setup still fails to fully pass most tasks.</div>
+        </div>
+
+        <div class="metric">
+          <div class="metric-label">Hardest tier average</div>
+          <div class="metric-value">&lt;1%</div>
+          <div class="metric-note">Average full pass rate across mainstream configurations.</div>
+        </div>
+      </div>
+
+      <div class="box green">
+        <strong>Performance summary:</strong>
+        Current agents are still far from solving the hardest tasks. The paper
+        reports that the hardest tier remains far from saturated, with the average
+        full pass rate below 1% across mainstream harness and backbone configurations.
+      </div>
+
+      <h3>Top failure reason</h3>
+      <p>
+        The largest broad failure category is <strong>Approach errors</strong> at
+        47%. The largest single subcategory is <strong>Wrong Strategy</strong> at
+        30%. Understanding failures are also large at 31%, especially domain
+        knowledge gaps at 25%.
+      </p>
+
+      <div class="failure-chart">
+        <div class="failure-item orange">
+          <div class="failure-head">
+            <div class="failure-name">Approach errors</div>
+            <div class="failure-value">47%</div>
+          </div>
+          <div class="bar">
+            <div class="bar-fill" style="width: 47%;"></div>
+          </div>
+          <div class="failure-note">Largest broad category: the agent understood enough to act, but chose the wrong plan or stopped too early.</div>
+        </div>
+
+        <div class="failure-item blue">
+          <div class="failure-head">
+            <div class="failure-name">Wrong Strategy</div>
+            <div class="failure-value">30%</div>
+          </div>
+          <div class="bar">
+            <div class="bar-fill" style="width: 30%;"></div>
+          </div>
+          <div class="failure-note">Largest single subcategory: the agent chose a fundamentally wrong method or violated task constraints.</div>
+        </div>
+
+        <div class="failure-item purple">
+          <div class="failure-head">
+            <div class="failure-name">Understanding failures</div>
+            <div class="failure-value">31%</div>
+          </div>
+          <div class="bar">
+            <div class="bar-fill" style="width: 31%;"></div>
+          </div>
+          <div class="failure-note">The agent lacked knowledge, misunderstood the task, or fabricated information.</div>
+        </div>
+
+        <div class="failure-item green">
+          <div class="failure-head">
+            <div class="failure-name">Domain knowledge gaps</div>
+            <div class="failure-value">25%</div>
+          </div>
+          <div class="bar">
+            <div class="bar-fill" style="width: 25%;"></div>
+          </div>
+          <div class="failure-note">A domain expert would likely have avoided the mistake.</div>
+        </div>
+      </div>
+
+      <div class="box yellow">
+        <strong>Why this matters:</strong>
+        Agents often do not fail only because they cannot click, type, or run code.
+        They fail because they choose the wrong plan or lack the domain knowledge
+        needed to solve the task correctly.
+      </div>
+
+      <div class="box purple">
+        <strong>My takeaway:</strong>
+        This connects directly with the first point. For our lab, AI agents are
+        useful for computational work, but they still need strong human guidance.
+        We should define the scientific question, provide domain context, check the
+        plan, and verify the result carefully. The agent can move fast, but the
+        researcher still has to know where it should go.
+      </div>
+
+      <p class="link-row">
+        Links:
+        <a href="https://arxiv.org/abs/2606.05405" target="_blank" rel="noopener noreferrer">Read the arXiv paper</a> |
+        <a href="https://agents-last-exam.org/" target="_blank" rel="noopener noreferrer">Open the project site</a>
+      </p>
+    </div>
+
+    <div class="section">
+      <span class="tag purple">Reflection + Growth</span>
+      <h2>4. A prompt for understanding yourself</h2>
+
+      <p>
+        One useful way to use ChatGPT is not only to answer technical questions,
+        but to better understand yourself. Surprisingly, sometimes we know very
+        little about our own preferences, motivation, and working style until
+        someone asks the right question.
+      </p>
+
+      <div class="prompt-box">
+        <div class="prompt-label">Prompt to try with ChatGPT</div>
+        <div class="prompt-text">
+          Do you want to be a small fish or a big fish, in a small tank or a big tank?
+        </div>
+      </div>
+
+      <div class="box purple">
+        <strong>My takeaway:</strong>
+        This is not about choosing the "best" identity. It is a way to start a
+        conversation with ChatGPT about what kind of environment helps you grow.
+        The useful part is the follow-up: why did you choose that answer, what are
+        you avoiding, and what kind of challenge do you actually want next?
+      </div>
+    </div>
+
+    <div class="section summary">
+      <span class="tag purple">Summary</span>
+      <h2>Key takeaways</h2>
+
+      <ul>
+        <li>AI rewards users with domain knowledge, logical thinking, and self-directed initiative.</li>
+        <li>Codex is not just an intern; it is more like a strong computational collaborator that still needs scientific context.</li>
+        <li>Empty phrases make writing sound polished but weak. Every sentence should add concrete information.</li>
+        <li>Agents' Last Exam shows that current agents still fail often on real professional workflows.</li>
+        <li>The biggest failure pattern is not tool use alone; it is wrong strategy and missing domain knowledge.</li>
+        <li>ChatGPT can also be used as a mirror: good prompts can help us understand our own goals and working style.</li>
+      </ul>
+    </div>
+
+    <div class="footer">
+      Prepared for qtl.rocks Lab. Source links are included for follow-up reading.
+    </div>
+  </div>
+</body>
+</html>

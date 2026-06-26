@@ -376,11 +376,23 @@
       background: var(--gray-soft);
     }
 
+    .figure.polished {
+      background: linear-gradient(180deg, #ffffff 0%, var(--gray-soft) 100%);
+      padding: 16px;
+      box-shadow: 0 10px 28px rgba(17, 24, 39, 0.08);
+    }
+
     .figure img {
       display: block;
       width: 100%;
       border-radius: 10px;
       border: 1px solid #d1d5db;
+    }
+
+    .figure.polished img {
+      background: #ffffff;
+      border-color: #e5e7eb;
+      box-shadow: 0 4px 14px rgba(17, 24, 39, 0.10);
     }
 
     .figure.narrow {
@@ -559,8 +571,15 @@
       <span class="tag rose">Writing + Revision</span>
       <h2>2. No empty phrases</h2>
 
+      <div class="figure narrow polished">
+        <img src="assets/2026-06-26-no-empty-phrases.png" alt="Writing feedback screenshot warning against empty phrases" />
+        <div class="caption">
+          Writing note: polished language is useful only when each sentence adds concrete information.
+        </div>
+      </div>
+
       <p>
-        The practical writing point is to avoid empty phrases.
+        The note above makes a practical writing point: avoid empty phrases.
         These are phrases that sound polished but do not actually say anything.
         ChatGPT often writes this way, so we need to be careful that our scientific
         writing does not become vague and AI-like.

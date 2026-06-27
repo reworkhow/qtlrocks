@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>qtl.rocks Lab newsletter (5/15/2026)</title>
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.6;
+      color: #222;
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 28px;
+      background-color: #ffffff;
+    }
+
+    .header {
+      border-bottom: 4px solid #1f6feb;
+      padding-bottom: 14px;
+      margin-bottom: 28px;
+    }
+
+    .header h1 {
+      margin: 0;
+      font-size: 30px;
+      color: #111827;
+    }
+
+    .subtitle {
+      color: #555;
+      font-size: 15px;
+      margin-top: 6px;
+    }
+
+    .section {
+      margin-bottom: 34px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    .section h2 {
+      font-size: 21px;
+      color: #111827;
+      margin: 8px 0 12px 0;
+    }
+
+    .tag {
+      display: inline-block;
+      background-color: #e0f2fe;
+      color: #075985;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 4px 9px;
+      border-radius: 999px;
+      margin-bottom: 8px;
+    }
+
+    .highlight-box {
+      background-color: #f3f7ff;
+      border-left: 4px solid #1f6feb;
+      padding: 14px 18px;
+      margin: 16px 0;
+      border-radius: 7px;
+    }
+
+    .warning-box {
+      background-color: #fff7ed;
+      border-left: 4px solid #f97316;
+      padding: 14px 18px;
+      margin: 16px 0;
+      border-radius: 7px;
+    }
+
+    .action {
+      background-color: #fefce8;
+      border-left: 4px solid #ca8a04;
+      padding: 13px 16px;
+      border-radius: 7px;
+      margin-top: 14px;
+    }
+
+    .quote {
+      font-style: italic;
+      color: #374151;
+      border-left: 3px solid #cbd5e1;
+      padding-left: 14px;
+      margin: 14px 0;
+    }
+
+    ul {
+      padding-left: 22px;
+    }
+
+    li {
+      margin-bottom: 7px;
+    }
+
+    a {
+      color: #1f6feb;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .footer {
+      font-size: 13px;
+      color: #666;
+      margin-top: 34px;
+      padding-top: 16px;
+      border-top: 1px solid #e5e7eb;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="header">
+    <h1>qtl.rocks Lab newsletter (5/15/2026)</h1>
+    <div class="subtitle">Meeting logistics, AI research signals, and practical workflow updates</div>
+  </div>
+
+  <div class="section">
+    <span class="tag">Upcoming Meeting</span>
+    <h2>Meeting with Dr. Yun S. Song</h2>
+
+    <p>
+      We will meet with <strong>Dr. Yun S. Song</strong> on
+      <strong>Monday, May 18, from 11:00 AM to 12:00 PM</strong>.
+    </p>
+
+    <div class="action">
+      <strong>Action item:</strong>
+      Donna Li, please help reserve a room for this meeting.
+    </div>
+  </div>
+
+  <div class="section">
+    <span class="tag">AI & Mathematics</span>
+    <h2>Timothy Gowers: AI Solving Open Problems in Mathematics</h2>
+
+    <p>
+      Timothy Gowers shared that he tested an advanced AI model on open problems in mathematics,
+      specifically questions asked by Melvyn Nathanson. According to his thread, the model answered
+      the questions and produced a result that, in his assessment, could reasonably form a chapter
+      of a PhD thesis.
+    </p>
+
+    <div class="highlight-box">
+      <strong>Main signal:</strong>
+      AI may be moving from helping with exposition and coding toward contributing directly to
+      mathematical research-level problem solving.
+    </div>
+
+    <p>
+      Gowers emphasized that the interaction did not require highly technical prompting. The prompts
+      were closer to:
+    </p>
+
+    <ul>
+      <li>“Could you explore that idea and see whether you can get it to work?”</li>
+      <li>“Could you rewrite that argument as a LaTeX file in the style of a standard mathematical preprint?”</li>
+    </ul>
+
+    <div class="warning-box">
+      <strong>Why this matters:</strong>
+      If AI continues to progress at this rate, mathematics departments may soon need to rethink
+      PhD training, research expectations, and how students are prepared for AI-assisted discovery.
+    </div>
+
+    <p>
+      This connects directly to broader questions for quantitative genetics and statistical genomics:
+      not only whether AI can summarize or code, but whether it can help generate, test, and formalize
+      new research ideas.
+    </p>
+  </div>
+
+  <div class="section">
+    <span class="tag">LLM Tip</span>
+    <h2>Prompting Tip: Ask the LLM to Structure the Response as HTML</h2>
+
+    <p>
+      A useful prompting strategy is to add the following instruction at the end of a query:
+    </p>
+
+    <div class="highlight-box">
+      <strong>“Structure your response as HTML.”</strong>
+    </div>
+
+    <p>
+      This can make the output easier to view in a browser, convert into a webpage,
+      or adapt into slides, reports, and newsletters.
+    </p>
+
+    <p>
+      Reference:
+      <a href="https://x.com/karpathy/status/2053872850101285137" target="_blank">
+        Andrei Karpathy’s post on X
+      </a>
+    </p>
+  </div>
+
+  <div class="section">
+    <span class="tag">AI Tools</span>
+    <h2>Codex Mobile Is Here</h2>
+
+    <p>
+      Codex Mobile appears to provide a mobile interface for working with coding
+      projects and AI-assisted development workflows.
+    </p>
+
+    <p>
+      This may reduce the need for some custom local setups, depending on how well
+      it supports project access, mobile review, and ongoing coding tasks.
+    </p>
+
+    <div class="highlight-box">
+      <strong>Personal note:</strong>
+      This may eventually replace part of the current OpenClaw workflow.
+    </div>
+  </div>
+
+  <div class="section">
+    <span class="tag">Summary</span>
+    <h2>Key Takeaways</h2>
+
+    <ul>
+      <li>Meeting with Dr. Yun S. Song: Monday, May 18, 11:00 AM–12:00 PM.</li>
+      <li>Room reservation is needed.</li>
+      <li>AI may now be contributing to research-level mathematical problem solving, not just writing or coding.</li>
+      <li>Asking LLMs to “structure the response as HTML” can produce cleaner, reusable outputs.</li>
+      <li>Codex Mobile may become useful for mobile AI coding workflows.</li>
+    </ul>
+  </div>
+
+  <div class="footer">
+    Prepared as a concise newsletter-style update.
+  </div>
+</body>
+</html>

@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>qtl.rocks Lab newsletter (6/5/2026)</title>
+  <style type="text/css">
+    :root {
+      --ink: #111827;
+      --muted: #5b6472;
+      --line: #e5e7eb;
+      --blue: #1f6feb;
+      --blue-soft: #eef5ff;
+      --orange: #f97316;
+      --orange-soft: #fff7ed;
+      --green: #0f766e;
+      --green-soft: #ecfdf5;
+      --purple: #7c3aed;
+      --purple-soft: #f5f3ff;
+      --yellow: #ca8a04;
+      --yellow-soft: #fefce8;
+      --rose: #be123c;
+      --rose-soft: #fff1f2;
+      --gray-soft: #f9fafb;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: #f3f4f6;
+      color: var(--ink);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.6;
+    }
+
+    .page {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #ffffff;
+      padding: 34px;
+    }
+
+    .header {
+      border-bottom: 5px solid var(--blue);
+      padding-bottom: 18px;
+      margin-bottom: 28px;
+    }
+
+    .kicker {
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--blue);
+      font-weight: 700;
+      font-size: 13px;
+      margin-bottom: 6px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 34px;
+      line-height: 1.15;
+      color: var(--ink);
+    }
+
+    .subtitle {
+      color: var(--muted);
+      font-size: 16px;
+      margin-top: 10px;
+    }
+
+    .toc {
+      background: var(--gray-soft);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 18px 20px;
+      margin: 24px 0 32px;
+    }
+
+    .toc h2 {
+      margin: 0 0 10px;
+      font-size: 18px;
+    }
+
+    .toc ol {
+      margin: 0;
+      padding-left: 22px;
+    }
+
+    .section {
+      margin: 0 0 34px;
+      padding-bottom: 30px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .section.summary {
+      border-bottom: none;
+    }
+
+    .tag {
+      display: inline-block;
+      border-radius: 999px;
+      padding: 4px 10px;
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .tag.blue {
+      background: var(--blue-soft);
+      color: #075985;
+    }
+
+    .tag.orange {
+      background: var(--orange-soft);
+      color: #9a3412;
+    }
+
+    .tag.green {
+      background: var(--green-soft);
+      color: #065f46;
+    }
+
+    .tag.purple {
+      background: var(--purple-soft);
+      color: #5b21b6;
+    }
+
+    .tag.rose {
+      background: var(--rose-soft);
+      color: #9f1239;
+    }
+
+    h2 {
+      margin: 4px 0 12px;
+      font-size: 25px;
+      line-height: 1.25;
+    }
+
+    h3 {
+      margin: 22px 0 8px;
+      font-size: 18px;
+    }
+
+    p {
+      margin: 10px 0;
+    }
+
+    a {
+      color: var(--blue);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .box {
+      border-radius: 12px;
+      padding: 16px 18px;
+      margin: 16px 0;
+      border-left: 5px solid;
+    }
+
+    .box.blue {
+      background: var(--blue-soft);
+      border-color: var(--blue);
+    }
+
+    .box.orange {
+      background: var(--orange-soft);
+      border-color: var(--orange);
+    }
+
+    .box.green {
+      background: var(--green-soft);
+      border-color: var(--green);
+    }
+
+    .box.purple {
+      background: var(--purple-soft);
+      border-color: var(--purple);
+    }
+
+    .box.yellow {
+      background: var(--yellow-soft);
+      border-color: var(--yellow);
+    }
+
+    .box.rose {
+      background: var(--rose-soft);
+      border-color: var(--rose);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      margin: 18px 0;
+    }
+
+    .card {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 16px;
+      background: #ffffff;
+    }
+
+    .card h3 {
+      margin-top: 0;
+      font-size: 17px;
+    }
+
+    .card p {
+      color: #374151;
+      font-size: 14px;
+      margin-bottom: 0;
+    }
+
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      margin: 18px 0;
+    }
+
+    .metric {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: #ffffff;
+      padding: 18px;
+    }
+
+    .metric-label {
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .metric-value {
+      color: var(--ink);
+      font-size: 30px;
+      font-weight: 800;
+      line-height: 1.1;
+      margin-top: 6px;
+    }
+
+    .quote-print {
+      background: #f8fafc;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      margin: 18px 0;
+      padding: 18px;
+    }
+
+    .quote-paper {
+      background: #fffdf7;
+      border: 1px solid #d6d3d1;
+      border-radius: 8px;
+      color: #292524;
+      font-family: "Courier New", Courier, monospace;
+      font-size: 20px;
+      line-height: 1.45;
+      padding: 26px 22px;
+      text-align: center;
+    }
+
+    .draft-line {
+      display: inline-block;
+      position: relative;
+    }
+
+    .draft-line .struck {
+      color: #57534e;
+      text-decoration: line-through;
+      text-decoration-thickness: 2px;
+    }
+
+    .draft-line .revision {
+      color: var(--rose);
+      font-weight: 700;
+    }
+
+    .caption {
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 8px;
+    }
+
+    .link-row {
+      margin-top: 14px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    ul {
+      padding-left: 22px;
+    }
+
+    li {
+      margin-bottom: 7px;
+    }
+
+    .footer {
+      margin-top: 28px;
+      padding-top: 18px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    @media (max-width: 760px) {
+      .page {
+        padding: 22px;
+      }
+
+      h1 {
+        font-size: 28px;
+      }
+
+      .grid,
+      .metric-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .quote-paper {
+        font-size: 17px;
+        padding: 22px 16px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+    <div class="header">
+      <div class="kicker">qtl.rocks Lab Newsletter</div>
+      <h1>qtl.rocks Lab newsletter (6/5/2026)</h1>
+      <div class="subtitle">
+        This week's theme: progress comes from rough drafts, faster feedback loops, and consistently showing up.
+      </div>
+    </div>
+
+    <div class="toc">
+      <h2>In this issue</h2>
+      <ol>
+        <li>First drafts can be garbage, and that is okay</li>
+        <li>Jiayi reduced computing time from two days to three hours</li>
+        <li>Nature: a practical guide for scientists who dislike networking</li>
+      </ol>
+    </div>
+
+    <div class="section">
+      <span class="tag rose">Writing + Iteration</span>
+      <h2>1. First drafts can be garbage, and that is okay</h2>
+
+      <p>
+        The attached image is useful because it shows both the idea and the
+        process: a first draft can be garbage, and revision is how we make it
+        better. The exact attribution matters less than the habit: make a rough
+        first version, then improve it.
+      </p>
+
+      <div class="quote-print">
+        <div class="quote-paper">
+          <span class="draft-line">
+            <span class="revision">The</span> first draft of <span class="revision">anything</span> is garbage.
+          </span>
+        </div>
+        <div class="caption">
+          The useful part of a first draft is that it turns an idea into something we can revise.
+        </div>
+      </div>
+
+      <div class="box rose">
+        <strong>Main signal:</strong>
+        Do not wait for the first version to be beautiful. Make the first version
+        concrete, then use revision, feedback, and validation to improve it.
+      </div>
+
+      <h3>Why this matters for the lab</h3>
+      <p>
+        Many research tasks stay stuck because they are still abstract: an idea for
+        a paper, a possible analysis, a method that might work, or a paragraph that
+        has not been written yet. A rough draft changes the situation. Once there is
+        something on the page or something running in code, we can criticize it,
+        test it, and improve it.
+      </p>
+
+      <div class="box purple">
+        <strong>My takeaway:</strong>
+        AI is useful because it can help us get from zero to first draft faster.
+        But the real value is not the first output. The real value comes from
+        editing, checking, testing, and improving the draft until it becomes useful.
+      </div>
+    </div>
+
+    <div class="section">
+      <span class="tag blue">AI for Research</span>
+      <h2>2. Jiayi reduced computing time from two days to three hours</h2>
+
+      <p>
+        Jiayi reduced a research computation from about two days to about three
+        hours. This is a very good example of using AI for research because it
+        directly improves the research feedback loop.
+      </p>
+
+      <div class="metric-grid">
+        <div class="metric">
+          <div class="metric-label">Before</div>
+          <div class="metric-value">2 days</div>
+        </div>
+
+        <div class="metric">
+          <div class="metric-label">After</div>
+          <div class="metric-value">3 hours</div>
+        </div>
+      </div>
+
+      <div class="box blue">
+        <strong>Main signal:</strong>
+        AI is not only useful for writing text or generating code. It becomes
+        especially valuable when it shortens the time between trying an idea and
+        seeing whether the idea works.
+      </div>
+
+      <p>
+        This matters because revision timelines are short. If a project has only
+        six months for revision, but an important computation is slow, the team
+        cannot test enough ideas. A two-day run makes feedback expensive. A
+        three-hour run makes iteration much more realistic.
+      </p>
+
+      <h3>What makes this kind of AI help work</h3>
+      <div class="grid">
+        <div class="card">
+          <h3>A well-defined question</h3>
+          <p>
+            The problem needs to be specific enough that AI can help improve the
+            workflow instead of wandering around a vague research goal.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>An easy validation approach</h3>
+          <p>
+            The team needs a clear way to check whether the faster method still
+            gives the correct result.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Energy</h3>
+          <p>
+            Someone has to keep pushing through the boring parts: debugging,
+            testing, profiling, and rerunning.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Motivation</h3>
+          <p>
+            The motivation can come from curiosity, ambition, enjoyment, pressure,
+            or a deadline. The important thing is having enough drive to finish.
+          </p>
+        </div>
+      </div>
+
+      <div class="box orange">
+        <strong>Why this matters:</strong>
+        When computation is slow, research feels stuck because every mistake costs
+        too much time. When computation is fast, mistakes become easier to learn
+        from, and the team can improve the work much more quickly.
+      </div>
+
+      <div class="box purple">
+        <strong>My takeaway:</strong>
+        The best use of AI in research is not magic. It is concrete. Start with a
+        well-defined question, make validation easy, then use AI to remove the
+        bottleneck that is slowing down feedback.
+      </div>
+    </div>
+
+    <div class="section">
+      <span class="tag green">Career + Lab Life</span>
+      <h2>3. Networking is a research skill, not a personality test</h2>
+
+      <p>
+        A Nature Careers column by Caroline Dunne offers practical advice for
+        scientists who dislike conference networking. The useful framing is that
+        networking does not have to mean walking into a room and trying to impress
+        everyone. It can be treated as a structured professional skill.
+      </p>
+
+      <div class="box green">
+        <strong>Main signal:</strong>
+        Networking becomes easier when it is concrete: identify a few people,
+        prepare a real question, have a short conversation, and follow up after
+        the meeting.
+      </div>
+
+      <h3>A practical conference strategy</h3>
+      <ul>
+        <li><strong>Before the meeting:</strong> choose a few people you want to meet and read one abstract or paper from each person.</li>
+        <li><strong>During the meeting:</strong> ask one specific question instead of trying to make a generic impression.</li>
+        <li><strong>After the meeting:</strong> send a short follow-up message that reminds them what you discussed.</li>
+      </ul>
+
+      <div class="box yellow">
+        <strong>Why this matters:</strong>
+        Conferences are not only for listening to talks. They are also where
+        students and researchers learn what people are actually working on, make
+        their own work visible, and find future collaborators.
+      </div>
+
+      <div class="box purple">
+        <strong>My takeaway:</strong>
+        My personal approach to networking is simple: always show up and stay
+        present. That means consistently being there, staying engaged, and
+        maintaining a continuous presence in your professional circles. You do not
+        need to be the loudest person in the room. You need to keep showing up,
+        keep asking thoughtful questions, keep following up, and let people remember
+        that you are serious, reliable, and part of the conversation.
+      </div>
+
+      <p class="link-row">
+        Link:
+        <a href="https://www.nature.com/articles/d41586-026-00525-9" target="_blank" rel="noopener noreferrer">Read the Nature article</a>
+      </p>
+    </div>
+
+    <div class="section summary">
+      <span class="tag purple">Summary</span>
+      <h2>Key takeaways</h2>
+
+      <ul>
+        <li>First drafts are useful because they create something concrete to revise.</li>
+        <li>Reducing computing time from two days to three hours changes the pace of research feedback.</li>
+        <li>Good AI use needs a well-defined question, easy validation, and enough human motivation to push through.</li>
+        <li>Networking is easier when treated as a consistent habit: show up, stay present, ask good questions, and follow up.</li>
+      </ul>
+    </div>
+
+    <div class="footer">
+      Prepared for qtl.rocks Lab. Source links are included for follow-up reading.
+    </div>
+  </div>
+</body>
+</html>

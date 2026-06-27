@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>qtl.rocks Lab newsletter (5/29/2026)</title>
+  <style type="text/css">
+    :root {
+      --ink: #111827;
+      --muted: #5b6472;
+      --line: #e5e7eb;
+      --blue: #1f6feb;
+      --blue-soft: #eef5ff;
+      --orange: #f97316;
+      --orange-soft: #fff7ed;
+      --green: #0f766e;
+      --green-soft: #ecfdf5;
+      --purple: #7c3aed;
+      --purple-soft: #f5f3ff;
+      --yellow: #ca8a04;
+      --yellow-soft: #fefce8;
+      --gray-soft: #f9fafb;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: #f3f4f6;
+      color: var(--ink);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.6;
+    }
+
+    .page {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #ffffff;
+      padding: 34px;
+    }
+
+    .header {
+      border-bottom: 5px solid var(--blue);
+      padding-bottom: 18px;
+      margin-bottom: 28px;
+    }
+
+    .kicker {
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--blue);
+      font-weight: 700;
+      font-size: 13px;
+      margin-bottom: 6px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 34px;
+      line-height: 1.15;
+      color: var(--ink);
+    }
+
+    .subtitle {
+      color: var(--muted);
+      font-size: 16px;
+      margin-top: 10px;
+    }
+
+    .toc {
+      background: var(--gray-soft);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 18px 20px;
+      margin: 24px 0 32px;
+    }
+
+    .toc h2 {
+      margin: 0 0 10px;
+      font-size: 18px;
+    }
+
+    .toc ol {
+      margin: 0;
+      padding-left: 22px;
+    }
+
+    .section {
+      margin: 0 0 34px;
+      padding-bottom: 30px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .section.summary {
+      border-bottom: none;
+    }
+
+    .tag {
+      display: inline-block;
+      border-radius: 999px;
+      padding: 4px 10px;
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .tag.blue {
+      background: var(--blue-soft);
+      color: #075985;
+    }
+
+    .tag.orange {
+      background: var(--orange-soft);
+      color: #9a3412;
+    }
+
+    .tag.green {
+      background: var(--green-soft);
+      color: #065f46;
+    }
+
+    .tag.purple {
+      background: var(--purple-soft);
+      color: #5b21b6;
+    }
+
+    h2 {
+      margin: 4px 0 12px;
+      font-size: 25px;
+      line-height: 1.25;
+    }
+
+    h3 {
+      margin: 22px 0 8px;
+      font-size: 18px;
+    }
+
+    p {
+      margin: 10px 0;
+    }
+
+    a {
+      color: var(--blue);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .box {
+      border-radius: 12px;
+      padding: 16px 18px;
+      margin: 16px 0;
+      border-left: 5px solid;
+    }
+
+    .box.blue {
+      background: var(--blue-soft);
+      border-color: var(--blue);
+    }
+
+    .box.orange {
+      background: var(--orange-soft);
+      border-color: var(--orange);
+    }
+
+    .box.green {
+      background: var(--green-soft);
+      border-color: var(--green);
+    }
+
+    .box.purple {
+      background: var(--purple-soft);
+      border-color: var(--purple);
+    }
+
+    .box.yellow {
+      background: var(--yellow-soft);
+      border-color: var(--yellow);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      margin: 18px 0;
+    }
+
+    .card {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 16px;
+      background: #ffffff;
+    }
+
+    .card h3 {
+      margin-top: 0;
+      font-size: 17px;
+    }
+
+    .card p {
+      color: #374151;
+      font-size: 14px;
+      margin-bottom: 0;
+    }
+
+    .quote {
+      border-left: 5px solid #cbd5e1;
+      background: #f8fafc;
+      border-radius: 12px;
+      color: #374151;
+      font-size: 18px;
+      font-style: italic;
+      margin: 18px 0;
+      padding: 16px 18px;
+    }
+
+    .link-row {
+      margin-top: 14px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    ul {
+      padding-left: 22px;
+    }
+
+    li {
+      margin-bottom: 7px;
+    }
+
+    .footer {
+      margin-top: 28px;
+      padding-top: 18px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    @media (max-width: 760px) {
+      .page {
+        padding: 22px;
+      }
+
+      h1 {
+        font-size: 28px;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+    <div class="header">
+      <div class="kicker">qtl.rocks Lab Newsletter</div>
+      <h1>qtl.rocks Lab newsletter (5/29/2026)</h1>
+      <div class="subtitle">
+        This week's theme: good AI work depends on concrete instructions, concrete ideas, and measurable signals.
+      </div>
+    </div>
+
+    <div class="toc">
+      <h2>In this issue</h2>
+      <ol>
+        <li>Karpathy's notes on why LLMs fail when writing code</li>
+        <li>Andrew Ng on why concrete ideas beat vague startup language</li>
+        <li>Nature: gene-expression patterns as aging and mortality signals</li>
+      </ol>
+    </div>
+
+    <div class="section">
+      <span class="tag blue">AI Agents</span>
+      <h2>1. Karpathy: when LLM coding agents fail</h2>
+
+      <p>
+        Andrej Karpathy shared a useful set of observations on how LLMs fail when writing code.
+        The recurring pattern is not just that the model makes mistakes. The deeper problem is that
+        it often makes silent assumptions, overbuilds, edits unrelated code, and declares success
+        before the work has actually been verified.
+      </p>
+
+      <div class="box blue">
+        <strong>Main signal:</strong>
+        Good agent behavior is mostly disciplined problem solving: understand the request, keep the
+        solution small, avoid unrelated changes, and verify the result before moving on.
+      </div>
+
+      <h3>The practical rules</h3>
+      <div class="grid">
+        <div class="card">
+          <h3>Think before coding</h3>
+          <p>State assumptions clearly. If the task has multiple interpretations, surface them instead of guessing silently.</p>
+        </div>
+
+        <div class="card">
+          <h3>Simplicity first</h3>
+          <p>Use the minimum code that solves the actual problem. Avoid speculative abstractions and unnecessary flexibility.</p>
+        </div>
+
+        <div class="card">
+          <h3>Surgical changes</h3>
+          <p>Touch only what the task requires. Do not clean up, rewrite, or reformat nearby code unless asked.</p>
+        </div>
+
+        <div class="card">
+          <h3>Goal-driven execution</h3>
+          <p>Turn the task into something verifiable, then loop until the evidence says the job is done.</p>
+        </div>
+      </div>
+
+      <div class="box purple">
+        <strong>My takeaway:</strong>
+        This is also great for general problem solving. State the goal, avoid vague assumptions,
+        keep the solution focused, and test whether the result actually works.
+      </div>
+
+      <p class="link-row">
+        Links:
+        <a href="https://x.com/karpathy/status/2015883857489522876" target="_blank" rel="noopener noreferrer">Karpathy post</a> |
+        <a href="https://github.com/multica-ai/andrej-karpathy-skills/blob/main/CLAUDE.md" target="_blank" rel="noopener noreferrer">CLAUDE.md</a>
+      </p>
+    </div>
+
+    <div class="section">
+      <span class="tag orange">Startup Thinking</span>
+      <h2>2. Andrew Ng: concrete ideas create speed</h2>
+
+      <p>
+        In his talk <em>Building Faster with AI</em>, Andrew Ng makes a sharp point
+        about startup ideas. Vague ideas often get praise because they are hard to
+        disagree with. But that same vagueness makes them hard to build.
+      </p>
+
+      <div class="quote">
+        "When you're vague, you're almost always right. But when you're concrete,
+        you may be right or wrong."
+      </div>
+
+      <p>
+        Ng's point is that concrete ideas give teams a direction. Once the idea is
+        specific enough, a team can build it, test it, and decide whether to keep
+        going or reject it.
+      </p>
+
+      <div class="box orange">
+        <strong>Why this matters:</strong>
+        Being concrete introduces the risk of being wrong, but it also creates the
+        possibility of learning quickly. Vague ideas feel safe because they avoid
+        contact with reality.
+      </div>
+
+      <div class="box yellow">
+        <strong>My takeaway:</strong>
+        This is the line worth remembering: when you are vague, you are almost
+        always right. When you are concrete, you may be right or wrong. That is
+        exactly why concrete thinking is useful.
+      </div>
+
+      <p class="link-row">
+        Link:
+        <a href="https://singjupost.com/andrew-ng-building-faster-with-ai-transcript/" target="_blank" rel="noopener noreferrer">Read the transcript</a>
+      </p>
+    </div>
+
+    <div class="section">
+      <span class="tag green">Aging + Transcriptomics</span>
+      <h2>3. Gene expression as an aging and mortality signal</h2>
+
+      <p>
+        A Nature News &amp; Views article discusses work showing that large-scale
+        RNA transcript patterns across rodents, monkeys, and humans can be used to
+        estimate chronological age and predict mortality risk. The study points to
+        transcriptomic signatures that are shared across tissues and mammalian species.
+      </p>
+
+      <div class="box green">
+        <strong>Main signal:</strong>
+        Gene-expression data may provide a measurable molecular clock for aging,
+        which could help evaluate healthspan and lifespan interventions faster than
+        waiting for long-term outcomes.
+      </div>
+
+      <h3>Why this is interesting for the lab</h3>
+      <ul>
+        <li><strong>Measurement:</strong> aging becomes something that can be estimated from molecular data, not only observed over time.</li>
+        <li><strong>Translation:</strong> shared signals across species may help connect model-organism studies with human biology.</li>
+        <li><strong>Prediction:</strong> transcriptomic patterns could become useful features for risk, age, and intervention-response models.</li>
+      </ul>
+
+      <div class="box purple">
+        <strong>My takeaway:</strong>
+        Biological age is becoming more measurable. For quantitative genetics and
+        genomics, the important question is how these molecular clocks connect with
+        genotype, environment, tissue context, and phenotype.
+      </div>
+
+      <p class="link-row">
+        Link:
+        <a href="https://www.nature.com/articles/d41586-026-01326-w" target="_blank" rel="noopener noreferrer">Read the Nature article</a>
+      </p>
+    </div>
+
+    <div class="section summary">
+      <span class="tag purple">Summary</span>
+      <h2>Key takeaways</h2>
+
+      <ul>
+        <li>For AI agents, the biggest improvements often come from clearer instructions, smaller scope, and real verification.</li>
+        <li>For startups and research ideas, vague thinking is comfortable but slow. Concrete ideas are testable.</li>
+        <li>For aging biology, transcriptomic clocks may help make mortality risk and biological age more measurable.</li>
+      </ul>
+    </div>
+
+    <div class="footer">
+      Prepared for qtl.rocks Lab. Source links are included for follow-up reading.
+    </div>
+  </div>
+</body>
+</html>

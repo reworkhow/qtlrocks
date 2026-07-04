@@ -270,6 +270,46 @@ footer {
   margin-bottom: 0;
 }
 
+.resource-list {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.resource-item {
+  background: #f8f8fa;
+  border-radius: 8px;
+  padding: 22px 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.resource-label {
+  color: #666;
+  font-size: 0.95em;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.resource-item h3 {
+  margin: 0 0 10px 0;
+  color: #444;
+}
+
+.resource-item h3 a {
+  color: #8b0000;
+  text-decoration: none;
+}
+
+.resource-item h3 a:hover {
+  text-decoration: underline;
+}
+
+.resource-item p {
+  margin: 0;
+  color: #444;
+  line-height: 1.6;
+}
+
 .newsletter-archive {
   display: flex;
   flex-direction: column;

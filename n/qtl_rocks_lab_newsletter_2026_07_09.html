@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>qtl.rocks Lab newsletter (7/9/2026)</title>
+  <style type="text/css">
+    :root {
+      --ink: #111827;
+      --muted: #5b6472;
+      --line: #e5e7eb;
+      --blue: #2563eb;
+      --blue-soft: #eff6ff;
+      --teal: #0f766e;
+      --teal-soft: #ecfdf5;
+      --orange: #ea580c;
+      --orange-soft: #fff7ed;
+      --purple: #7c3aed;
+      --purple-soft: #f5f3ff;
+      --rose: #be123c;
+      --rose-soft: #fff1f2;
+      --gray-soft: #f9fafb;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: #f3f4f6;
+      color: var(--ink);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.58;
+    }
+
+    .page {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #ffffff;
+      padding: 34px;
+    }
+
+    .header {
+      border-bottom: 5px solid var(--blue);
+      padding-bottom: 18px;
+      margin-bottom: 26px;
+    }
+
+    .kicker,
+    .tag,
+    .eyebrow,
+    .metric-label,
+    .flow-step {
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      font-weight: 700;
+    }
+
+    .kicker {
+      color: var(--blue);
+      font-size: 13px;
+      margin-bottom: 6px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 34px;
+      line-height: 1.15;
+    }
+
+    .subtitle {
+      color: var(--muted);
+      font-size: 16px;
+      margin-top: 10px;
+    }
+
+    .toc {
+      background: var(--gray-soft);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin: 24px 0 30px;
+    }
+
+    .toc h2 { margin: 0 0 9px; font-size: 18px; }
+    .toc ol { margin: 0; padding-left: 22px; }
+    .toc li { margin-bottom: 3px; }
+
+    .section {
+      margin: 0 0 32px;
+      padding-bottom: 28px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .section:last-of-type { margin-bottom: 0; }
+
+    .section.summary {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .tag {
+      display: inline-block;
+      border-radius: 999px;
+      padding: 4px 10px;
+      font-size: 12px;
+      margin-bottom: 8px;
+    }
+
+    .tag.blue { background: var(--blue-soft); color: #1d4ed8; }
+    .tag.orange { background: var(--orange-soft); color: #9a3412; }
+    .tag.teal { background: var(--teal-soft); color: #065f46; }
+    .tag.purple { background: var(--purple-soft); color: #6d28d9; }
+    .tag.rose { background: var(--rose-soft); color: #9f1239; }
+
+    h2 {
+      margin: 4px 0 12px;
+      font-size: 25px;
+      line-height: 1.25;
+    }
+
+    h3 { margin: 20px 0 7px; font-size: 18px; }
+    p { margin: 9px 0; }
+    a { color: var(--blue); text-decoration: none; font-weight: 600; }
+    a:hover { text-decoration: underline; }
+
+    .box {
+      border-radius: 10px;
+      padding: 15px 17px;
+      margin: 15px 0;
+      border-left: 5px solid;
+    }
+
+    .box.blue { background: var(--blue-soft); border-color: var(--blue); }
+    .box.orange { background: var(--orange-soft); border-color: var(--orange); }
+    .box.teal { background: var(--teal-soft); border-color: var(--teal); }
+    .box.purple { background: var(--purple-soft); border-color: var(--purple); }
+    .box.rose { background: var(--rose-soft); border-color: var(--rose); }
+
+    .grid,
+    .metric-grid,
+    .flow,
+    .compare-grid {
+      display: grid;
+      gap: 12px;
+      margin: 16px 0;
+    }
+
+    .grid { grid-template-columns: repeat(3, 1fr); }
+    .metric-grid { grid-template-columns: repeat(3, 1fr); }
+    .flow { grid-template-columns: repeat(4, 1fr); }
+    .compare-grid { grid-template-columns: repeat(2, 1fr); }
+
+    .card,
+    .metric,
+    .flow-card,
+    .compare-card {
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 15px;
+      background: #ffffff;
+    }
+
+    .card h3,
+    .flow-card h3,
+    .compare-card h3 { margin: 0 0 6px; font-size: 17px; }
+
+    .card p,
+    .flow-card p,
+    .compare-card p {
+      color: #374151;
+      font-size: 14px;
+      margin: 0;
+    }
+
+    .metric-label {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .metric-value {
+      color: var(--ink);
+      font-size: 28px;
+      font-weight: 800;
+      line-height: 1.1;
+      margin-top: 6px;
+    }
+
+    .metric-note {
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 7px;
+    }
+
+    .flow-card { background: var(--gray-soft); }
+    .flow-step { color: var(--blue); font-size: 11px; margin-bottom: 6px; }
+
+    .compare-card.human { background: #f8fafc; }
+    .compare-card.farm { background: var(--teal-soft); border-color: #a7f3d0; }
+    .compare-card .big { font-size: 25px; font-weight: 800; line-height: 1.1; }
+    .compare-card .small { color: var(--muted); font-size: 13px; margin-top: 5px; }
+
+    .prompt-box {
+      border: 1px solid #c4b5fd;
+      border-left: 5px solid var(--purple);
+      border-radius: 10px;
+      background: var(--purple-soft);
+      padding: 17px;
+      margin: 16px 0;
+    }
+
+    .prompt-label {
+      color: #6d28d9;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      font-weight: 800;
+      margin-bottom: 7px;
+    }
+
+    .prompt-text { font-size: 20px; font-weight: 800; line-height: 1.35; }
+
+    .video-frame {
+      margin: 16px auto;
+      max-width: 520px;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #0b1020;
+    }
+
+    .video-frame video {
+      display: block;
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: contain;
+      background: #000000;
+      border-radius: 8px;
+    }
+
+    .caption,
+    .source {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .caption { margin-top: 8px; }
+    .source { margin-top: 12px; }
+
+    .summary-list { margin: 8px 0 0; padding-left: 22px; }
+    .summary-list li { margin-bottom: 6px; }
+
+    .footer {
+      margin-top: 26px;
+      padding-top: 17px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    @media (max-width: 760px) {
+      .page { padding: 22px; }
+      h1 { font-size: 28px; }
+      .grid,
+      .metric-grid,
+      .flow,
+      .compare-grid { grid-template-columns: 1fr; }
+      .metric-value { font-size: 25px; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+    <div class="header">
+      <div class="kicker">qtl.rocks Lab Newsletter</div>
+      <h1>qtl.rocks Lab newsletter (7/9/2026)</h1>
+      <div class="subtitle">
+        This week's theme: AI is becoming a research collaborator, but judgment and persistence still matter.
+      </div>
+    </div>
+
+    <div class="toc" role="navigation" aria-label="Newsletter contents">
+      <h2>In this issue</h2>
+      <ol>
+        <li>ChatGPT and Codex are one now</li>
+        <li>GPT-5.6 is here</li>
+        <li>Autonomous biomedical research is now in Science</li>
+        <li>Farm animal evolution reveals hidden regulation</li>
+        <li>Do not underestimate yourself because progress is slow</li>
+      </ol>
+    </div>
+
+    <div class="section">
+      <span class="tag blue">AI + Research</span>
+      <h2>1. ChatGPT and Codex are one now</h2>
+
+      <div class="box blue">
+        <strong>No need for me to push you to jump from ChatGPT to Codex.</strong>
+        They are one now. The important question is not which interface we start from,
+        but what the task requires next.
+      </div>
+
+      <p>
+        The same workflow can move between conversation, research, coding, files,
+        testing, and interpretation. ChatGPT and Codex are different ways of working
+        with the same kind of computational collaborator.
+      </p>
+
+      <div class="grid">
+        <div class="card">
+          <h3>Domain knowledge</h3>
+          <p>Provide the scientific context and decide what matters.</p>
+        </div>
+        <div class="card">
+          <h3>Logical thinking</h3>
+          <p>Break down the problem, test assumptions, and notice contradictions.</p>
+        </div>
+        <div class="card">
+          <h3>Self-directed initiative</h3>
+          <p>The drive to notice what needs to be done, start before being asked, keep asking, testing, revising, and pushing until the work becomes real.</p>
+        </div>
+      </div>
+
+      <div class="box purple">
+        <strong>My takeaway:</strong>
+        The question is no longer, "Should I use ChatGPT or Codex?" The better question
+        is, "What does this task require next?" AI raises the return on the user's own
+        ability, but the researcher still defines the problem and checks the result.
+      </div>
+
+      <div class="box teal">
+        <strong>Learning by building:</strong>
+        I do not regret setting up OpenClaw. Building it taught me how agents use context,
+        tools, permissions, workflows, and debugging. Now ChatGPT and Codex bring many of
+        those capabilities together, but the understanding came from doing the work.
+      </div>
+    </div>
+
+    <div class="section">
+      <span class="tag orange">Model Update</span>
+      <h2>2. GPT-5.6 is here</h2>
+
+      <p>
+        GPT-5.6 is another step toward AI systems that support more than conversation.
+        OpenAI describes the GPT-5.6 family as targeting software engineering, computer
+        use, scientific research, and other demanding knowledge work.
+      </p>
+
+      <div class="metric-grid">
+        <div class="metric">
+          <div class="metric-label">Model family</div>
+          <div class="metric-value">GPT-5.6</div>
+          <div class="metric-note">A model update, not a new way to avoid thinking.</div>
+        </div>
+        <div class="metric">
+          <div class="metric-label">Useful transition</div>
+          <div class="metric-value">Idea -&gt; result</div>
+          <div class="metric-note">Move more smoothly from a question to implementation and testing.</div>
+        </div>
+        <div class="metric">
+          <div class="metric-label">Lab test</div>
+          <div class="metric-value">Real work</div>
+          <div class="metric-note">Evaluate it on computational genomics, not release language alone.</div>
+        </div>
+      </div>
+
+      <div class="box orange">
+        <strong>My takeaway:</strong>
+        A new model is useful only if it changes what we can accomplish. The real test
+        is whether it helps us formulate a better question, inspect the code, identify
+        mistakes, and reach a verifiable result faster.
+      </div>
+
+      <div class="source">
+        Sources: <a href="https://openai.com/index/previewing-gpt-5-6-sol/" target="_blank" rel="noopener noreferrer">OpenAI announcement</a>
+        and <a href="https://help.openai.com/en/articles/20001325-a-preview-of-gpt-5-6-sol-terra-and-luna" target="_blank" rel="noopener noreferrer">availability notes</a>.
+      </div>
+    </div>
+
+    <div class="section">
+      <span class="tag teal">AI Agents + Biology</span>
+      <h2>3. Autonomous biomedical research is now in <em>Science</em></h2>
+
+      <p>
+        A new paper introduces <strong>Biomni</strong>, a general-purpose biomedical AI
+        agent. It searches scientific resources, selects tools and databases, writes and
+        executes code, analyzes complex datasets, and composes multi-step workflows.
+      </p>
+
+      <div class="flow" aria-label="Biomni research workflow">
+        <div class="flow-card">
+          <div class="flow-step">01 Question</div>
+          <h3>Define</h3>
+          <p>Start from a biomedical question and target result.</p>
+        </div>
+        <div class="flow-card">
+          <div class="flow-step">02 Resources</div>
+          <h3>Find</h3>
+          <p>Retrieve tools, databases, protocols, and literature.</p>
+        </div>
+        <div class="flow-card">
+          <div class="flow-step">03 Analysis</div>
+          <h3>Execute</h3>
+          <p>Compose workflows and run code across complex data.</p>
+        </div>
+        <div class="flow-card">
+          <div class="flow-step">04 Output</div>
+          <h3>Test</h3>
+          <p>Produce findings, hypotheses, or experimentally testable protocols.</p>
+        </div>
+      </div>
+
+      <div class="metric-grid">
+        <div class="metric">
+          <div class="metric-label">Database questions</div>
+          <div class="metric-value">74.4%</div>
+          <div class="metric-note">Human experts: 74.7%.</div>
+        </div>
+        <div class="metric">
+          <div class="metric-label">Sequence questions</div>
+          <div class="metric-value">81.9%</div>
+          <div class="metric-note">Human experts: 78.8%.</div>
+        </div>
+        <div class="metric">
+          <div class="metric-label">Biomedical coverage</div>
+          <div class="metric-value">25 domains</div>
+          <div class="metric-note">Tools, databases, and protocols from the literature.</div>
+        </div>
+      </div>
+
+      <div class="box teal">
+        <strong>My takeaway:</strong>
+        This is no longer only about building a better chatbot. The important part is
+        the environment around the model: domain knowledge, tools, code execution, and
+        feedback. A language model alone is not a biomedical researcher, but a model in
+        the right environment can carry out substantial parts of the research process.
+      </div>
+
+      <div class="source">
+        <a href="https://www.science.org/doi/10.1126/science.adz4351" target="_blank" rel="noopener noreferrer">Read the Science paper</a>.
+      </div>
+    </div>
+
+    <div class="section">
+      <span class="tag rose">Comparative Genomics</span>
+      <h2>4. Farm animal evolution reveals hidden regulation in human traits</h2>
+
+      <p>
+        Most human GWAS variants are non-coding and are thought to influence traits by
+        changing gene expression. Yet researchers often cannot connect these variants to
+        eQTLs, creating a "missing regulation" problem.
+      </p>
+
+      <div class="compare-grid" aria-label="Human and farm-animal comparison">
+        <div class="compare-card human">
+          <h3>Human data</h3>
+          <div class="big">About 15%</div>
+          <div class="small">of GWAS heritability mediated by eQTLs in the study's comparison.</div>
+          <div class="big" style="margin-top: 14px;">About 42%</div>
+          <div class="small">of GWAS associations explained by eQTL colocalization.</div>
+        </div>
+        <div class="compare-card farm">
+          <h3>Cattle and pigs</h3>
+          <div class="big">More than 50%</div>
+          <div class="small">of GWAS heritability mediated by eQTLs.</div>
+          <div class="big" style="margin-top: 14px;">More than 85%</div>
+          <div class="small">of cattle GWAS associations explained; pigs reached 55%.</div>
+        </div>
+      </div>
+
+      <p>
+        The authors argue that domestication and selective breeding created strong
+        population bottlenecks. These changed allele frequencies and made some regulatory
+        variants easier to detect than they are in human data.
+      </p>
+
+      <div class="box rose">
+        <strong>My takeaway:</strong>
+        Human genetic data show only the part of biology that our evolutionary history,
+        allele frequencies, sample sizes, and experimental designs allow us to see.
+        Comparative genomics can act like a natural experiment: other species may reveal
+        regulatory mechanisms that are too rare or too context-specific to detect in humans.
+      </div>
+
+      <div class="source">
+        <a href="https://www.biorxiv.org/content/10.64898/2026.02.02.703413v1" target="_blank" rel="noopener noreferrer">Read the bioRxiv preprint</a>.
+      </div>
+    </div>
+
+    <div class="section">
+      <span class="tag orange">Reflection + Growth</span>
+      <h2>5. Do not underestimate yourself because progress is slow</h2>
+
+      <p>
+        The curve in this video illustrates why progress can be difficult to see at
+        first. Small improvements may look insignificant for a long time, but consistent
+        effort can eventually create a large difference.
+      </p>
+
+      <div class="video-frame">
+        <video controls playsinline preload="metadata" poster="assets/2026-07-09-slow-progress-curve-poster.png">
+          <source src="assets/2026-07-09-slow-progress-curve.mp4" type="video/mp4" />
+          Your browser does not support embedded video.
+        </video>
+        <div class="caption">Curve-only version of the source video.</div>
+      </div>
+
+      <div class="box orange">
+        <strong>My takeaway:</strong>
+        We often judge ourselves by visible short-term results. That can be misleading.
+        Research skills, technical ability, judgment, and confidence develop quietly
+        before the results become obvious. Do not mistake slow progress for limited ability.
+        A slow phase may be the period in which the foundation is being built.
+      </div>
+
+      <div class="source">
+        <a href="https://www.xiaohongshu.com/explore/6a4bbdcb000000001101612b" target="_blank" rel="noopener noreferrer">Source video</a>.
+      </div>
+    </div>
+
+    <div class="section summary">
+      <span class="tag blue">Summary</span>
+      <h2>Key takeaways</h2>
+      <ul class="summary-list">
+        <li>ChatGPT and Codex are increasingly one workflow; choose the next action, not a brand.</li>
+        <li>AI is most useful when the researcher brings domain knowledge, logic, and initiative.</li>
+        <li>The value of a biomedical agent comes from its environment of tools, data, code, and feedback.</li>
+        <li>Building a system is also a way to learn how systems work, even when the tool changes.</li>
+        <li>Other species can reveal human biology that our own data do not yet make visible.</li>
+        <li>Slow progress is not the same as no progress.</li>
+      </ul>
+    </div>
+
+    <footer class="footer">
+      Prepared for qtl.rocks Lab. Source links are included for follow-up reading.
+    </footer>
+  </div>
+</body>
+</html>

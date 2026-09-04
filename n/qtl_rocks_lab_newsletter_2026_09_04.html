@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="qtl.rocks Lab newsletter for September 4, 2026" />
+  <title>qtl.rocks Lab newsletter (9/4/2026)</title>
+  <style type="text/css">
+    :root {
+      --ink: #172033;
+      --body: #364152;
+      --muted: #667085;
+      --line: #dfe3e8;
+      --paper: #ffffff;
+      --canvas: #eef1f4;
+      --blue: #2563eb;
+      --blue-soft: #eff6ff;
+      --teal: #0f766e;
+      --teal-soft: #ecfdf5;
+      --coral: #d9485f;
+      --coral-soft: #fff1f3;
+      --gold: #b7791f;
+      --gold-soft: #fff8e8;
+      --violet: #7157b7;
+      --violet-soft: #f5f2ff;
+      --gray-soft: #f7f8fa;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background: var(--canvas);
+      color: var(--body);
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 16px;
+      line-height: 1.58;
+    }
+
+    .page {
+      width: min(100%, 920px);
+      margin: 0 auto;
+      background: var(--paper);
+      padding: 38px;
+    }
+
+    .header {
+      border-top: 7px solid var(--blue);
+      border-bottom: 1px solid var(--line);
+      padding: 24px 0 22px;
+      margin-bottom: 26px;
+    }
+
+    .kicker,
+    .tag,
+    .metric-label,
+    .stage-number,
+    .mini-label {
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .kicker {
+      color: var(--blue);
+      font-size: 13px;
+      margin-bottom: 6px;
+    }
+
+    h1,
+    h2,
+    h3 {
+      color: var(--ink);
+      letter-spacing: 0;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 35px;
+      line-height: 1.15;
+    }
+
+    h2 {
+      margin: 6px 0 12px;
+      font-size: 26px;
+      line-height: 1.28;
+    }
+
+    h3 {
+      margin: 20px 0 7px;
+      font-size: 18px;
+      line-height: 1.35;
+    }
+
+    p { margin: 10px 0; }
+
+    strong { color: var(--ink); }
+
+    a {
+      color: #1d5bc7;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    a:hover,
+    a:focus { text-decoration: underline; }
+
+    .subtitle {
+      max-width: 720px;
+      color: var(--muted);
+      font-size: 16px;
+      margin-top: 10px;
+    }
+
+    .toc {
+      background: var(--gray-soft);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 17px 20px;
+      margin: 0 0 34px;
+    }
+
+    .toc h2 {
+      margin: 0 0 9px;
+      font-size: 18px;
+    }
+
+    .toc ol {
+      margin: 0;
+      padding-left: 23px;
+    }
+
+    .toc li { margin: 4px 0; }
+
+    .section {
+      margin: 0 0 36px;
+      padding-bottom: 34px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .section:last-of-type {
+      margin-bottom: 0;
+      border-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .tag {
+      display: inline-block;
+      border-radius: 999px;
+      padding: 4px 10px;
+      font-size: 12px;
+      margin-bottom: 3px;
+    }
+
+    .tag.blue { color: #1d4ed8; background: var(--blue-soft); }
+    .tag.teal { color: #08635d; background: var(--teal-soft); }
+    .tag.coral { color: #a92f46; background: var(--coral-soft); }
+    .tag.gold { color: #8a5713; background: var(--gold-soft); }
+
+    .box {
+      border-left: 5px solid;
+      border-radius: 8px;
+      padding: 16px 18px;
+      margin: 17px 0;
+    }
+
+    .box.blue { border-color: var(--blue); background: var(--blue-soft); }
+    .box.teal { border-color: var(--teal); background: var(--teal-soft); }
+    .box.coral { border-color: var(--coral); background: var(--coral-soft); }
+    .box.gold { border-color: var(--gold); background: var(--gold-soft); }
+    .box.violet { border-color: var(--violet); background: var(--violet-soft); }
+
+    .box p:first-child { margin-top: 0; }
+    .box p:last-child { margin-bottom: 0; }
+
+    .takeaway {
+      font-size: 17px;
+    }
+
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin: 18px 0;
+    }
+
+    .metric {
+      min-height: 154px;
+      border: 1px solid var(--line);
+      border-top: 5px solid var(--blue);
+      border-radius: 8px;
+      padding: 15px;
+      background: var(--paper);
+    }
+
+    .metric.teal { border-top-color: var(--teal); }
+    .metric.coral { border-top-color: var(--coral); }
+    .metric.gold { border-top-color: var(--gold); }
+
+    .metric-label {
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .metric-value {
+      color: var(--ink);
+      font-size: 29px;
+      font-weight: 800;
+      line-height: 1.08;
+      margin-top: 7px;
+    }
+
+    .metric-note {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.45;
+      margin-top: 8px;
+    }
+
+    .debate-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin: 17px 0;
+    }
+
+    .debate-side {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 16px;
+      background: var(--gray-soft);
+    }
+
+    .debate-side h3 { margin: 0 0 8px; }
+    .debate-side p { margin: 0; font-size: 14px; }
+
+    .source-row {
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 15px;
+    }
+
+    .source-row a { margin-right: 9px; }
+
+    .release-strip {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+      margin: 18px 0;
+    }
+
+    .release-item {
+      min-height: 112px;
+      padding: 16px;
+      border-right: 1px solid var(--line);
+      background: var(--paper);
+    }
+
+    .release-item:last-child { border-right: 0; }
+
+    .release-value {
+      color: var(--ink);
+      font-size: 24px;
+      font-weight: 800;
+      line-height: 1.1;
+      margin: 6px 0;
+    }
+
+    .mini-label {
+      color: var(--teal);
+      font-size: 11px;
+    }
+
+    .release-note {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+    .workflow {
+      margin: 20px 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .stage {
+      display: grid;
+      grid-template-columns: 118px minmax(0, 1fr) 190px;
+      align-items: center;
+      gap: 14px;
+      min-height: 76px;
+      border: 1px solid;
+      border-radius: 8px;
+      padding: 12px 16px;
+    }
+
+    .stage:nth-child(1) {
+      width: 100%;
+      border-color: #b9cffb;
+      background: var(--blue-soft);
+    }
+
+    .stage:nth-child(2) {
+      width: 90%;
+      border-color: #a7ded8;
+      background: var(--teal-soft);
+    }
+
+    .stage:nth-child(3) {
+      width: 80%;
+      border-color: #f0c4cc;
+      background: var(--coral-soft);
+    }
+
+    .stage:nth-child(4) {
+      width: 70%;
+      border-color: #ead091;
+      background: var(--gold-soft);
+    }
+
+    .stage-number {
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .stage-title {
+      color: var(--ink);
+      font-size: 18px;
+      font-weight: 800;
+    }
+
+    .stage-purpose {
+      color: var(--body);
+      font-size: 14px;
+    }
+
+    .stage-question {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+    .workflow-axis {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: 2px;
+    }
+
+    .energy-figure {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 15px;
+      margin: 18px 0;
+      background: var(--gray-soft);
+    }
+
+    .energy-figure svg {
+      display: block;
+      width: 100%;
+      height: auto;
+      min-height: 250px;
+    }
+
+    .curve-high,
+    .curve-low {
+      fill: none;
+      stroke-width: 5;
+      stroke-linecap: round;
+    }
+
+    .curve-high { stroke: var(--coral); }
+    .curve-low { stroke: var(--teal); }
+    .axis { stroke: #98a2b3; stroke-width: 2; }
+    .guide { stroke: #c8cdd5; stroke-width: 1.5; stroke-dasharray: 6 6; }
+
+    .energy-caption {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px 24px;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      font-size: 13px;
+      text-align: center;
+      margin-top: 8px;
+    }
+
+    .legend-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .legend-line {
+      display: inline-block;
+      width: 27px;
+      height: 4px;
+      border-radius: 999px;
+    }
+
+    .legend-line.high { background: var(--coral); }
+    .legend-line.low { background: var(--teal); }
+
+    blockquote {
+      margin: 17px 0;
+      padding: 4px 0 4px 18px;
+      border-left: 4px solid var(--violet);
+      color: var(--ink);
+      font-size: 20px;
+      font-weight: 700;
+      line-height: 1.4;
+    }
+
+    .activation-flow {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 8px;
+      margin: 16px 0;
+    }
+
+    .activation-step {
+      position: relative;
+      min-height: 72px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 11px 10px;
+      color: var(--ink);
+      background: var(--paper);
+      font-size: 13px;
+      font-weight: 700;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .activation-step:not(:last-child)::after {
+      content: ">";
+      position: absolute;
+      right: -8px;
+      top: 50%;
+      z-index: 2;
+      transform: translateY(-50%);
+      color: var(--muted);
+      background: var(--paper);
+      padding: 0 2px;
+    }
+
+    .footer {
+      margin-top: 34px;
+      padding-top: 18px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    @media (max-width: 760px) {
+      .page { padding: 24px 20px; }
+      h1 { font-size: 29px; }
+      h2 { font-size: 23px; }
+
+      .metric-grid,
+      .debate-grid,
+      .release-strip,
+      .activation-flow {
+        grid-template-columns: 1fr;
+      }
+
+      .metric { min-height: auto; }
+      .release-item { min-height: auto; border-right: 0; border-bottom: 1px solid var(--line); }
+      .release-item:last-child { border-bottom: 0; }
+
+      .stage,
+      .stage:nth-child(n) {
+        width: 100%;
+        grid-template-columns: 92px 1fr;
+      }
+
+      .stage-question { grid-column: 1 / -1; }
+      .workflow-axis { display: none; }
+
+      .activation-step:not(:last-child)::after {
+        content: "v";
+        right: auto;
+        left: 50%;
+        top: auto;
+        bottom: -10px;
+        transform: translateX(-50%);
+      }
+
+      .energy-figure { padding: 8px; }
+      .energy-figure svg { min-height: 210px; }
+    }
+
+    @media print {
+      body { background: #ffffff; }
+      .page { width: 100%; max-width: none; padding: 0; }
+      a { color: var(--ink); }
+      .section { break-inside: avoid; }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="page">
+    <header class="header">
+      <div class="kicker">qtl.rocks Lab Newsletter</div>
+      <h1>qtl.rocks Lab newsletter (9/4/2026)</h1>
+      <div class="subtitle">
+        This week: scrutinize strong claims, use more capable AI deliberately, and invest attention where it matters.
+      </div>
+    </header>
+
+    <nav class="toc" aria-label="Newsletter contents">
+      <h2>In this issue</h2>
+      <ol>
+        <li><a href="#solar-debate">A significant result is not always a strong result</a></li>
+        <li><a href="#gpt-6">GPT-6 Astra is here</a></li>
+        <li><a href="#reading-workflow">A four-step workflow for reading scientific papers</a></li>
+        <li><a href="#activation-energy">AI lowers activation energy, but it cannot create motivation</a></li>
+      </ol>
+    </nav>
+
+    <section class="section" id="solar-debate">
+      <span class="tag coral">1 / Statistics in practice</span>
+      <h2>A Significant Result Is Not Always a Strong Result</h2>
+
+      <p>
+    A recent <em>Science</em> paper analyzed 2,344 Chinese counties and reported that a one-standard-deviation
+    increase in the <strong>Photovoltaic Policy Stringency Index (PSI)</strong>, a measure of how strongly local
+    policies promoted photovoltaic expansion, was associated with a <strong>2.10% decrease in bird diversity</strong>.
+        Its title states the conclusion directly: <em>China's solar expansion policy reduces bird diversity</em>.
+      </p>
+
+      <div class="metric-grid" aria-label="Three statistical results in the solar policy debate">
+        <div class="metric coral">
+          <div class="metric-label">Original estimate</div>
+          <div class="metric-value">-2.10%</div>
+          <div class="metric-note">Reported change in the Shannon index per one-standard-deviation increase in policy stringency.</div>
+        </div>
+        <div class="metric gold">
+          <div class="metric-label">Published commentary</div>
+          <div class="metric-value">Within R<sup>2</sup> = 0.0007</div>
+          <div class="metric-note">PSI-only model: 1.8% of the full model's within-model explanatory variation.</div>
+        </div>
+        <div class="metric teal">
+          <div class="metric-label">Preprint reanalysis</div>
+          <div class="metric-value">+0.58%</div>
+          <div class="metric-note">After adding observer count: P = 0.288, no longer statistically significant.</div>
+        </div>
+      </div>
+
+      <div class="debate-grid">
+        <div class="debate-side">
+          <h3>What the critics argue</h3>
+          <p>
+            The reported overall R<sup>2</sup> is dominated by fixed effects, while PSI explains very little remaining
+            within-county variation. A separate reanalysis argues that changing citizen-science observation effort
+            can alter the estimated effect; its instrumental-variable estimate also becomes nonsignificant (P = 0.912).
+          </p>
+        </div>
+        <div class="debate-side">
+          <h3>What the authors respond</h3>
+          <p>
+            Observation duration and policy effects are not directly comparable. Policy variables can explain a small
+            share of environmental variation and still matter because policy is one of the factors people can change.
+          </p>
+        </div>
+      </div>
+
+      <div class="box coral takeaway">
+        <p><strong>My takeaway:</strong> Even a paper in <em>Science</em> can have statistical analysis that is debatable or only moderately convincing.</p>
+        <p>
+          A prestigious journal does not remove the need to distinguish statistical significance, effect size,
+          explanatory importance, robustness, and evidence for causality. Read beyond the title and inspect the variables,
+          model, data-generating process, and sensitivity analyses.
+        </p>
+      </div>
+
+      <p>
+    The classic <a href="https://www.nejm.org/doi/10.1056/NEJMon1211064" target="_blank" rel="noopener noreferrer">chocolate-Nobel correlation</a>
+    makes the same point: a plausible association can still be driven by a third factor such as national wealth
+    rather than the proposed causal story.
+      </p>
+
+      <div class="source-row">
+        Sources:
+        <a href="https://doi.org/10.1126/science.aee0747" target="_blank" rel="noopener noreferrer">Science paper</a>
+        <a href="https://doi.org/10.48130/stati-0026-0017" target="_blank" rel="noopener noreferrer">published commentary</a>
+        <a href="https://doi.org/10.64898/2026.08.25.746390" target="_blank" rel="noopener noreferrer">bioRxiv reanalysis</a>
+        <a href="https://m.sixthtone.com/news/1018949" target="_blank" rel="noopener noreferrer">authors' response</a>
+        <a href="https://www.nejm.org/doi/10.1056/NEJMon1211064" target="_blank" rel="noopener noreferrer">chocolate-Nobel example</a>
+        <a href="https://doi.org/10.3945/jn.113.174813" target="_blank" rel="noopener noreferrer">follow-up analysis</a>
+      </div>
+    </section>
+
+    <section class="section" id="gpt-6">
+      <span class="tag blue">2 / Model release</span>
+      <h2>GPT-6 Astra Is Here</h2>
+
+      <p>
+        OpenAI announced <strong>GPT-6 Astra</strong> on September 3, 2026. It appears as <strong>GPT-6 Pro</strong>
+        in ChatGPT. It is rolling out first through the Trusted Access Program, with availability through the API and
+        eligible Plus, Pro, Business, and Enterprise plans expanding over the following days.
+      </p>
+
+      <div class="release-strip" aria-label="GPT-6 Astra key facts">
+        <div class="release-item">
+          <div class="mini-label">Context window</div>
+          <div class="release-value">1.05M</div>
+          <div class="release-note">More room for long documents, codebases, and multi-step work.</div>
+        </div>
+        <div class="release-item">
+          <div class="mini-label">Maximum output</div>
+          <div class="release-value">128K</div>
+          <div class="release-note">Designed for substantial end-to-end deliverables.</div>
+        </div>
+        <div class="release-item">
+          <div class="mini-label">Safety threshold</div>
+          <div class="release-value">Critical cyber</div>
+          <div class="release-note">Released with stronger monitoring and access controls.</div>
+        </div>
+      </div>
+
+      <p>
+        Astra is designed for complex reasoning, coding, research, computer use, and document creation. The meaningful
+        change is its ability to carry more of a workflow across tools, rather than merely answer isolated questions.
+      </p>
+
+      <div class="box blue takeaway">
+        <p><strong>My takeaway:</strong> Better AI makes human judgment more important, not less.</p>
+        <p>
+          As AI takes on larger parts of a workflow, our value shifts toward choosing the right problem, providing domain
+          knowledge, defining success clearly, setting boundaries, and verifying whether the result is correct.
+        </p>
+      </div>
+
+      <div class="source-row">
+        Sources:
+        <a href="https://developers.openai.com/api/docs/models/gpt-6-astra" target="_blank" rel="noopener noreferrer">official model page</a>
+        <a href="https://openai.com/index/safety-overview-gpt-6-astra/" target="_blank" rel="noopener noreferrer">OpenAI safety overview</a>
+      </div>
+    </section>
+
+    <section class="section" id="reading-workflow">
+      <span class="tag gold">3 / Research practice</span>
+      <h2>My Four-Step Workflow for Reading Scientific Papers (Without Trying to Read Them All)</h2>
+
+      <p>
+        Scientific papers should not all receive the same amount of attention. Shea Andrews describes reading as a
+        sequence of decisions that progressively narrows the literature while increasing the attention given to each paper.
+      </p>
+
+      <div class="workflow" aria-label="Four-stage scientific-paper reading funnel">
+        <div class="stage">
+          <div>
+            <div class="stage-number">Stage 01</div>
+            <div class="stage-title">Discovery</div>
+          </div>
+          <div class="stage-purpose">Find papers through alerts, colleagues, searches, and AI tools.</div>
+          <div class="stage-question">Is this potentially relevant?</div>
+        </div>
+        <div class="stage">
+          <div>
+            <div class="stage-number">Stage 02</div>
+            <div class="stage-title">Triage</div>
+          </div>
+          <div class="stage-purpose">Use titles and abstracts to filter the incoming literature.</div>
+          <div class="stage-question">Ignore, save, or continue?</div>
+        </div>
+        <div class="stage">
+          <div>
+            <div class="stage-number">Stage 03</div>
+            <div class="stage-title">Skimming</div>
+          </div>
+          <div class="stage-purpose">Identify the question, assumptions, and main findings.</div>
+          <div class="stage-question">Do I need deeper understanding?</div>
+        </div>
+        <div class="stage">
+          <div>
+            <div class="stage-number">Stage 04</div>
+            <div class="stage-title">Deep reading</div>
+          </div>
+          <div class="stage-purpose">Interrogate the design, methods, evidence, and interpretation.</div>
+          <div class="stage-question">Can I explain and evaluate it?</div>
+        </div>
+        <div class="workflow-axis" aria-hidden="true">
+          <span>More papers</span>
+          <span>More attention per paper</span>
+        </div>
+      </div>
+
+      <p>
+        AI can assist with discovery, triage, and targeted extraction. Its summaries and citations still need to be
+        checked against the original paper.
+      </p>
+
+      <div class="box gold takeaway">
+        <p><strong>Beyond the to-read list:</strong> A reference manager should be a searchable map of the literature, not an ever-growing obligation.</p>
+        <p>
+          The goal is to decide deliberately whether to ignore a paper, save it, skim it for context, or read it deeply
+          because your own experiment, analysis, grant, or scientific claim depends on it.
+        </p>
+      </div>
+
+      <div class="source-row">
+        <a href="https://www.nature.com/articles/d41586-026-02119-x" target="_blank" rel="noopener noreferrer">Read the Nature career column</a>
+      </div>
+    </section>
+
+    <section class="section" id="activation-energy">
+      <span class="tag teal">4 / AI adoption</span>
+      <h2>AI Lowers Activation Energy, but It Cannot Create Motivation</h2>
+
+      <p>
+        Khan Academy built Khanmigo as an always-available AI tutor. Sal Khan describes the role of educational
+        technology using a chemistry analogy:
+      </p>
+
+      <blockquote>
+        "It will lower the activation energy to learn. It'll make it easier to learn."
+      </blockquote>
+
+      <div class="energy-figure">
+        <svg viewBox="0 0 720 330" role="img" aria-labelledby="energy-title energy-desc">
+          <title id="energy-title">AI lowers, but does not eliminate, the activation-energy barrier to learning</title>
+          <desc id="energy-desc">Two curves begin at not started and end at engaged. The curve without AI has a higher peak than the curve with AI.</desc>
+
+          <line class="axis" x1="68" y1="278" x2="670" y2="278" />
+          <line class="axis" x1="68" y1="278" x2="68" y2="35" />
+          <line class="guide" x1="68" y1="238" x2="650" y2="238" />
+          <line class="guide" x1="310" y1="64" x2="310" y2="278" />
+
+          <path class="curve-high" d="M78 238 C170 238, 185 64, 310 64 C430 64, 455 205, 640 205" />
+          <path class="curve-low" d="M78 238 C175 238, 205 137, 310 137 C430 137, 475 205, 640 205" />
+
+          <text x="26" y="165" fill="#667085" font-size="15" text-anchor="middle" transform="rotate(-90 26 165)">Effort barrier</text>
+          <text x="368" y="316" fill="#667085" font-size="15" text-anchor="middle">Progress toward learning</text>
+          <text x="78" y="260" fill="#364152" font-size="14">Not started</text>
+          <text x="640" y="195" fill="#364152" font-size="14" text-anchor="end">Engaged</text>
+          <text x="327" y="54" fill="#a92f46" font-size="14" font-weight="700">Higher barrier</text>
+          <text x="327" y="128" fill="#08635d" font-size="14" font-weight="700">AI lowers the barrier</text>
+        </svg>
+        <div class="energy-caption">
+          <span class="legend-item"><span class="legend-line high"></span>Without AI support</span>
+          <span class="legend-item"><span class="legend-line low"></span>With AI support</span>
+          <span>Human motivation and support still provide the push.</span>
+        </div>
+      </div>
+
+      <p>
+        This newsletter is a simple example. I had wanted to make one for a long time, but it required too much effort
+        to produce consistently. With AI, I can now turn my ideas into a finished newsletter in about 30 minutes. By
+        lowering the barrier, AI makes me both more willing and happier to do it regularly.
+      </p>
+
+      <p>
+        Lowering the barrier is not the same as getting people across it. Khan later described Khanmigo as a
+        "non-event" for many students because they did not use it much. A reactive tutor cannot help someone who does
+        not seek assistance, does not recognize the gap, or does not know how to formulate a useful question.
+      </p>
+
+      <div class="activation-flow" aria-label="Steps from access to benefit">
+        <div class="activation-step">AI is available</div>
+        <div class="activation-step">Start using it</div>
+        <div class="activation-step">Formulate a question</div>
+        <div class="activation-step">Keep engaging</div>
+        <div class="activation-step">Benefit</div>
+      </div>
+
+      <div class="box teal takeaway">
+        <p><strong>My takeaway:</strong> AI can reduce friction, but it cannot replace self-directed initiative.</p>
+        <p>
+          A powerful assistant creates an opportunity. Someone still has to recognize the opportunity, begin the
+          interaction, ask questions, and continue when the work becomes difficult. Access to AI and effective use of AI
+          are two different things.
+        </p>
+      </div>
+
+      <div class="source-row">
+        Sources:
+        <a href="https://www.hbs.edu/managing-the-future-of-work/podcast/positive-prompts-sal-khan-on-ai-in-the-classroom-and-beyond" target="_blank" rel="noopener noreferrer">HBS podcast and transcript</a>
+        <a href="https://www.chalkbeat.org/2026/04/09/sal-khan-reflects-on-ai-in-schools-and-khanmigo/" target="_blank" rel="noopener noreferrer">later Khanmigo interview</a>
+      </div>
+    </section>
+
+    <footer class="footer">
+      Prepared for qtl.rocks Lab. Source links are included for follow-up reading and verification.
+    </footer>
+  </main>
+</body>
+</html>

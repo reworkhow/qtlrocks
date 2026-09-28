@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="qtl.rocks Lab newsletter for September 28, 2026" />
+  <title>qtl.rocks Lab newsletter (9/28/2026)</title>
+  <style type="text/css">
+    :root {
+      --ink: #172033;
+      --body: #364152;
+      --muted: #667085;
+      --line: #dfe3e8;
+      --paper: #ffffff;
+      --canvas: #eef1f4;
+      --blue: #2563eb;
+      --blue-soft: #eff6ff;
+      --teal: #0f766e;
+      --teal-soft: #ecfdf5;
+      --coral: #d9485f;
+      --coral-soft: #fff1f3;
+      --gold: #b7791f;
+      --gold-soft: #fff8e8;
+      --violet: #7157b7;
+      --violet-soft: #f5f2ff;
+      --gray-soft: #f7f8fa;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background: var(--canvas);
+      color: var(--body);
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 16px;
+      line-height: 1.58;
+    }
+
+    .page {
+      width: min(100%, 920px);
+      margin: 0 auto;
+      background: var(--paper);
+      padding: 38px;
+    }
+
+    .header {
+      border-top: 7px solid var(--blue);
+      border-bottom: 1px solid var(--line);
+      padding: 24px 0 22px;
+      margin-bottom: 26px;
+    }
+
+    .kicker, .tag, .mini-label {
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .kicker { color: var(--blue); font-size: 13px; margin-bottom: 6px; }
+    h1, h2, h3 { color: var(--ink); letter-spacing: 0; }
+    h1 { margin: 0; font-size: 35px; line-height: 1.15; }
+    h2 { margin: 6px 0 12px; font-size: 26px; line-height: 1.28; }
+    h3 { margin: 18px 0 7px; font-size: 18px; line-height: 1.35; }
+    p { margin: 10px 0; }
+    strong { color: var(--ink); }
+
+    a { color: #1d5bc7; font-weight: 700; text-decoration: none; }
+    a:hover, a:focus { text-decoration: underline; }
+
+    .subtitle { max-width: 720px; color: var(--muted); margin-top: 10px; }
+
+    .toc {
+      background: var(--gray-soft);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 17px 20px;
+      margin: 0 0 34px;
+    }
+    .toc h2 { margin: 0 0 9px; font-size: 18px; }
+    .toc ol { margin: 0; padding-left: 23px; }
+    .toc li { margin: 4px 0; }
+
+    .section {
+      margin: 0 0 36px;
+      padding-bottom: 34px;
+      border-bottom: 1px solid var(--line);
+    }
+    .section:last-of-type { margin-bottom: 0; border-bottom: 0; padding-bottom: 0; }
+
+    .tag {
+      display: inline-block;
+      border-radius: 999px;
+      padding: 4px 10px;
+      font-size: 12px;
+      margin-bottom: 3px;
+    }
+    .tag.blue { color: #1d4ed8; background: var(--blue-soft); }
+    .tag.teal { color: #08635d; background: var(--teal-soft); }
+    .tag.coral { color: #a92f46; background: var(--coral-soft); }
+    .tag.gold { color: #8a5713; background: var(--gold-soft); }
+
+    .box {
+      border-left: 5px solid;
+      border-radius: 8px;
+      padding: 15px 18px;
+      margin: 17px 0;
+    }
+    .box.blue { border-color: var(--blue); background: var(--blue-soft); }
+    .box.teal { border-color: var(--teal); background: var(--teal-soft); }
+    .box.coral { border-color: var(--coral); background: var(--coral-soft); }
+    .box.gold { border-color: var(--gold); background: var(--gold-soft); }
+    .box.violet { border-color: var(--violet); background: var(--violet-soft); }
+    .box p:first-child { margin-top: 0; }
+    .box p:last-child { margin-bottom: 0; }
+    .takeaway { font-size: 16px; }
+
+    .three-up, .two-up, .sequence, .term-list {
+      display: grid;
+      gap: 10px;
+      margin: 16px 0;
+    }
+    .three-up { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .two-up { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .sequence { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .term-list { grid-template-columns: 1fr; }
+
+    .mini-card, .sequence-step {
+      min-width: 0;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 13px 14px;
+      background: var(--paper);
+    }
+    .mini-card h3 { margin: 0 0 5px; font-size: 16px; }
+    .mini-card p, .sequence-step p { margin: 0; font-size: 14px; color: var(--body); }
+    .mini-card.coral { border-top: 4px solid var(--coral); }
+    .mini-card.gold { border-top: 4px solid var(--gold); }
+    .mini-card.violet { border-top: 4px solid var(--violet); }
+
+    .sequence-step { background: var(--gray-soft); }
+    .sequence-step .mini-label { display: block; color: var(--muted); font-size: 10px; margin-bottom: 5px; }
+    .sequence-step strong { display: block; margin-bottom: 4px; }
+
+    .flowline {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1fr);
+      gap: 8px;
+      align-items: center;
+      margin: 17px 0;
+    }
+    .flow-node {
+      min-width: 0;
+      min-height: 76px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background: var(--gray-soft);
+      color: var(--ink);
+      font-size: 14px;
+      font-weight: 700;
+    }
+    .flow-arrow { color: var(--muted); font-size: 20px; font-weight: 700; }
+
+    .source-row {
+      border-top: 1px solid var(--line);
+      padding-top: 12px;
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .source-row a { display: inline-block; margin: 3px 12px 3px 0; }
+
+    .footer {
+      margin-top: 34px;
+      padding-top: 18px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    @media (max-width: 720px) {
+      .page { padding: 25px 19px; }
+      h1 { font-size: 29px; }
+      h2 { font-size: 23px; }
+      .three-up, .two-up, .sequence { grid-template-columns: 1fr; }
+      .flowline { grid-template-columns: 1fr; gap: 5px; }
+      .flow-node { min-height: 54px; }
+      .flow-arrow { transform: rotate(90deg); text-align: center; line-height: 1; }
+    }
+
+    @media print {
+      body { background: #ffffff; }
+      .page { width: 100%; max-width: none; padding: 0; }
+      a { color: var(--ink); }
+      .section { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="header">
+      <div class="kicker">qtl.rocks Lab Newsletter</div>
+      <h1>qtl.rocks Lab newsletter (9/28/2026)</h1>
+      <div class="subtitle">This week: AI in medical education, GPT moving into action, how to study unfamiliar AI systems, and biomedical world models.</div>
+    </header>
+
+    <nav class="toc" aria-label="Newsletter contents">
+      <h2>In this issue</h2>
+      <ol>
+        <li><a href="#never-skilling">AI-induced never-skilling in medical education</a></li>
+        <li><a href="#gpt-driving">GPT moves from generating content to taking action</a></li>
+        <li><a href="#study-gpt">Should we study GPT like a new species?</a></li>
+        <li><a href="#world-models">World models for biomedicine</a></li>
+      </ol>
+    </nav>
+
+    <section class="section" id="never-skilling">
+      <span class="tag coral">1 / AI and learning</span>
+      <h2>AI-Induced Never-Skilling in Medical Education</h2>
+
+      <p>
+        A <em>Nature Medicine</em> Perspective introduces <strong>never-skilling</strong>: the risk that medical trainees
+        who rely on AI before developing core clinical reasoning may never acquire those skills. The authors distinguish
+        this from losing a skill one already had, or learning incorrect information from AI.
+      </p>
+
+      <div class="three-up" aria-label="Three distinct risks of AI use in learning">
+        <article class="mini-card coral">
+          <h3>Never-skilling</h3>
+          <p>Foundational skills never develop.</p>
+        </article>
+        <article class="mini-card gold">
+          <h3>Deskilling</h3>
+          <p>Previously acquired skills weaken.</p>
+        </article>
+        <article class="mini-card violet">
+          <h3>Mis-skilling</h3>
+          <p>Learners absorb incorrect information from AI.</p>
+        </article>
+      </div>
+
+      <p>
+        The authors propose building competence without AI first, teaching students to evaluate AI critically, and then
+        integrating it under supervision. They emphasize that direct evidence of never-skilling in medical training is
+        still lacking and call for further research.
+      </p>
+
+      <div class="box coral takeaway">
+        <p><strong>A related, separate perspective:</strong> In a New York Times opinion essay, geriatrician Rachael
+          Bedard describes AI as useful in her own clinical practice while worrying that its speed may deprive trainees
+          of the effortful reasoning through which clinical judgment develops. She discusses AI-free reasoning exercises
+          and AI literacy as possible responses.</p>
+        <p>The essay and the <em>Nature Medicine</em> paper are separate works by different authors. Read together, they
+          raise the question: how can medical education help students benefit from AI while still building the judgment
+          needed to use it well?</p>
+      </div>
+
+      <div class="source-row">
+        Sources:
+        <a href="https://www.nature.com/articles/s41591-026-04438-y" target="_blank" rel="noopener noreferrer">Nature Medicine Perspective</a>
+        <a href="https://www.nytimes.com/2026/09/25/opinion/ai-doctor-medical-students.html" target="_blank" rel="noopener noreferrer">Rachael Bedard's NYT essay</a>
+      </div>
+    </section>
+
+    <section class="section" id="gpt-driving">
+      <span class="tag blue">2 / AI in the physical world</span>
+      <h2>GPT Moves from Generating Content to Taking Action</h2>
+
+      <p>
+        GPT-6 Astra was connected to a car for a controlled DrivingBench test. It received camera observations and issued
+        steering and speed commands through tools, completing a low-speed cone course on its second attempt. A human
+        supervisor was ready to intervene, and the car's existing control and safety systems remained in use. This was
+        a striking demonstration of GPT interacting with the physical world, but not a test of autonomous road driving.
+      </p>
+
+      <div class="flowline" aria-label="How GPT interacted with the car in the controlled test">
+        <div class="flow-node">Camera view and driving goal</div>
+        <div class="flow-arrow" aria-hidden="true">&#8594;</div>
+        <div class="flow-node">GPT observes and chooses a command</div>
+        <div class="flow-arrow" aria-hidden="true">&#8594;</div>
+        <div class="flow-node">Vehicle control system executes it</div>
+      </div>
+
+      <div class="box blue takeaway">
+        <p><strong>My takeaway:</strong> This makes me think about how important Tesla's driving data is. A general-purpose
+          model can now make a car move through a simple course, but robust driving across real-world situations depends
+          on much more than a successful demonstration. Tesla's fleet data and task-specific training may matter most in
+          building and improving that broader capability.</p>
+      </div>
+
+      <div class="source-row">
+        Sources:
+        <a href="https://huggingface.co/datasets/drivingbench/drivingbench-traces/blob/main/2026-09-17-cone-course-trial/README.md" target="_blank" rel="noopener noreferrer">DrivingBench trial record</a>
+        <a href="https://huggingface.co/datasets/drivingbench/drivingbench-traces/blob/main/2026-09-17-cone-course-trial/gpt-6-astra/transcript.md" target="_blank" rel="noopener noreferrer">Astra's control transcript</a>
+        <a href="https://www.tesla.com/en_gb/AI" target="_blank" rel="noopener noreferrer">Tesla AI and robotics</a>
+      </div>
+    </section>
+
+    <section class="section" id="study-gpt">
+      <span class="tag teal">3 / Studying AI</span>
+      <h2>Should We Study GPT Like a New Species?</h2>
+
+      <p>
+        GPT's internal workings can be difficult to interpret, while its behavior can be tested across many tasks and
+        environments. Perhaps we can study it somewhat as biologists study unfamiliar organisms: design careful
+        experiments, compare behavior under different conditions, and examine not just successes but also failure
+        patterns. “New species” is a metaphor for how unfamiliar GPT can feel, not a literal biological claim.
+      </p>
+
+      <div class="sequence" aria-label="A behavioral approach to studying AI systems">
+        <div class="sequence-step"><span class="mini-label">1 / Probe</span><strong>Design a task</strong><p>Test a specific ability.</p></div>
+        <div class="sequence-step"><span class="mini-label">2 / Vary</span><strong>Change conditions</strong><p>Check whether behavior is robust.</p></div>
+        <div class="sequence-step"><span class="mini-label">3 / Compare</span><strong>Repeat and contrast</strong><p>Compare models and versions.</p></div>
+        <div class="sequence-step"><span class="mini-label">4 / Explain</span><strong>Study failures</strong><p>Look for shortcuts and limits.</p></div>
+      </div>
+
+      <div class="box teal takeaway">
+        <p><strong>My takeaway:</strong> We may need to study GPT as a new kind of system: observe it systematically, test
+          it under varied conditions, and map where its abilities hold up or break down. We should not assume that
+          behavior that looks human means the system thinks like a person or an animal.</p>
+      </div>
+
+      <div class="source-row">
+        Related research:
+        <a href="https://openreview.net/pdf?id=RSbSX0Bf24" target="_blank" rel="noopener noreferrer">Principles of animal cognition for LLM evaluation</a>
+        <a href="https://papers.nips.cc/paper_files/paper/2025/hash/a3a9f4a71557964ca3f54b4674c2d914-Abstract-Conference.html" target="_blank" rel="noopener noreferrer">LLMs as model organisms for associative learning</a>
+      </div>
+    </section>
+
+    <section class="section" id="world-models">
+      <span class="tag gold">4 / AI for biology</span>
+      <h2>World Models for Biomedicine</h2>
+
+      <p>
+        This <em>Cell</em> review proposes that biomedical AI could move beyond predicting a measurement to modeling how
+        a biological system changes over time and responds to interventions. The authors envision models spanning
+        molecular, cellular, tissue, and clinical scales, combining observational data with longitudinal measurements
+        and experimental perturbations.
+      </p>
+
+      <div class="box gold">
+        <p><strong>What makes it a world model?</strong> It aims to predict how a system evolves after an action or
+          intervention, so researchers can ask, “What might happen if we make this change, and what should we test next?”</p>
+      </div>
+
+      <p>
+        Genomic prediction estimates genetic merit from genome-wide markers to rank selection candidates. A world model
+        for breeding would go further: represent a population across generations, account for environment and management,
+        and predict how different selection decisions might change future traits. Genomic prediction could be one part of
+        that larger model.
+      </p>
+
+      <p>
+        AlphaFold 3 predicts molecular structures and interactions; by itself, it does not simulate how an entire
+        biological system changes over time after an intervention. “Foundation model” describes a model trained on broad
+        data that can be adapted to different tasks. It describes how a model is built, while “world model” describes the
+        goal of predicting how a system evolves. These approaches can overlap, but they answer different questions.
+      </p>
+
+      <div class="box violet takeaway">
+        <p><strong>My takeaway:</strong> A useful biomedical world model should help choose experiments by predicting
+          what may happen after an intervention the model has not seen before. Those predictions still need to be tested
+          against real experimental results.</p>
+      </div>
+
+      <div class="source-row">
+        Sources:
+        <a href="https://www.cell.com/cell/fulltext/S0092-8674(26)01005-6" target="_blank" rel="noopener noreferrer">Cell review: World models for biomedicine</a>
+        <a href="https://doi.org/10.1093/genetics/157.4.1819" target="_blank" rel="noopener noreferrer">Foundational genomic selection paper</a>
+        <a href="https://www.nature.com/articles/s41586-024-07487-w" target="_blank" rel="noopener noreferrer">AlphaFold 3</a>
+        <a href="https://arxiv.org/abs/2108.07258" target="_blank" rel="noopener noreferrer">Foundation models report</a>
+      </div>
+    </section>
+
+    <footer class="footer">
+      qtl.rocks Lab newsletter · Monday, September 28, 2026
+    </footer>
+  </main>
+</body>
+</html>

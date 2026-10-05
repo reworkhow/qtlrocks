@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="qtl.rocks Lab newsletter for October 5, 2026" />
+  <title>qtl.rocks Lab newsletter (10/5/2026)</title>
+  <style>
+    :root {
+      --ink: #172033;
+      --body: #364152;
+      --muted: #667085;
+      --line: #dfe3e8;
+      --paper: #ffffff;
+      --canvas: #eef1f4;
+      --blue: #2563eb;
+      --blue-soft: #eff6ff;
+      --teal: #0f766e;
+      --teal-soft: #ecfdf5;
+      --coral: #d9485f;
+      --coral-soft: #fff1f3;
+      --gold: #b7791f;
+      --gold-soft: #fff8e8;
+      --gray-soft: #f7f8fa;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--canvas);
+      color: var(--body);
+      font: 16px/1.58 Arial, Helvetica, sans-serif;
+    }
+    .page {
+      width: min(100%, 960px);
+      margin: 0 auto;
+      padding: 38px;
+      background: var(--paper);
+    }
+    .header {
+      border-top: 7px solid var(--blue);
+      border-bottom: 1px solid var(--line);
+      padding: 24px 0 22px;
+      margin-bottom: 26px;
+    }
+    .kicker, .tag, .mini-label {
+      font-weight: 800;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+    .kicker { color: var(--blue); font-size: 13px; margin-bottom: 6px; }
+    h1, h2, h3 { color: var(--ink); letter-spacing: 0; }
+    h1 { margin: 0; font-size: 35px; line-height: 1.15; }
+    h2 { margin: 6px 0 12px; font-size: 26px; line-height: 1.28; }
+    h3 { margin: 18px 0 7px; font-size: 18px; line-height: 1.35; }
+    p { margin: 10px 0; }
+    strong { color: var(--ink); }
+    a { color: #1d5bc7; font-weight: 700; text-decoration: none; }
+    a:hover, a:focus { text-decoration: underline; }
+    .subtitle { max-width: 740px; color: var(--muted); margin-top: 10px; }
+    .toc {
+      background: var(--gray-soft);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 17px 20px;
+      margin: 0 0 34px;
+    }
+    .toc h2 { margin: 0 0 9px; font-size: 18px; }
+    .toc ol { margin: 0; padding-left: 23px; }
+    .toc li { margin: 4px 0; }
+    .section { margin: 0 0 36px; padding-bottom: 34px; border-bottom: 1px solid var(--line); }
+    .section:last-of-type { margin-bottom: 0; border-bottom: 0; padding-bottom: 0; }
+    .tag { display: inline-block; border-radius: 999px; padding: 4px 10px; font-size: 12px; margin-bottom: 3px; }
+    .tag.blue { color: #1d4ed8; background: var(--blue-soft); }
+    .tag.teal { color: #08635d; background: var(--teal-soft); }
+    .tag.coral { color: #a92f46; background: var(--coral-soft); }
+    .tag.gold { color: #8a5713; background: var(--gold-soft); }
+    .box { border-left: 5px solid; border-radius: 8px; padding: 15px 18px; margin: 17px 0; }
+    .box.blue { border-color: var(--blue); background: var(--blue-soft); }
+    .box.teal { border-color: var(--teal); background: var(--teal-soft); }
+    .box.coral { border-color: var(--coral); background: var(--coral-soft); }
+    .box.gold { border-color: var(--gold); background: var(--gold-soft); }
+    .box p:first-child { margin-top: 0; }
+    .box p:last-child { margin-bottom: 0; }
+    .takeaway { font-size: 16px; }
+    .two-up, .three-up, .sequence { display: grid; gap: 10px; margin: 16px 0; }
+    .two-up { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .three-up { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .sequence { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .mini-card, .sequence-step { min-width: 0; border: 1px solid var(--line); border-radius: 8px; padding: 13px 14px; background: var(--paper); }
+    .mini-card h3 { margin: 0 0 5px; font-size: 16px; }
+    .mini-card p, .sequence-step p { margin: 0; font-size: 14px; color: var(--body); }
+    .mini-card.blue { border-top: 4px solid var(--blue); }
+    .mini-card.teal { border-top: 4px solid var(--teal); }
+    .mini-card.coral { border-top: 4px solid var(--coral); }
+    .mini-card.gold { border-top: 4px solid var(--gold); }
+    .sequence-step { background: var(--gray-soft); }
+    .sequence-step .mini-label { display: block; color: var(--muted); font-size: 10px; margin-bottom: 5px; }
+    .sequence-step strong { display: block; margin-bottom: 4px; }
+    .source-row { border-top: 1px solid var(--line); padding-top: 12px; margin-top: 18px; color: var(--muted); font-size: 13px; }
+    .source-row a { display: inline-block; margin: 3px 12px 3px 0; }
+    .footer { margin-top: 34px; padding-top: 18px; border-top: 1px solid var(--line); color: var(--muted); font-size: 13px; }
+
+    .paper-label { display: block; color: var(--muted); font-size: 12px; font-weight: 800; text-transform: uppercase; margin-bottom: 5px; }
+    .study-card { padding: 16px; border-radius: 8px; border: 1px solid var(--line); background: var(--paper); }
+    .study-card h3 { margin: 0 0 8px; font-size: 17px; }
+    .study-card p { font-size: 14px; }
+    .study-card.nm { border-top: 4px solid var(--coral); }
+    .study-card.nb { border-top: 4px solid var(--teal); }
+    .question-callout { background: var(--gray-soft); border: 1px solid var(--line); border-radius: 8px; padding: 12px 15px; margin: 13px 0; }
+    .question-callout strong { color: var(--blue); }
+
+    .slider-shell { margin: 17px 0; }
+    .slider-track {
+      display: flex;
+      gap: 12px;
+      overflow-x: auto;
+      padding: 2px 2px 12px;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      scrollbar-color: #aab4c3 #edf0f4;
+      scrollbar-width: thin;
+      overscroll-behavior-x: contain;
+    }
+    .slide {
+      flex: 0 0 100%;
+      min-width: 0;
+      min-height: 350px;
+      padding: 20px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      scroll-snap-align: start;
+      scroll-snap-stop: always;
+    }
+    .slide h3 { margin: 0 0 10px; font-size: 19px; }
+    .slide-count { display: block; color: var(--teal); font-size: 11px; font-weight: 800; text-transform: uppercase; margin-bottom: 7px; }
+    .slider-controls { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 5px; }
+    .control-group { display: flex; align-items: center; gap: 7px; }
+    .slider-controls button {
+      min-width: 40px;
+      min-height: 40px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: white;
+      color: var(--ink);
+      font: inherit;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .slider-controls button:hover { background: var(--gray-soft); }
+    .slider-controls button:focus-visible { outline: 3px solid #93c5fd; outline-offset: 2px; }
+    .slider-controls button:disabled { color: #98a2b3; cursor: default; }
+    .slider-controls .dot { min-width: 14px; width: 14px; min-height: 14px; height: 14px; padding: 0; border-radius: 50%; background: #d0d5dd; }
+    .slider-controls .dot[aria-current="true"] { background: var(--teal); }
+    .slide-status { color: var(--muted); font-size: 13px; }
+    .table-wrap { width: 100%; overflow-x: auto; margin: 12px 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    th, td { padding: 9px 10px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+    th { background: var(--gray-soft); color: var(--ink); font-size: 11px; letter-spacing: .04em; text-transform: uppercase; }
+    td:first-child { color: var(--ink); font-weight: 700; }
+    .note { color: var(--muted); font-size: 12px !important; }
+    .equation {
+      margin: 11px 0;
+      padding: 12px 14px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: var(--gray-soft);
+      color: var(--ink);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 17px;
+      text-align: center;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+    .equation.small { font-size: 14px; text-align: left; }
+    .matrix-grid { display: grid; grid-template-columns: repeat(4, minmax(52px, 1fr)); gap: 4px; max-width: 370px; margin: 10px auto; text-align: center; }
+    .matrix-grid span { padding: 5px 3px; border-radius: 4px; background: var(--blue-soft); color: #1e3a8a; font-family: Georgia, "Times New Roman", serif; font-size: 13px; }
+    .matrix-head span { background: #dbeafe; font-family: Arial, Helvetica, sans-serif; font-size: 10px; font-weight: 800; }
+    .question-table td:nth-child(2) { white-space: nowrap; color: var(--teal); font-weight: 700; }
+    .stat { border-radius: 8px; padding: 12px; background: var(--teal-soft); text-align: center; }
+    .stat strong { display: block; color: var(--teal); font-size: 25px; line-height: 1.15; }
+    .stat span { color: var(--body); font-size: 12px; }
+    .pipeline { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; counter-reset: pipe; margin: 18px 0; }
+    .pipeline-step { position: relative; min-width: 0; padding: 13px 12px 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--gray-soft); }
+    .pipeline-step::before { counter-increment: pipe; content: "0" counter(pipe); display: block; color: var(--coral); font-size: 11px; font-weight: 800; margin-bottom: 5px; }
+    .pipeline-step strong { display: block; color: var(--ink); font-size: 14px; }
+    .pipeline-step span { display: block; margin-top: 4px; font-size: 12px; }
+
+    @media (max-width: 720px) {
+      .page { padding: 25px 19px; }
+      h1 { font-size: 29px; }
+      h2 { font-size: 23px; }
+      .three-up, .two-up, .sequence { grid-template-columns: 1fr; }
+      .slide { min-height: 0; padding: 16px; }
+      .pipeline { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .slider-controls { flex-wrap: wrap; }
+      .control-group { order: 2; }
+      .slider-status-wrap { order: 1; width: 100%; }
+      table { min-width: 590px; }
+      .question-table { min-width: 550px; }
+    }
+    @media print {
+      body { background: #fff; }
+      .page { width: 100%; max-width: none; padding: 0; }
+      a { color: var(--ink); }
+      .slider-controls { display: none; }
+      .slider-track { display: block; overflow: visible; padding: 0; }
+      .slide { min-height: 0; margin: 10px 0; break-inside: avoid; }
+      .section, .study-card, .pipeline-step { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="header">
+      <div class="kicker">qtl.rocks Lab Newsletter</div>
+      <h1>qtl.rocks Lab newsletter (10/5/2026)</h1>
+      <div class="subtitle">This week: what benchmarks measure, what data integration can reveal, and how AI can make public data usable at scale.</div>
+    </header>
+
+    <nav class="toc" aria-label="Newsletter contents">
+      <h2>In this issue</h2>
+      <ol>
+        <li><a href="#perturbation-benchmarks">Two studies, one lesson: benchmark metrics matter</a></li>
+        <li><a href="#cattle-integration">Connecting CattleGTEx with the Cattle Cell Atlas</a></li>
+        <li><a href="#scbasecount">scBaseCount: an AI-curated single-cell resource</a></li>
+      </ol>
+    </nav>
+
+    <section class="section" id="perturbation-benchmarks">
+      <span class="tag coral">1 / Benchmarking AI</span>
+      <h2>Can Deep Learning Predict Gene-Perturbation Effects?</h2>
+      <p>
+        Two recent papers appear to reach different conclusions about deep-learning models for predicting gene-perturbation effects. Their results are better read as complementary: one emphasizes the strength of simple baselines; the other shows that evaluation metrics can hide perturbation-specific signal.
+      </p>
+
+      <div class="two-up" aria-label="A comparison of two gene-perturbation benchmarking studies">
+        <article class="study-card nm">
+          <span class="paper-label">Nature Methods · 2025</span>
+          <h3>“Deep-learning-based gene perturbation effect prediction does not yet outperform simple linear baselines”</h3>
+          <p>
+            Testing unseen single and double perturbations, Ahlmann-Eltze et al. found that simple baselines were hard to beat. For double perturbations, the additive prediction from the two single perturbations outperformed the tested deep-learning models; for other tasks, simple mean or linear approaches were also highly competitive.
+          </p>
+          <p><a href="https://www.nature.com/articles/s41592-025-02772-6" target="_blank" rel="noopener noreferrer">Read the paper</a></p>
+        </article>
+        <article class="study-card nb">
+          <span class="paper-label">Nature Biotechnology · 2026</span>
+          <h3>“Deep learning perturbation models can outperform baselines on calibrated metrics”</h3>
+          <p>
+            Miller et al. ask whether common metrics, such as whole-transcriptome MSE, are sensitive to the response genes that matter. They calibrate metrics using positive and negative controls and find that several models outperform uninformative baselines under weighted and rank-based metrics.
+          </p>
+          <p><a href="https://www.nature.com/articles/s41587-026-03307-w" target="_blank" rel="noopener noreferrer">Read the paper</a></p>
+        </article>
+      </div>
+
+      <div class="question-callout">
+        <strong>Why these findings can coexist:</strong> the first asks whether complex models beat strong simple baselines on the tested tasks; the second asks whether the metric can detect biologically informative predictions in the first place.
+      </div>
+      <div class="box coral takeaway">
+        <p><strong>My takeaway:</strong> A larger model is not automatically a better biological model. But before declaring it a failure, check whether the benchmark uses strong baselines, appropriate data, and metrics that can detect the signal of interest.</p>
+      </div>
+      <div class="source-row">
+        Sources:
+        <a href="https://www.nature.com/articles/s41592-025-02772-6" target="_blank" rel="noopener noreferrer">Ahlmann-Eltze et al., Nature Methods</a>
+        <a href="https://www.nature.com/articles/s41587-026-03307-w" target="_blank" rel="noopener noreferrer">Miller et al., Nature Biotechnology</a>
+      </div>
+    </section>
+
+    <section class="section" id="cattle-integration">
+      <span class="tag teal">2 / Integrating datasets</span>
+      <h2>Connecting CattleGTEx with the Cattle Cell Atlas</h2>
+      <p>
+        CattleGTEx brings population-scale genetics; the Cattle Cell Atlas brings cellular resolution. Connecting them lets researchers ask which cell types may underlie a genetic signal found in a mixed tissue. The CattleCell-GTEx study combined atlas-based cell-composition estimates with genotype and bulk expression to identify cell-context-associated regulatory signals. This adds resolution, but does not by itself prove a causal mechanism.
+      </p>
+
+      <div class="slider-shell" data-slider>
+        <div class="slider-track" tabindex="0" aria-label="CattleGTEx and Cattle Cell Atlas details. Use left and right arrow keys to move between panels.">
+          <article class="slide" aria-label="Panel 1 of 4: Dataset scale">
+            <span class="slide-count">Panel 1 / 4 · Dataset scale</span>
+            <h3>Three views of the data</h3>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Resource</th><th>Animals</th><th>Scale</th></tr></thead>
+                <tbody>
+                  <tr><td>CattleGTEx Phase 1</td><td>8,956</td><td>12,422 RNA-seq samples; 43 tissues; 82 breeds; 4.32M common SNPs</td></tr>
+                  <tr><td>Cattle Cell Atlas</td><td>15</td><td>1.79M cells/nuclei; 59 tissues; 131 cell types</td></tr>
+                  <tr><td>Matched integration</td><td>Analysis subset</td><td>8,866 bulk samples; 999,192 cells; 22 tissues; 81 cell types; 4.32M SNPs</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p class="note">The integration analysis tested 21,385 protein-coding genes. The full Phase 1 resource reports 20,875 protein-coding and lncRNA genes; these figures use different processing and gene filters. Cell counts are not independent-animal counts.</p>
+          </article>
+
+          <article class="slide" aria-label="Panel 2 of 4: The statistical bridge">
+            <span class="slide-count">Panel 2 / 4 · The statistical bridge</span>
+            <h3>From a cell atlas to bulk samples</h3>
+            <p>Reference expression signatures help estimate cell-type contributions in each bulk-tissue sample:</p>
+            <div class="equation" aria-label="y sub i is approximately S times p sub i">y<sub>i</sub> &asymp; S p<sub>i</sub></div>
+            <p class="note"><strong>S</strong> = reference signatures (genes &times; cell types); <strong>y<sub>i</sub></strong> = bulk expression profile; <strong>p<sub>i</sub></strong> = estimated cell composition for animal i. This schematic is not a literal cell count.</p>
+            <p>Then test whether the genotype-expression association varies with cell abundance:</p>
+            <div class="equation">Y<sub>i</sub> = &mu; + G<sub>i</sub>&beta;<sub>G</sub> + P<sub>i</sub>&beta;<sub>P</sub> + (G<sub>i</sub>P<sub>i</sub>)&beta;<sub>GP</sub> + &epsilon;<sub>i</sub></div>
+            <p class="note">The design matrix has one row per animal and columns for intercept, genotype, cell fraction, and genotype &times; cell fraction. The published analysis includes additional covariates and methods.</p>
+            <div class="matrix-grid matrix-head" aria-hidden="true"><span>1</span><span>G</span><span>P</span><span>G&times;P</span></div>
+            <div class="matrix-grid" role="img" aria-label="Symbolic design matrix: rows for animals, columns for intercept, genotype, cell fraction, and their interaction">
+              <span>1</span><span>G<sub>1</sub></span><span>P<sub>1</sub></span><span>G<sub>1</sub>P<sub>1</sub></span>
+              <span>1</span><span>G<sub>2</sub></span><span>P<sub>2</sub></span><span>G<sub>2</sub>P<sub>2</sub></span>
+              <span>&hellip;</span><span>&hellip;</span><span>&hellip;</span><span>&hellip;</span>
+              <span>1</span><span>G<sub>n</sub></span><span>P<sub>n</sub></span><span>G<sub>n</sub>P<sub>n</sub></span>
+            </div>
+          </article>
+
+          <article class="slide" aria-label="Panel 3 of 4: Questions enabled by integration">
+            <span class="slide-count">Panel 3 / 4 · Questions</span>
+            <h3>What can the integrated data answer?</h3>
+            <div class="table-wrap">
+              <table class="question-table">
+                <thead><tr><th>Question</th><th>Analysis</th><th>Interpretation</th></tr></thead>
+                <tbody>
+                  <tr><td>Does genotype associate with cell abundance?</td><td>fQTL</td><td>Genetic association with tissue composition</td></tr>
+                  <tr><td>Does the expression association vary with cell abundance?</td><td>Interaction eQTL</td><td>Association with a cellular context</td></tr>
+                  <tr><td>Which cells may relate to a trait locus?</td><td>Cell-resolved eQTL + GWAS colocalization</td><td>Candidate cell types for follow-up</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="box teal">
+              <p><strong>The reasoning move:</strong> start with a specific biological question, identify what each dataset measures, then choose an analysis that connects those measurements.</p>
+            </div>
+          </article>
+
+          <article class="slide" aria-label="Panel 4 of 4: Findings and interpretation">
+            <span class="slide-count">Panel 4 / 4 · Findings</span>
+            <h3>What did the study report?</h3>
+            <div class="three-up">
+              <div class="stat"><strong>57,043</strong><span>cell-resolved regulatory associations</span></div>
+              <div class="stat"><strong>18,153</strong><span>genes with reported associations</span></div>
+              <div class="stat"><strong>505</strong><span>additional GWAS loci colocalized vs. bulk eQTLs</span></div>
+            </div>
+            <div class="box gold">
+              <p>These findings help prioritize candidate cell types and regulatory mechanisms. They do not, by themselves, establish that a cell type causally mediates a trait.</p>
+            </div>
+            <p class="takeaway"><strong>My takeaway:</strong> Integration is not simply stacking datasets. It uses one dataset's strengths to address a limitation of another, while keeping the inferential limits clear.</p>
+          </article>
+        </div>
+        <div class="slider-controls">
+          <div class="control-group" aria-label="Choose a panel">
+            <button class="dot" type="button" data-go="0" aria-label="Go to panel 1" aria-current="true"></button>
+            <button class="dot" type="button" data-go="1" aria-label="Go to panel 2" aria-current="false"></button>
+            <button class="dot" type="button" data-go="2" aria-label="Go to panel 3" aria-current="false"></button>
+            <button class="dot" type="button" data-go="3" aria-label="Go to panel 4" aria-current="false"></button>
+          </div>
+          <div class="slider-status-wrap"><span class="slide-status" aria-live="polite">Panel 1 of 4</span></div>
+          <div class="control-group">
+            <button type="button" data-prev aria-label="Previous panel">&#8592;</button>
+            <button type="button" data-next aria-label="Next panel">&#8594;</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="source-row">
+        Sources:
+        <a href="https://cattlegtex.kiz.ac.cn/" target="_blank" rel="noopener noreferrer">CattleGTEx Phase 1</a>
+        <a href="https://www.nature.com/articles/s41588-025-02329-5" target="_blank" rel="noopener noreferrer">Cattle Cell Atlas</a>
+        <a href="https://www.biorxiv.org/content/10.1101/2025.06.23.661035v1.full" target="_blank" rel="noopener noreferrer">CattleCell-GTEx study</a>
+      </div>
+    </section>
+
+    <section class="section" id="scbasecount">
+      <span class="tag gold">3 / AI for research infrastructure</span>
+      <h2>scBaseCount: An AI-Curated, 502-Million-Cell Resource</h2>
+      <p>
+        Public single-cell data are abundant, but hard to find, interpret, and compare when metadata and processing vary across studies. This <em>Cell</em> paper introduces scBaseCount: an AI agent discovers 10x Genomics datasets in the Sequence Read Archive (SRA) and extracts metadata; a standardized pipeline then processes the data consistently.
+      </p>
+      <div class="pipeline" aria-label="How scBaseCount is assembled">
+        <div class="pipeline-step"><strong>Public SRA</strong><span>Raw studies, uneven metadata</span></div>
+        <div class="pipeline-step"><strong>AI discovery</strong><span>Find datasets and extract metadata</span></div>
+        <div class="pipeline-step"><strong>Uniform processing</strong><span>Consistent counts across experiments</span></div>
+        <div class="pipeline-step"><strong>scBaseCount</strong><span>Reusable, expanding resource</span></div>
+      </div>
+      <div class="three-up" aria-label="scBaseCount scale at publication">
+        <div class="stat"><strong>502M+</strong><span>cells</span></div>
+        <div class="stat"><strong>27</strong><span>organisms</span></div>
+        <div class="stat"><strong>75</strong><span>tissues</span></div>
+      </div>
+      <p>
+        Uniform processing supports comparable measurement of intronic and exonic reads and non-coding gene expression across studies. The authors present the resource as a broader foundation for meta-analysis and model training.
+      </p>
+      <div class="box gold takeaway">
+        <p><strong>My takeaway:</strong> AI can contribute to science by building and maintaining research infrastructure, not only by answering questions after data are ready. Scale is valuable, but metadata quality, study representation, and experimental differences still deserve scrutiny.</p>
+      </div>
+      <div class="source-row">
+        Source:
+        <a href="https://www.cell.com/cell/fulltext/S0092-8674(26)00998-0" target="_blank" rel="noopener noreferrer">Youngblut et al., Cell (2026)</a>
+        <a href="https://pubmed.ncbi.nlm.nih.gov/42753696/" target="_blank" rel="noopener noreferrer">PubMed abstract</a>
+      </div>
+    </section>
+
+    <footer class="footer">qtl.rocks Lab newsletter &middot; Monday, October 5, 2026</footer>
+  </main>
+  <script>
+    document.querySelectorAll('[data-slider]').forEach(function (slider) {
+      var track = slider.querySelector('.slider-track');
+      var slides = Array.from(slider.querySelectorAll('.slide'));
+      var dots = Array.from(slider.querySelectorAll('[data-go]'));
+      var status = slider.querySelector('.slide-status');
+      var previous = slider.querySelector('[data-prev]');
+      var next = slider.querySelector('[data-next]');
+      var current = 0;
+
+      function goTo(index) {
+        current = Math.max(0, Math.min(slides.length - 1, index));
+        slides[current].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
+        dots.forEach(function (dot, i) { dot.setAttribute('aria-current', i === current ? 'true' : 'false'); });
+        status.textContent = 'Panel ' + (current + 1) + ' of ' + slides.length;
+        previous.disabled = current === 0;
+        next.disabled = current === slides.length - 1;
+      }
+
+      dots.forEach(function (dot) {
+        dot.addEventListener('click', function () { goTo(Number(dot.dataset.go)); });
+      });
+      previous.addEventListener('click', function () { goTo(current - 1); });
+      next.addEventListener('click', function () { goTo(current + 1); });
+      track.addEventListener('keydown', function (event) {
+        if (event.key === 'ArrowRight') { event.preventDefault(); goTo(current + 1); }
+        if (event.key === 'ArrowLeft') { event.preventDefault(); goTo(current - 1); }
+      });
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting && entry.intersectionRatio > 0.6) {
+            var index = slides.indexOf(entry.target);
+            if (index !== -1 && index !== current) {
+              current = index;
+              dots.forEach(function (dot, i) { dot.setAttribute('aria-current', i === current ? 'true' : 'false'); });
+              status.textContent = 'Panel ' + (current + 1) + ' of ' + slides.length;
+              previous.disabled = current === 0;
+              next.disabled = current === slides.length - 1;
+            }
+          }
+        });
+      }, { root: track, threshold: 0.6 });
+      slides.forEach(function (slide) { observer.observe(slide); });
+      goTo(0);
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="qtl.rocks Lab newsletter for October 19, 2026: The Little Prince game, employment at Anthropic, and why initiative and judgment become more visible with AI." />
+  <title>qtl.rocks Lab newsletter (10/19/2026)</title>
+  <style>
+    :root {
+      --ink: #172033;
+      --body: #364152;
+      --muted: #667085;
+      --line: #dfe3e8;
+      --paper: #ffffff;
+      --canvas: #eef1f4;
+      --blue: #2563eb;
+      --blue-soft: #eff6ff;
+      --teal: #0f766e;
+      --teal-soft: #ecfdf5;
+      --coral: #b93850;
+      --coral-soft: #fff1f3;
+      --gold: #946017;
+      --gray-soft: #f7f8fa;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--canvas);
+      color: var(--body);
+      font: 16px/1.62 Arial, Helvetica, sans-serif;
+      letter-spacing: 0;
+    }
+    .page { width: min(100%, 960px); margin: 0 auto; padding: 38px; background: var(--paper); }
+    .header { border-top: 7px solid var(--blue); border-bottom: 1px solid var(--line); padding: 23px 0 22px; margin-bottom: 30px; }
+    .kicker { color: var(--blue); font-size: 13px; font-weight: 700; text-transform: uppercase; margin-bottom: 7px; }
+    h1, h2, h3 { color: var(--ink); letter-spacing: 0; }
+    h1 { margin: 0; font-size: 35px; line-height: 1.18; }
+    h2 { margin: 8px 0 15px; font-size: 26px; line-height: 1.28; }
+    h3 { margin: 0 0 12px; font-size: 18px; line-height: 1.35; }
+    p { margin: 12px 0; }
+    strong { color: var(--ink); }
+    a { color: #1d5bc7; font-weight: 700; text-decoration: none; overflow-wrap: anywhere; }
+    a:hover { text-decoration: underline; }
+    a:focus-visible { outline: 3px solid #93c5fd; outline-offset: 3px; }
+    .subtitle { margin: 12px 0 0; color: var(--muted); }
+    .toc { margin-bottom: 32px; padding: 16px 20px; background: var(--gray-soft); border: 1px solid var(--line); border-radius: 8px; }
+    .toc h2 { margin: 0 0 8px; font-size: 18px; }
+    .toc ol { margin: 0; padding-left: 23px; }
+    .toc li { margin: 6px 0; }
+    .section { scroll-margin-top: 18px; }
+    .section + .section { margin-top: 34px; padding-top: 30px; border-top: 1px solid var(--line); }
+    .tag { display: inline-block; padding: 4px 10px; border-radius: 8px; background: var(--blue-soft); color: #1d4ed8; font-size: 12px; font-weight: 700; text-transform: uppercase; }
+    .tag.coral { background: var(--coral-soft); color: var(--coral); }
+    .takeaway { margin: 22px 0; padding: 20px 22px; border-left: 5px solid var(--teal); border-radius: 0 8px 8px 0; background: var(--teal-soft); }
+    .takeaway h3 { color: var(--teal); }
+    .takeaway p:last-child { margin-bottom: 0; }
+    .takeaway-emphasis { display: block; margin-top: 18px; color: var(--teal); font-size: 24px; font-weight: 800; line-height: 1.35; }
+    .note { color: var(--muted); font-size: 13px; line-height: 1.5; }
+    .source-row { border-top: 1px solid var(--line); padding-top: 12px; margin-top: 20px; color: var(--muted); font-size: 13px; }
+    .source-row a { display: inline-block; margin: 3px 18px 3px 0; }
+    .footer { margin-top: 32px; padding-top: 18px; border-top: 1px solid var(--line); color: var(--muted); font-size: 13px; }
+    .metrics { margin: 22px 0 16px; }
+    .metrics figcaption { margin-bottom: 12px; color: var(--ink); font-size: 17px; font-weight: 700; }
+    .metric-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+    .metric { min-width: 0; border: 1px solid var(--line); border-top: 4px solid var(--blue); border-radius: 8px; padding: 17px 19px; }
+    .metric:nth-child(1) { border-top-color: var(--coral); }
+    .metric:nth-child(3) { border-top-color: var(--gold); }
+    .metric:nth-child(4) { border-top-color: var(--teal); }
+    .metric-value { display: block; margin-bottom: 8px; color: var(--blue); font-size: 34px; font-weight: 800; line-height: 1.2; font-variant-numeric: tabular-nums; }
+    .metric:nth-child(1) .metric-value { color: var(--coral); }
+    .metric:nth-child(3) .metric-value { color: var(--gold); }
+    .metric:nth-child(4) .metric-value { color: var(--teal); }
+    .metric h3 { margin: 0 0 6px; font-size: 16px; }
+    .metric p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.5; }
+    @media (max-width: 720px) {
+      .page { padding: 25px 19px; }
+      h1 { font-size: 29px; }
+      h2 { font-size: 23px; }
+    }
+    @media (max-width: 480px) {
+      .page { padding: 22px 17px; }
+      h1 { font-size: 27px; }
+      .takeaway { padding: 17px 18px; }
+      .takeaway-emphasis { font-size: 22px; }
+      .metric-grid { grid-template-columns: 1fr; gap: 10px; }
+      .metric { padding: 15px 18px; }
+      .metric-value { font-size: 30px; }
+      .toc { padding: 15px 17px; }
+    }
+    @media print {
+      body { background: var(--paper); font-size: 12px; }
+      .page { width: 100%; max-width: none; padding: 0; }
+      .toc { display: none; }
+      h2, h3, figcaption { break-after: avoid; }
+      .metric { break-inside: avoid; }
+      .metric-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .takeaway { padding: 14px 18px; }
+      .takeaway-emphasis { font-size: 18px; }
+      a { color: var(--ink); }
+      * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="header">
+      <div class="kicker">Monday, October 19, 2026</div>
+      <h1>qtl.rocks Lab newsletter (10/19/2026)</h1>
+      <p class="subtitle">Two perspectives on AI, initiative, and judgment.</p>
+    </header>
+
+    <nav class="toc" aria-label="Newsletter contents">
+      <h2>In This Issue</h2>
+      <ol>
+        <li><a href="#little-prince">The Little Prince: From a Story to a Playable World</a></li>
+        <li><a href="#employment-at-anthropic">How Employment Is Changing at Anthropic</a></li>
+      </ol>
+    </nav>
+
+    <section class="section" id="little-prince" aria-labelledby="little-prince-title">
+      <span class="tag">1 / Making With AI</span>
+      <h2 id="little-prince-title">The Little Prince: From a Story to a Playable World</h2>
+      <p>What if you could walk through <em>The Little Prince</em> rather than just read it? <strong>The Little Prince: Among the Stars</strong> turns the story into a browser-based 3D adventure, with planets to explore and characters to encounter. <a href="https://littleprince.dev/">Play the game</a>.</p>
+      <p>Its creator, <strong>Sac</strong>, reports building it in <strong>16 days</strong>, using Claude Opus 5.5 for coding, Tripo for 3D asset generation, and Blender for asset editing. It is a striking example of combining AI tools to turn a creative idea into something people can actually use.</p>
+
+      <aside class="takeaway" aria-labelledby="initiative-takeaway-title">
+        <h3 id="initiative-takeaway-title">My Take</h3>
+        <p>Before AI, two people could look similar from the outside: neither had built anything. But the reasons could be very different. One had ideas and wanted to experiment, yet could not justify spending months learning the tools and implementing them. The other was not interested in starting.</p>
+        <p>AI lowers those barriers. Someone with curiosity, ideas, and <strong>self-directed initiative</strong> can now attempt projects that previously felt out of reach. This game illustrates that possibility: an idea that might have remained &ldquo;something I would love to make someday&rdquo; became something people can play.</p>
+        <p>The distinction is not simply between people who use AI and people who do not. It is between <strong>waiting for something to happen and taking the initiative to make it happen</strong>.</p>
+        <p>AI can reduce the <em>activation energy</em> needed to begin. But we still need the drive to notice possibilities, start, experiment, and keep improving.</p>
+        <p class="takeaway-emphasis">As implementation becomes easier, what we choose to attempt matters more.</p>
+      </aside>
+
+      <p class="note">The development timeline and tool use are reported by the creator, not evidence that AI produced the entire game autonomously.</p>
+      <div class="source-row">
+        <a href="https://littleprince.dev/">Play The Little Prince</a>
+        <a href="https://x.com/Saccc_c/status/2109962425512734739">Creator's announcement</a>
+      </div>
+    </section>
+
+    <section class="section" id="employment-at-anthropic" aria-labelledby="employment-title">
+      <span class="tag coral">2 / Working With AI</span>
+      <h2 id="employment-title">How Employment Is Changing at Anthropic</h2>
+      <p>Anthropic's <a href="https://www.anthropic.com/research/employment-at-anthropic">October 16 report</a> offers a glimpse of work inside an organization heavily using AI agents. Four findings stand out:</p>
+
+      <figure class="metrics" aria-labelledby="metrics-title">
+        <figcaption id="metrics-title">What Changed Inside Anthropic?</figcaption>
+        <div class="metric-grid">
+          <div class="metric">
+            <span class="metric-value">27% &rarr; 9%</span>
+            <h3>Junior share of technical hires</h3>
+            <p>A smaller share of new technical hires, even as the company expanded.</p>
+          </div>
+          <div class="metric">
+            <span class="metric-value">~5&times;</span>
+            <h3>Code commits per engineer</h3>
+            <p>Increase over six months. Output volume, not a fivefold improvement in quality.</p>
+          </div>
+          <div class="metric">
+            <span class="metric-value">6:1</span>
+            <h3>Agent runtime : human work hours</h3>
+            <p>By August. A comparison of time, not equivalent productivity.</p>
+          </div>
+          <div class="metric">
+            <span class="metric-value">~80%</span>
+            <h3>Interactive session time waiting</h3>
+            <p>Agents waiting for human input. Human attention becomes a bottleneck.</p>
+          </div>
+        </div>
+      </figure>
+
+      <p class="note">For the 6:1 comparison, employee hours are estimated from headcount and a 40-hour week; agent hours come from session telemetry.</p>
+      <p>Hiring assessments increasingly emphasized <strong>autonomy and judgment</strong>, relative to narrow technical expertise and implementation skills.</p>
+
+      <aside class="takeaway" aria-labelledby="judgment-takeaway-title">
+        <h3 id="judgment-takeaway-title">My Take</h3>
+        <p>This is another angle on the lesson from <em>The Little Prince</em>.</p>
+        <p>Before AI, routine implementation could dominate everyone's work. Two students might both spend days writing and debugging an R script. Their progress could look similar, even if they differed considerably in their ability to identify useful questions, choose an approach, or interpret results.</p>
+        <p>When AI handles much of that implementation, those differences become more visible. <strong>What do you choose to investigate? Can you recognize when an analysis is going in the wrong direction? Do you initiate the next useful step, or wait for instructions?</strong></p>
+        <p>The routine work has not disappeared completely, and technical understanding still matters. But completing a prescribed task is becoming less distinguishing than <strong>deciding what needs to be done and judging whether it was done well</strong>.</p>
+        <p class="takeaway-emphasis">As routine execution becomes easier, differences in autonomy and judgment become more visible.</p>
+      </aside>
+
+      <div class="source-row">
+        <a href="https://www.anthropic.com/research/employment-at-anthropic">Anthropic: How Employment Is Changing at Anthropic</a>
+        <a href="https://www-cdn.anthropic.com/72628f1863c53432195db83279252dfd2cb53158/Employment%20at%20Anthropic.pdf">Full Report (PDF)</a>
+      </div>
+    </section>
+
+    <footer class="footer">qtl.rocks Lab &middot; October 19, 2026</footer>
+  </main>
+</body>
+</html>

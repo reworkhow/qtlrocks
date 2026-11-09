@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="qtl.rocks Lab newsletter for November 9, 2026: SBayesRC and Alzheimer's heritability, noncoding variant prediction, Yaghi's automated experiments, Claude's genome analysis, our Rosalind Academic Plan, and Roddur's interactive prediction-accuracy explainer." />
+  <title>qtl.rocks Lab newsletter (11/9/2026)</title>
+  <style>
+    :root {
+      --ink: #172033; --body: #364152; --muted: #667085; --line: #dfe3e8;
+      --paper: #fff; --canvas: #eef1f4; --blue: #2563eb; --blue-soft: #eff6ff;
+      --teal: #0f766e; --teal-soft: #ecfdf5; --coral: #b93850; --coral-soft: #fff1f3;
+      --gold: #946017; --gold-soft: #fff8e8; --gray-soft: #f7f8fa;
+      color-scheme: light;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--canvas); color: var(--body); font: 16px/1.62 Arial, Helvetica, sans-serif; letter-spacing: 0; }
+    .page { width: min(100%, 960px); margin: 0 auto; padding: 38px; background: var(--paper); }
+    .header { border-top: 7px solid var(--blue); border-bottom: 1px solid var(--line); padding: 23px 0 22px; margin-bottom: 25px; }
+    .kicker { color: var(--blue); font-size: 13px; font-weight: 700; text-transform: uppercase; margin-bottom: 7px; }
+    h1, h2, h3, h4 { color: var(--ink); letter-spacing: 0; }
+    h1 { margin: 0; font-size: 35px; line-height: 1.18; }
+    h2 { margin: 8px 0 14px; font-size: 26px; line-height: 1.28; }
+    h3 { margin: 0 0 8px; font-size: 18px; line-height: 1.35; }
+    h4 { margin: 0 0 8px; font-size: 15px; line-height: 1.4; }
+    p { margin: 12px 0; }
+    strong { color: var(--ink); }
+    a { color: #1d5bc7; font-weight: 700; text-decoration: none; overflow-wrap: anywhere; }
+    a:hover { text-decoration: underline; }
+    a:focus-visible, button:focus-visible, select:focus-visible, summary:focus-visible { outline: 3px solid #93c5fd; outline-offset: 4px; }
+    button, select { font: inherit; }
+    button { cursor: pointer; }
+    button:disabled, select:disabled { cursor: default; opacity: .6; }
+    button .icon, a .icon { width: 18px; height: 18px; flex: 0 0 18px; vertical-align: middle; }
+    .subtitle { margin: 12px 0 0; color: var(--muted); }
+    .toc { margin-bottom: 29px; padding: 16px 0; border-bottom: 1px solid var(--line); }
+    .toc h2 { margin: 0 0 9px; font-size: 16px; }
+    .toc ol { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 30px; row-gap: 7px; list-style: none; padding: 0; margin: 0; }
+    .toc a { display: flex; align-items: baseline; gap: 10px; font-size: 14px; }
+    .toc a span { color: var(--muted); font-variant-numeric: tabular-nums; font-weight: 400; }
+    .section { scroll-margin-top: 18px; }
+    .section + .section { margin-top: 32px; padding-top: 28px; border-top: 1px solid var(--line); }
+    .tag { display: inline-block; padding: 4px 10px; border-radius: 6px; background: var(--blue-soft); color: #1d4ed8; font-size: 12px; font-weight: 700; text-transform: uppercase; }
+    .tag.coral { color: var(--coral); background: var(--coral-soft); }
+    .tag.gold { color: var(--gold); background: var(--gold-soft); }
+    .tag.teal { color: var(--teal); background: var(--teal-soft); }
+    .paper-title { margin: 0 0 13px; color: var(--muted); font-size: 14px; }
+    .takeaway { margin: 20px 0 0; padding: 17px 20px; border-left: 4px solid var(--teal); border-radius: 0 7px 7px 0; background: var(--teal-soft); }
+    .takeaway h3 { font-size: 16px; color: var(--teal); }
+    .takeaway p { margin: 0; }
+    .takeaway.coral { border-color: var(--coral); background: var(--coral-soft); }
+    .takeaway.coral h3 { color: var(--coral); }
+    .takeaway.gold { border-color: var(--gold); background: var(--gold-soft); }
+    .takeaway.gold h3 { color: var(--gold); }
+    .note { color: var(--muted); font-size: 13px; line-height: 1.5; }
+    .source-row { margin-top: 15px; font-size: 13px; }
+    .source-row a { display: inline-block; margin: 3px 17px 3px 0; }
+    .footer { margin-top: 32px; padding-top: 18px; border-top: 1px solid var(--line); color: var(--muted); font-size: 13px; }
+    .heritability-chart { margin: 20px 0 14px; }
+    .heritability-chart figcaption { color: var(--ink); font-size: 15px; font-weight: 700; margin-bottom: 13px; }
+    .h-row { display: grid; grid-template-columns: 105px minmax(0, 1fr) 55px; align-items: center; gap: 12px; margin: 11px 0; }
+    .h-name { color: var(--ink); font-size: 14px; font-weight: 700; }
+    .h-track { height: 25px; background: #f0f2f5; }
+    .h-fill { height: 100%; background: var(--blue); }
+    .h-fill.teal { background: var(--teal); }
+    .h-value { color: var(--ink); font-size: 23px; font-weight: 700; font-variant-numeric: tabular-nums; }
+    .h-scale { display: flex; justify-content: space-between; margin: 2px 67px 0 117px; color: var(--muted); font-size: 12px; }
+    .prediction-note { margin-top: 14px; padding: 10px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .prediction-note strong { color: var(--blue); }
+    .question-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin: 18px 0; gap: 15px; }
+    .question-grid > div { padding-top: 11px; border-top: 3px solid var(--coral); }
+    .question-grid h3 { font-size: 16px; margin: 0 0 3px; }
+    .question-grid p { font-size: 14px; margin: 0; }
+    details.technical { margin-top: 20px; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+    details.technical > summary { cursor: pointer; padding: 14px 17px; background: var(--gray-soft); color: var(--ink); font-size: 15px; font-weight: 700; }
+    .technical-body { padding: 18px; }
+    .technical-controls { display: flex; flex-wrap: wrap; align-items: end; gap: 12px; margin: 14px 0 20px; }
+    .route-control { display: grid; gap: 5px; flex: 1 1 230px; min-width: 0; font-size: 13px; font-weight: 700; }
+    .route-control select { width: 100%; max-width: 100%; min-width: 0; padding: 9px 30px 9px 10px; border: 1px solid #b8c1cc; background: var(--paper); color: var(--ink); border-radius: 5px; font-size: 14px; }
+    .animate-control { display: flex; align-items: center; gap: 9px; }
+    .animate-button { display: inline-flex; align-items: center; justify-content: center; gap: 7px; min-height: 41px; padding: 8px 13px; border: 0; border-radius: 5px; background: var(--blue); color: #fff; font-size: 14px; font-weight: 700; }
+    #effect-status { min-width: 61px; font-size: 12px; color: var(--muted); }
+    .technical-grid { display: grid; grid-template-columns: 1.15fr .8fr 1.05fr; gap: 19px; align-items: center; }
+    .technical-grid > div { min-width: 0; }
+    .sequence-label { font-size: 12px; color: var(--muted); margin: 8px 0 4px; }
+    .dna { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); max-width: 210px; gap: 2px; text-align: center; font-family: ui-monospace, SFMono-Regular, Consolas, monospace; font-size: 14px; }
+    .dna > span { padding: 2px 0; }
+    .dna .reference { background: #dbeafe; color: #173c8f; font-weight: 700; }
+    .dna .alternate { background: #ffe0e6; color: #8e1e35; font-weight: 700; }
+    .dna .mask { background: #e9edf2; color: var(--ink); font-weight: 700; }
+    .one-hot { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); max-width: 210px; gap: 2px; text-align: center; font-size: 12px; font-variant-numeric: tabular-nums; }
+    .one-hot .one-reference { color: #173c8f; background: #dbeafe; }
+    .one-hot .one-alternate { color: #8e1e35; background: #ffe0e6; }
+    .model-stage { text-align: center; }
+    .model-stage h4 { margin: 10px 0 5px; }
+    .model-stage .note { margin: 0; }
+    .model-flow { position: relative; height: 8px; width: min(100%, 100px); margin: 16px auto; background: #ecedf0; }
+    .model-flow > span { position: absolute; inset: 0 auto 0 0; width: 100%; background: var(--coral); }
+    .output-heading { min-height: 42px; }
+    .effect-row { margin: 9px 0; }
+    .effect-row-label { display: flex; justify-content: space-between; gap: 8px; color: var(--ink); font-size: 12px; font-variant-numeric: tabular-nums; }
+    .effect-track { height: 17px; margin-top: 4px; background: #eef1f4; }
+    .effect-bar { height: 100%; background: var(--blue); }
+    .effect-bar.alt { background: var(--coral); }
+    .effect-bar.other { background: #7b8797; }
+    .effect-result { margin-top: 17px; text-align: right; }
+    .effect-result strong { color: var(--coral); font-size: 24px; font-variant-numeric: tabular-nums; }
+    .effect-result .note { display: block; }
+    .formula { margin: 20px 0 10px; padding-top: 15px; border-top: 1px solid var(--line); color: var(--ink); text-align: center; font-size: 17px; }
+    math { font-family: "Cambria Math", "STIX Two Math", serif; max-width: 100%; }
+    .formula p { font-size: 13px; color: var(--muted); }
+    .workflow { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; padding: 16px 0; margin: 18px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); list-style: none; }
+    .workflow li { min-width: 0; }
+    .workflow .step { color: var(--gold); font-size: 12px; font-weight: 700; text-transform: uppercase; }
+    .workflow strong { display: block; font-size: 15px; margin-top: 2px; }
+    .workflow small { display: block; font-size: 13px; color: var(--muted); }
+    .video-figure { margin: 20px 0 10px; }
+    .video-player { aspect-ratio: 16 / 9; min-height: 200px; background: #111827; position: relative; overflow: hidden; border-radius: 7px; }
+    .video-poster { display: block; width: 100%; height: 100%; color: #fff; position: relative; }
+    .video-poster > img { display: block; width: 100%; height: 100%; object-fit: cover; }
+    .video-play-label { display: flex; align-items: center; gap: 10px; position: absolute; left: 18px; bottom: 18px; padding: 10px 14px; background: #172033; border-radius: 5px; color: #fff; font-size: 14px; }
+    .video-play-label .icon { width: 22px; height: 22px; }
+    .video-player iframe { width: 100%; height: 100%; min-height: 200px; border: 0; display: block; }
+    .video-figure figcaption { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 14px; margin-top: 9px; font-size: 13px; color: var(--muted); }
+    .inline-action { display: inline-flex; align-items: center; gap: 5px; padding: 0; background: none; border: 0; color: #1d5bc7; font-size: 13px; font-weight: 700; text-align: left; text-decoration: underline; text-underline-offset: 3px; }
+    .accuracy-list { margin: 16px 0; padding-left: 20px; }
+    .accuracy-list li { margin: 7px 0; }
+    .limits-note { margin: 16px 0; padding: 12px 17px; background: var(--blue-soft); border-left: 4px solid var(--blue); border-radius: 0 7px 7px 0; }
+    .limits-note p { margin: 0; }
+    .comparison { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; margin: 20px 0 8px; padding: 16px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .comparison strong { display: block; font-size: 26px; line-height: 1.25; color: var(--blue); }
+    .comparison .current strong { color: var(--teal); }
+    .comparison span { font-size: 13px; color: var(--muted); }
+    .plan-band { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; padding: 20px 0; margin: 18px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .plan-band strong { display: block; font-size: 31px; line-height: 1.2; color: var(--teal); font-variant-numeric: tabular-nums; }
+    .plan-band span { display: block; font-size: 13px; color: var(--muted); margin-top: 5px; }
+    .plan-band .plan-qualifier { margin: 0 0 5px; font-size: 12px; }
+    .challenge { display: block; margin-top: 11px; color: var(--teal); font-size: 20px; font-weight: 700; line-height: 1.4; }
+    [hidden] { display: none !important; }
+    @media (max-width: 720px) {
+      .page { padding: 25px 19px; }
+      h1 { font-size: 29px; }
+      h2 { font-size: 23px; }
+      .technical-grid { grid-template-columns: 1fr 1fr; }
+      .model-stage { grid-column: 1 / -1; grid-row: 2; padding: 9px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+      .model-flow { margin: 8px auto; }
+      .output-stage { grid-column: 2; grid-row: 1; align-self: center; }
+    }
+    @media (max-width: 480px) {
+      .page { padding: 22px 17px; }
+      h1 { font-size: 27px; }
+      .toc ol { grid-template-columns: 1fr; gap: 8px; }
+      .question-grid { grid-template-columns: 1fr; gap: 10px; }
+      .question-grid > div { display: grid; grid-template-columns: 105px minmax(0, 1fr); gap: 9px; }
+      .question-grid h3 { font-size: 14px; }
+      .question-grid p { font-size: 13px; }
+      .technical-body { padding: 14px; }
+      .technical-grid { grid-template-columns: 1fr; gap: 15px; }
+      .input-stage { display: grid; justify-items: center; }
+      #paired-inputs, #masked-input { width: 100%; max-width: 230px; }
+      .dna, .one-hot { width: 100%; max-width: none; }
+      .model-stage, .output-stage { grid-column: auto; grid-row: auto; }
+      .output-heading { min-height: 0; }
+      .formula { font-size: 15px; }
+      .h-row { grid-template-columns: 82px minmax(0, 1fr) 47px; gap: 9px; }
+      .h-scale { margin-right: 56px; margin-left: 91px; }
+      .h-value { font-size: 21px; }
+      .workflow { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 13px; }
+      .takeaway { padding: 15px 17px; }
+      .comparison { gap: 15px; }
+      .comparison strong { font-size: 22px; }
+      .plan-band { gap: 10px; }
+      .plan-band strong { font-size: 27px; }
+      .plan-band span { font-size: 12px; }
+      .video-play-label { left: 10px; bottom: 10px; padding: 9px 11px; font-size: 13px; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+    @media print {
+      body { background: var(--paper); font-size: 12px; }
+      .page { width: 100%; max-width: none; padding: 0; }
+      .toc, .technical-controls, .video-play-label, .inline-action { display: none; }
+      h2, h3, figcaption { break-after: avoid; }
+      .heritability-chart, .comparison, .plan-band, .workflow, .takeaway { break-inside: avoid; }
+      .video-player { display: none; }
+      .takeaway { padding: 12px 16px; }
+      a { color: var(--ink); }
+      * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="header">
+      <div class="kicker">Monday, November 9, 2026</div>
+      <h1>qtl.rocks Lab newsletter (11/9/2026)</h1>
+      <p class="subtitle">Heritability, variant effects, automated experiments, and new tools for our lab.</p>
+    </header>
+    <nav class="toc" aria-label="Newsletter contents">
+      <h2>In This Issue</h2>
+      <ol>
+        <li><a href="#heritability"><span>01</span> SBayesRC and Alzheimer's heritability</a></li>
+        <li><a href="#variant-effects"><span>02</span> What genomic AI actually predicts</a></li>
+        <li><a href="#robot-lab"><span>03</span> ChatGPT meets the robot lab</a></li>
+        <li><a href="#claude-genome"><span>04</span> A genome analysis in 30 minutes</a></li>
+        <li><a href="#rosalind"><span>05</span> Our lab got the Rosalind Academic Plan!</a></li>
+        <li><a href="#roddur-contribution"><span>06</span> Roddur: why divide by &#8730;h&#178;?</a></li>
+      </ol>
+    </nav>
+
+    <section class="section" id="heritability" aria-labelledby="heritability-title">
+      <span class="tag">1 / Statistical Genetics</span>
+      <h2 id="heritability-title">Genomic Analyses Reveal New Insights into Alzheimer's Disease</h2>
+      <p class="paper-title">Uffelmann et al. &middot; medRxiv preprint &middot; revised May 2026</p>
+      <p><strong>Same GWAS data, different SNP heritability:</strong> approximately <strong>6% with LD score regression (LDSC)</strong>, versus <strong>16% with SBayesRC</strong> in the revised preprint.</p>
+      <figure class="heritability-chart">
+        <figcaption>European-ancestry SNP heritability on the liability scale</figcaption>
+        <div class="h-row"><span class="h-name">LDSC</span><div class="h-track" role="img" aria-label="LDSC estimate: 6 percent"><div class="h-fill" style="width:30%"></div></div><span class="h-value">6%</span></div>
+        <div class="h-row"><span class="h-name">SBayesRC</span><div class="h-track" role="img" aria-label="SBayesRC estimate: 16 percent"><div class="h-fill teal" style="width:80%"></div></div><span class="h-value">16%</span></div>
+        <div class="h-scale" aria-hidden="true"><span>0%</span><span>10%</span><span>20%</span></div>
+        <p class="note">Point estimates; assumed population prevalence 5%. These are heritability estimates, not prediction accuracy.</p>
+      </figure>
+      <div class="prediction-note" id="sbayesrc-validation" aria-labelledby="sbayesrc-validation-title">
+        <h3 id="sbayesrc-validation-title">How Did They Validate the Estimate?</h3>
+        <ol class="accuracy-list">
+          <li><strong>Start with known truth.</strong> Using <strong>348,494 UK Biobank genotypes</strong>, they simulated a 5%-prevalence disease with target liability heritability of <strong>12%</strong>: 6% from APOE-&#949;4 and 6% from <strong>1,000 other SNPs</strong>. <strong>Five replicates</strong> tested whether the estimators recovered that target.</li>
+          <li><strong>Stress-test the large-effect locus.</strong> The standard all-SNP random-effects model showed modest upward bias. Fitting the APOE tagging variant as a <strong>fixed effect</strong> and excluding correlated neighboring SNPs removed the reported bias in this simulation; LDSC remained downward-biased.</li>
+          <li><strong>Carry the correction back to real data.</strong> The adjusted SBayesRC estimate fell from approximately <strong>18% to 16%</strong>, rather than retaining the larger estimate.</li>
+        </ol>
+      </div>
+      <details class="technical" id="sbayesrc-checks">
+        <summary>Additional Robustness Checks: Annotations, LD, and Convergence</summary>
+        <div class="technical-body">
+          <ul class="accuracy-list">
+            <li><strong>Annotation-free simulation:</strong> they used SBayesR <strong>without annotations</strong>, because no annotation effects were simulated. The recovery check therefore did not depend on supplying functional annotation information.</li>
+            <li><strong>Alternative LD handling:</strong> they tested exclusions based on LD with APOE (r<sup>2</sup> &gt; 0.001) or its entire LD block. They also tested LDSC with fuller LD-score coverage because the APOE tagging variant was absent from the HapMap3 LD-score files.</li>
+            <li><strong>Numerical stability:</strong> four independent MCMC chains and a convergence diagnostic assessed whether sampling had stabilized. Convergence is a computational check, not proof that the model is scientifically correct.</li>
+          </ul>
+          <p class="note">See the revised paper's Methods and Supplementary Data 18. Five replicates under an Alzheimer's-like architecture support this specific setting, not universal robustness across traits.</p>
+        </div>
+      </details>
+      <p class="prediction-note">A complementary <strong>leave-one-cohort-out</strong> prediction check achieved an average incremental <strong>liability-scale R<sup>2</sup> of 12.8%</strong> in European-ancestry cohorts. This tests out-of-sample prediction, not unbiased heritability estimation by itself.</p>
+      <aside class="takeaway"><h3>My Take</h3><p>Do not simply prefer the larger estimate. <strong>Construct a relevant simulation, check recovery of known truth, diagnose failures in your own preferred method, and then return to the real data.</strong> That is the validation story worth learning from.</p></aside>
+      <p class="note">Version matters: the original PMC abstract reports 19%; this item uses the revised estimate of 16%.</p>
+      <div class="source-row"><a href="https://www.medrxiv.org/content/10.1101/2025.10.10.25337470v2.full.pdf">Revised paper / Figure 4</a><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12633094/">Original abstract</a></div>
+    </section>
+
+    <section class="section" id="variant-effects" aria-labelledby="variant-title">
+      <span class="tag coral">2 / Genomic AI</span>
+      <h2 id="variant-title">Leveraging Genomic Deep Learning Models for the Prediction of Noncoding Variant Effects</h2>
+      <p class="paper-title">Kathail, Bajwa &amp; Ioannidis &middot; Nature Genetics &middot; October 2026</p>
+      <p>This is a <strong>review, not a new model competing with AlphaGenome</strong>. It distinguishes models trained on measured molecular activity from DNA language models initially trained on sequence itself.</p>
+      <div class="question-grid" aria-label="Three distinct prediction targets">
+        <div><h3>Identification</h3><p>Does this variant affect function?</p></div>
+        <div><h3>Direction</h3><p>Does activity go up or down?</p></div>
+        <div><h3>Magnitude</h3><p>How large is the change?</p></div>
+      </div>
+      <p>Success at one does not establish success at the others. Current models show promise for local regulatory effects, but distal effects, quantitative effect sizes, and differences between individuals remain challenging.</p>
+      <details class="technical" id="variant-technical">
+        <summary>Technical View: From a DNA Change to an Effect Score</summary>
+        <div class="technical-body">
+          <p class="note">Illustrative values, not paper results. Seven bases abbreviate a much longer sequence context; the only change is A &#8594; G at site 4.</p>
+          <div class="technical-controls">
+            <label class="route-control" for="effect-route">Prediction route
+              <select id="effect-route"><option value="functional">Sequence-to-activity</option><option value="likelihood">DNA likelihood (zero-shot)</option></select>
+            </label>
+            <div class="animate-control"><button class="animate-button" id="effect-animate" type="button"><svg class="icon" data-lucide="Play" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z" /></svg> Animate</button><span id="effect-status" role="status">Complete</span></div>
+          </div>
+          <div class="technical-grid">
+            <div class="input-stage">
+              <h4 id="input-heading">Two allele-containing sequences</h4>
+              <div id="paired-inputs">
+                <div class="sequence-label">Reference A</div><div class="dna" aria-label="Reference sequence G C A A G T C"><span>G</span><span>C</span><span>A</span><span class="reference">A</span><span>G</span><span>T</span><span>C</span></div>
+                <div class="sequence-label">Alternate G</div><div class="dna" aria-label="Alternate sequence G C A G G T C"><span>G</span><span>C</span><span>A</span><span class="alternate">G</span><span>G</span><span>T</span><span>C</span></div>
+                <div class="sequence-label">One-hot encoding at site 4</div>
+              </div>
+              <div id="masked-input" hidden><div class="sequence-label">Site 4 masked</div><div class="dna" aria-label="Masked sequence G C A unknown G T C"><span>G</span><span>C</span><span>A</span><span class="mask">?</span><span>G</span><span>T</span><span>C</span></div><p class="note">Same surrounding context for both alleles.</p></div>
+              <div id="one-hot" class="one-hot" role="img" aria-label="Base order A C G T. Reference one-hot column: 1 0 0 0. Alternate column: 0 0 1 0."><span>Base</span><span>Ref</span><span>Alt</span><span>A</span><span class="one-reference">1</span><span>0</span><span>C</span><span>0</span><span>0</span><span>G</span><span>0</span><span class="one-alternate">1</span><span>T</span><span>0</span><span>0</span></div>
+            </div>
+            <div class="model-stage"><h4 id="model-heading">Same trained model</h4><p class="note" id="model-detail">Shared weights; same assay and cell type.</p><div class="model-flow" aria-hidden="true"><span id="model-progress"></span></div><p class="note" id="model-route">DNA &#8594; molecular activity</p></div>
+            <div class="output-stage">
+              <h4 class="output-heading" id="output-heading">Predicted activity (arbitrary units)</h4>
+              <div class="effect-row"><div class="effect-row-label"><span id="reference-label">Reference A</span><span id="reference-value">100</span></div><div class="effect-track"><div class="effect-bar" data-bar="reference" style="width:100%"></div></div></div>
+              <div class="effect-row"><div class="effect-row-label"><span id="alternate-label">Alternate G</span><span id="alternate-value">70</span></div><div class="effect-track"><div class="effect-bar alt" data-bar="alternate" style="width:70%"></div></div></div>
+              <div class="effect-row" id="other-probabilities" hidden><div class="effect-row-label"><span>C + T</span><span>0.30</span></div><div class="effect-track"><div class="effect-bar other" style="width:30%"></div></div></div>
+              <div class="effect-result" aria-live="polite" aria-atomic="true"><strong id="effect-score">-30 units</strong><span class="note" id="effect-meaning">30% lower predicted activity</span></div>
+            </div>
+          </div>
+          <div class="formula" id="functional-formula">
+            <math display="block" aria-label="Effect in task t equals model prediction for the alternate sequence minus model prediction for the reference sequence"><msub><mi>&#916;</mi><mi>t</mi></msub><mo>=</mo><msub><mi>f</mi><mi>&#952;</mi></msub><mo>(</mo><msub><mi>X</mi><mtext>alt</mtext></msub><msub><mo>)</mo><mi>t</mi></msub><mo>&#8722;</mo><msub><mi>f</mi><mi>&#952;</mi></msub><mo>(</mo><msub><mi>X</mi><mtext>ref</mtext></msub><msub><mo>)</mo><mi>t</mi></msub></math>
+            <p>AlphaGenome, Enformer, and Borzoi fit this family. The score concerns a specified molecular output, not a complex-trait effect.</p>
+          </div>
+          <div class="formula" id="likelihood-formula" hidden>
+            <math display="block" aria-label="Score equals the natural logarithm of alternate allele probability divided by reference allele probability, conditional on context"><mi>S</mi><mo>=</mo><mi>log</mi><mfrac><mrow><mi>P</mi><mo>(</mo><mtext>alt</mtext><mo>|</mo><mtext>context</mtext><mo>)</mo></mrow><mrow><mi>P</mi><mo>(</mo><mtext>ref</mtext><mo>|</mo><mtext>context</mtext><mo>)</mo></mrow></mfrac></math>
+            <p>Lower sequence likelihood does not mean lower expression. Language models can also be fine-tuned on functional data; this illustrates zero-shot likelihood scoring only.</p>
+          </div>
+          <noscript><p class="note">The static example above shows a sequence-to-activity comparison. The likelihood alternative compares allele probabilities, not expression levels.</p></noscript>
+        </div>
+      </details>
+      <p><strong>The benchmark matters:</strong> distinguishing functional from nonfunctional regions is easier than identifying which particular variant changes function <em>within the same regulatory region</em>.</p>
+      <aside class="takeaway coral"><h3>My Take</h3><p>Define the biological quantity before choosing the model. A predicted molecular effect can be a useful annotation, but is not automatically a causal effect on a complex trait or a SNP effect for genomic prediction.</p></aside>
+      <div class="source-row"><a href="https://www.nature.com/articles/s41588-026-02769-7">Review</a><a href="https://arxiv.org/html/2411.11158v2">Accessible manuscript</a><a href="https://www.nature.com/articles/s41586-025-10014-0">AlphaGenome</a></div>
+    </section>
+
+    <section class="section" id="robot-lab" aria-labelledby="robot-title">
+      <span class="tag gold">3 / AI Meets Experiments</span>
+      <h2 id="robot-title">ChatGPT Meets the Robot Lab</h2>
+      <p>Nobel laureate <strong>Omar Yaghi</strong> describes a researcher-directed workflow for improving a covalent organic framework's crystallinity: ChatGPT proposed <strong>96 initial synthesis conditions</strong>, a robotic platform filled the reaction wells, and X-ray diffraction assessed the resulting materials.</p>
+      <ol class="workflow" aria-label="Closed-loop experimental workflow"><li><span class="step">01 / ChatGPT</span><strong>Propose conditions</strong></li><li><span class="step">02 / Robotics</span><strong>Prepare experiments</strong></li><li><span class="step">03 / Measurement</span><strong>Assess crystallinity</strong></li><li><span class="step">04 / Feedback</span><strong>Guide the next round</strong></li></ol>
+      <p>Experimental results were returned to ChatGPT. After <strong>three cycles</strong>, Yaghi reports crystallinity approximately <strong>three times the literature benchmark</strong>, following a problem researchers had pursued for about a decade.</p>
+      <figure class="video-figure">
+        <div class="video-player" id="yaghi-player"><a class="video-poster" id="yaghi-play" href="https://www.youtube.com/watch?v=dcWEma1w_GI&amp;t=2846s" target="_blank" rel="noopener noreferrer" aria-label="Watch Omar Yaghi's lecture from 47 minutes 26 seconds"><img src="https://i.ytimg.com/vi/dcWEma1w_GI/hqdefault.jpg" alt="Omar Yaghi's UC Berkeley lecture on carbon capture, water harvesting, and AI for materials" width="640" height="480" loading="lazy" /><span class="video-play-label"><svg class="icon" data-lucide="Play" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z" /></svg> Watch the excerpt</span></a></div>
+        <figcaption><span id="yaghi-duration">47:26&#8211;48:26 / 60 seconds / English</span><span>Caption-verified timing</span></figcaption>
+      </figure>
+      <p class="note">The initial 96-condition instruction precedes this minute. <button class="inline-action" id="yaghi-longer" type="button">Include that instruction: 47:15&#8211;48:24 (69 seconds)</button>. <a id="yaghi-direct" href="https://www.youtube.com/watch?v=dcWEma1w_GI&amp;t=2846s" target="_blank" rel="noopener noreferrer">Watch on YouTube <svg class="icon" data-lucide="ExternalLink" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 3h6v6" /><path d="M10 14 21 3" /><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" /></svg></a>.</p>
+      <p class="note">The embedded version uses start and end times; direct YouTube links start at the selected time but continue afterward. Playback depends on YouTube availability.</p>
+      <aside class="takeaway gold"><h3>My Take</h3><p>The important unit is the <strong>closed loop</strong>, not a chatbot answer: propose, test, measure, and revise. This is AI-assisted experimentation with human oversight, not ChatGPT independently conducting all the research.</p></aside>
+      <div class="source-row"><a href="https://news.berkeley.edu/2026/03/06/nobel-laureate-omar-yaghi/">Berkeley article and transcript</a><a href="https://www.youtube.com/watch?v=dcWEma1w_GI">Full lecture</a></div>
+    </section>
+
+    <section class="section" id="claude-genome" aria-labelledby="claude-title">
+      <span class="tag">4 / Genome Interpretation</span>
+      <h2 id="claude-title">Claude Analyzes a Genome in 30 Minutes</h2>
+      <p>Stanford geneticist <strong>Euan Ashley</strong> gave Claude his decade-old variant call file and a roughly <strong>180-word prompt</strong>. He reports recovering important known findings in about 30 minutes.</p>
+      <div class="comparison" aria-label="Historical comparison, not a controlled speed benchmark"><div><strong>9 months / 30 people</strong><span>Pioneering team effort in 2009</span></div><div class="current"><strong>~30 minutes</strong><span>Ashley's reported Claude self-test</span></div></div>
+      <ul class="accuracy-list"><li><strong>Rare disease:</strong> no major Mendelian loss-of-function finding, consistent with the previous analysis.</li><li><strong>Known risk:</strong> identified previously known APOE &#949;4 homozygosity, a specific finding rather than a genome-wide polygenic score.</li><li><strong>Pharmacogenomics:</strong> flagged findings involving <strong>DPYD</strong> and <strong>CYP2C19</strong>.</li></ul>
+      <div class="limits-note"><p><strong>It also recognized a limit:</strong> the old, non-gVCF file could <strong>not support reliable genome-wide polygenic risk scores</strong>.</p></div>
+      <p><strong>Reference does not mean benign.</strong> Ashley reports that Claude recognized the problem of risk alleles appearing in hg19 itself. The actual alleles and reference build matter, not simply whether a sequence differs from the reference.</p>
+      <aside class="takeaway"><h3>My Take</h3><p>The historical effort analyzed <strong>Stephen Quake's genome</strong> and helped establish the interpretation framework. This is not a controlled comparison: Claude now draws on years of accumulated tools and knowledge. The opportunity is easier access to that infrastructure, while retaining the expertise to check answers and input limitations.</p></aside>
+      <div class="source-row"><a href="https://www.linkedin.com/posts/euanashley_well-today-seemed-like-as-good-a-moment-activity-7479620834777513984-wfAh">Ashley's original post</a><a href="https://www.statnews.com/2026/10/01/claude-ai-genome-analysis-standards-ethics/">His follow-up essay</a><a href="https://www.levels.com/blog/genome-interpretation-ai-ashley">His explanation of the comparison</a><a href="https://journals.plos.org/plosgenetics/article?id=10.1371/journal.pgen.1002280">2011 reference-genome paper</a></div>
+    </section>
+
+    <section class="section" id="rosalind" aria-labelledby="rosalind-title">
+      <span class="tag teal">5 / Lab News</span>
+      <h2 id="rosalind-title">Our Lab Got the Rosalind Academic Plan!</h2>
+      <p>Our lab has received OpenAI's <strong>Rosalind Academic Plan</strong>, supporting academic research with sponsored access:</p>
+      <div class="plan-band" aria-label="Plan benefits: up to 30 seats, zero dollars per user per month, up to 12 months"><div><span class="plan-qualifier">Up to</span><strong>30</strong><span>Business Standard seats</span></div><div><span class="plan-qualifier">Sponsored</span><strong>$0</strong><span>Per user, per month</span></div><div><span class="plan-qualifier">Up to</span><strong>12</strong><span>Months of sponsored access</span></div></div>
+      <p>The plan includes commercially available frontier OpenAI models within plan usage limits, and <strong>GPT-Rosalind following trusted-access approval</strong>. GPT-Rosalind is designed for life sciences research, including genomics, experimental planning, and animal health. <strong>API access is not included.</strong></p>
+      <aside class="takeaway">
+        <h3>My Take: Build Your Own Research Loop</h3>
+        <p>We now have access to these tools. I would like each of you to build a small <strong>AI-assisted closed loop</strong> around a real question in your project:</p>
+        <span class="challenge">Propose &#8594; Run &#8594; Check &#8594; Feed Back &#8594; Revise</span>
+        <p style="margin-top:12px">Use AI to help develop an approach, run the analysis or experiment, and check the result against data, a strong baseline, or a problem with a known answer. Then feed those findings back into the next iteration.</p>
+        <p style="margin-top:12px">Like <a href="#robot-lab">Yaghi's example</a>, the opportunity is to connect suggestions to <strong>measured results and repeated improvement</strong>. The loop does not need to be fully automated. <strong>Your domain knowledge and judgment are part of it.</strong></p>
+      </aside>
+      <div class="source-row"><a href="https://openai.com/index/introducing-the-rosalind-academic-plan/">OpenAI's announcement and plan details</a></div>
+    </section>
+    <section class="section" id="roddur-contribution" aria-labelledby="roddur-title">
+      <span class="tag coral">6 / Student Contribution</span>
+      <h2 id="roddur-title">Why Do We Divide Prediction Correlation by the Square Root of Heritability?</h2>
+      <p class="paper-title">By <strong>Roddur</strong></p>
+      <p>We often validate genomic predictions against phenotypes, but our target is the <strong>true breeding value</strong>. Roddur explains why the correlation with a noisy phenotype (<strong>predictive ability</strong>) differs from the correlation with the true breeding value (<strong>genetic prediction accuracy</strong>).</p>
+      <div class="formula">
+        <p><strong>Estimated genetic accuracy</strong></p>
+        <math display="block" aria-label="Estimated genetic accuracy equals predictive ability divided by the square root of narrow-sense heritability; for this example, 0.35 divided by the square root of 0.25 equals 0.70">
+          <mrow><mfrac><mn>0.35</mn><msqrt><mn>0.25</mn></msqrt></mfrac><mo>=</mo><mn>0.70</mn></mrow>
+        </math>
+        <p>Hypothetical example: predictive ability = 0.35; narrow-sense heritability = 0.25.</p>
+      </div>
+      <p class="note">The adjustment requires an appropriate heritability estimate and predictions uncorrelated with validation residuals. It is not a substitute for a sound validation design.</p>
+      <div class="source-row"><a href="qtl_rocks_lab_newsletter_2026_11_09_student_contribution.html">Newsletter Supplementary Material: Roddur's Full Derivation and Interactive Example &#8594;</a></div>
+    </section>
+    <footer class="footer">qtl.rocks Lab &middot; November 9, 2026 &middot; Sources and supplementary material linked within each item.</footer>
+  </main>
+  <script>
+    (() => {
+      const select = document.getElementById('effect-route');
+      const animate = document.getElementById('effect-animate');
+      const status = document.getElementById('effect-status');
+      const score = document.getElementById('effect-score');
+      const result = document.querySelector('.effect-result');
+      const refBar = document.querySelector('[data-bar="reference"]');
+      const altBar = document.querySelector('[data-bar="alternate"]');
+      const progress = document.getElementById('model-progress');
+      const storageKey = 'qtlrocks:2026-11-09:variant-route';
+      let route = 'functional';
+      let running = false;
+      let frame = null;
+      let started = null;
+      const models = {
+        functional: { reference: 100, alternate: 70, scale: 100 },
+        likelihood: { reference: .6, alternate: .1, scale: 1 }
+      };
+      const byId = id => document.getElementById(id);
+      function save() { try { localStorage.setItem(storageKey, route); } catch (_) {} }
+      function bars(fraction) {
+        const data = models[route];
+        refBar.style.width = (100 * data.reference / data.scale * fraction) + '%';
+        altBar.style.width = (100 * data.alternate / data.scale * fraction) + '%';
+        byId('reference-value').textContent = route === 'functional' ? String(Math.round(data.reference * fraction)) : (data.reference * fraction).toFixed(2);
+        byId('alternate-value').textContent = route === 'functional' ? String(Math.round(data.alternate * fraction)) : (data.alternate * fraction).toFixed(2);
+      }
+      function finish() {
+        if (frame !== null) cancelAnimationFrame(frame);
+        frame = null; running = false; started = null;
+        select.disabled = false; animate.disabled = false;
+        status.textContent = 'Complete';
+        progress.style.width = '100%';
+        result.style.visibility = 'visible';
+        bars(1);
+      }
+      function render() {
+        finish();
+        const functional = route === 'functional';
+        select.value = route;
+        byId('paired-inputs').hidden = !functional;
+        byId('one-hot').hidden = !functional;
+        byId('masked-input').hidden = functional;
+        byId('other-probabilities').hidden = functional;
+        byId('functional-formula').hidden = !functional;
+        byId('likelihood-formula').hidden = functional;
+        byId('input-heading').textContent = functional ? 'Two allele-containing sequences' : 'One masked sequence';
+        byId('model-heading').textContent = functional ? 'Same trained model' : 'Masked language model';
+        byId('model-detail').textContent = functional ? 'Shared weights; same assay and cell type.' : 'No functional labels in this example.';
+        byId('model-route').textContent = functional ? 'DNA \u2192 molecular activity' : 'Context \u2192 allele probabilities';
+        byId('output-heading').textContent = functional ? 'Predicted activity (arbitrary units)' : 'Allele probabilities (scale: 0 to 1)';
+        byId('reference-label').textContent = functional ? 'Reference A' : 'P(A | context)';
+        byId('alternate-label').textContent = functional ? 'Alternate G' : 'P(G | context)';
+        const data = models[route];
+        score.textContent = functional ? (data.alternate - data.reference) + ' units' : Math.log(data.alternate / data.reference).toFixed(2);
+        byId('effect-meaning').textContent = functional ? '30% lower predicted activity' : 'Lower likelihood, not lower expression';
+      }
+      select.addEventListener('change', () => { route = select.value === 'likelihood' ? 'likelihood' : 'functional'; render(); save(); });
+      animate.addEventListener('click', () => {
+        if (running) return;
+        if (window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) { finish(); save(); return; }
+        running = true; select.disabled = true; animate.disabled = true;
+        result.style.visibility = 'hidden'; started = null;
+        const stages = ['Encode', 'Predict', 'Compare'];
+        function tick(timestamp) {
+          if (started === null) started = timestamp;
+          const fraction = Math.min(1, (timestamp - started) / 3300);
+          const stage = stages[Math.min(2, Math.floor(fraction * 3))];
+          if (status.textContent !== stage) status.textContent = stage;
+          progress.style.width = (fraction * 100) + '%';
+          bars(Math.max(0, Math.min(1, (fraction - .66) / .34)));
+          if (fraction < 1) frame = requestAnimationFrame(tick);
+          else { finish(); save(); }
+        }
+        frame = requestAnimationFrame(tick);
+      });
+      byId('variant-technical').addEventListener('toggle', () => { if (!byId('variant-technical').open) finish(); });
+      try { const saved = localStorage.getItem(storageKey); if (saved === 'functional' || saved === 'likelihood') route = saved; } catch (_) {}
+      render();
+    })();
+    (() => {
+      const player = document.getElementById('yaghi-player');
+      const poster = document.getElementById('yaghi-play');
+      const direct = document.getElementById('yaghi-direct');
+      const longer = document.getElementById('yaghi-longer');
+      const duration = document.getElementById('yaghi-duration');
+      const clips = {
+        short: { start: 2846, end: 2906, label: '47:26\u201348:26 / 60 seconds / English' },
+        long: { start: 2835, end: 2904, label: '47:15\u201348:24 / 69 seconds / English' }
+      };
+      let selected = 'short';
+      function watchUrl() { return 'https://www.youtube.com/watch?v=dcWEma1w_GI&t=' + clips[selected].start + 's'; }
+      function mount() {
+        const clip = clips[selected];
+        const iframe = document.createElement('iframe');
+        iframe.title = 'Omar Yaghi on ChatGPT, robotic experiments, and feedback: ' + clip.label;
+        iframe.src = 'https://www.youtube.com/embed/dcWEma1w_GI?start=' + clip.start + '&end=' + clip.end + '&cc_load_policy=1&cc_lang_pref=en-US&hl=en&playsinline=1&rel=0&autoplay=1';
+        iframe.setAttribute('referrerpolicy', 'strict-origin-when-cross-origin');
+        iframe.setAttribute('allow', 'autoplay; encrypted-media; picture-in-picture; fullscreen');
+        iframe.setAttribute('allowfullscreen', '');
+        player.replaceChildren(iframe);
+      }
+      poster.addEventListener('click', event => {
+        if (location.protocol === 'http:' || location.protocol === 'https:') { event.preventDefault(); mount(); }
+      });
+      longer.addEventListener('click', () => {
+        selected = selected === 'short' ? 'long' : 'short';
+        duration.textContent = clips[selected].label;
+        direct.href = watchUrl(); poster.href = watchUrl();
+        poster.setAttribute('aria-label', 'Watch Omar Yaghi: ' + clips[selected].label);
+        longer.textContent = selected === 'long' ? 'Return to the 60-second excerpt' : 'Include that instruction: 47:15\u201348:24 (69 seconds)';
+        if (player.querySelector('iframe')) mount();
+      });
+    })();
+  </script>
+</body>
+</html>
